@@ -1,0 +1,5 @@
+[Acessado em 10/10/2021] - https://www.devmedia.com.br/criando-uma-conexao-java-mysql-server/16753
+[Acessado em 10/10/2021] - https://www.tutorialspoint.com/jdbc/jdbc-insert-records.htm
+[Acessado em 10/10/2021] - https://stackoverflow.com/questions/6520999/create-table-if-not-exists-equivalent-in-sql-server
+[Acessado em 10/10/2021] - https://documentation.solarwinds.com/en/success_center/whd/content/helpdeskinstallmysqljdbcdriver.htm
+[Acessado em 10/10/2021] - https://www.tutorialspoint.com/jdbc/jdbc-insert-records.htm
