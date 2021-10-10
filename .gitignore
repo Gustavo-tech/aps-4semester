@@ -1,3 +1,6 @@
+# NetBeans Ignore
+/LivrariaAmazonia/nbproject/
+
 # Compiled class file
 *.class
 
@@ -22,3 +25,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /LivrariaAmazonia/nbproject/private/
+LivrariaAmazonia/nbproject/build-impl.xml
+LivrariaAmazonia/nbproject/genfiles.properties
+LivrariaAmazonia/nbproject/project.properties
+LivrariaAmazonia/nbproject/project.xml
