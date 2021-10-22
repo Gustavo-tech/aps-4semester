@@ -1,22 +1,22 @@
 package Model;
 
 public class Publisher {
-    private int publisherId;
+    private int id;
     private String name;
     private String url;
 
     public Publisher(int publisherId, String name, String url) {
-        this.publisherId = publisherId;
+        this.id = publisherId;
         this.name = name;
         this.url = url;
     }
 
-    public int getPublisherId() {
-        return publisherId;
+    public int getId() {
+        return id;
     }
 
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
+    public void setId(int publisherId) {
+        this.id = publisherId;
     }
 
     public String getName() {
@@ -34,5 +34,4 @@ public class Publisher {
     public void setUrl(String url) {
         this.url = url;
     }
-    
 }
