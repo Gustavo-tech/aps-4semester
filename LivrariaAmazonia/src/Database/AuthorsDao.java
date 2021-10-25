@@ -13,12 +13,18 @@ public class AuthorsDao {
     private static final String PASS = DatabaseConstants.PASS;
 
     public void addAuthor(Author author) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch(ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        
         try(Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
           String query = "INSERT INTO authors (name, fname) VALUES (?, ?)";
           PreparedStatement pstm = conn.prepareStatement(query);
           pstm.setString(1, author.getName());
           pstm.setString(2, author.getFName());
-          pstm.executeQuery();
+          pstm.executeUpdate();
           conn.close();
         } catch(SQLException e) {
           e.printStackTrace();
