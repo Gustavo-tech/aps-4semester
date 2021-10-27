@@ -5,10 +5,15 @@ public class Author {
   private String name;
   private String fName;
 
-  public Author(String name, String fName) {
-    this.id = id;
+  public Author(String name, String fName) { 
     this.name = name;
     this.fName = fName;
+  }
+  
+  public Author(Integer id, String name, String fName) {
+      this.id = id;
+      this.name = name;
+      this.fName = fName;
   }
 
   public Integer getId() {
