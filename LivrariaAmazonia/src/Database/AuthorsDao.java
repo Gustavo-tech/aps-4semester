@@ -16,12 +16,6 @@ public class AuthorsDao {
     private static final String PASS = DatabaseConstants.PASS;
     
     public static List<Author> getAuthors() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch(ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        
         List<Author> authors = new ArrayList<Author>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT * FROM authors";
@@ -35,19 +29,15 @@ public class AuthorsDao {
                 Author author = new Author(id, name, fname);
                 authors.add(author);
             }
+            
+            con.close();
         } catch(SQLException e) {
             e.printStackTrace();
         }
         return authors;
     }
 
-    public static void addAuthor(Author author) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch(ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        
+    public static void addAuthor(Author author) {        
         try(Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
           String query = "INSERT INTO authors (name, fname) VALUES (?, ?)";
           PreparedStatement pstm = conn.prepareStatement(query);
@@ -61,12 +51,6 @@ public class AuthorsDao {
     }
 
     public static void updateAuthor(Author author) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch(ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        
         try(Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
           String query = "UPDATE authors SET name = ?, fname = ? WHERE author_id = ?";
           PreparedStatement pstm = conn.prepareStatement(query);

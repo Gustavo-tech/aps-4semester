@@ -3,10 +3,10 @@ package Model;
 public class Book {
     private String title;
     private String isbn;
-    private int publisherId;
-    private double price;
+    private Integer publisherId;
+    private Double price;
 
-    public Book(String title, String isbn, int publisherId, double price) {
+    public Book(String title, String isbn, Integer publisherId, Double price) {
         this.title = title;
         this.isbn = isbn;
         this.publisherId = publisherId;
@@ -33,7 +33,7 @@ public class Book {
         return publisherId;
     }
 
-    public void setpublisherId(int publisherId) {
+    public void setpublisherId(Integer publisherId) {
         this.publisherId = publisherId;
     }
 
@@ -41,7 +41,7 @@ public class Book {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     

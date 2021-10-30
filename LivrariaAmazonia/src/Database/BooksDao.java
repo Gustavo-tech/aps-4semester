@@ -6,13 +6,41 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import Model.*;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BooksDao {
     private static final String URL = DatabaseConstants.URL;
     private static final String USER = DatabaseConstants.USER;
     private static final String PASS = DatabaseConstants.PASS;
+    
+    public static List<Book> getBooks() {
+        List<Book> books = new ArrayList<Book>();
+        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM books";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next()) {
+                String title = rs.getString("title");
+                String isbn = rs.getString("isbn");
+                Integer publisherId = rs.getInt("publisher_id");
+                Double price = rs.getDouble("price");
+                
+                Book book = new Book(title, isbn, publisherId, price);
+                books.add(book);
+            }
+            
+            con.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return books;
+    }
 
-    public void addBook(Book book) {
+    public static void addBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "INSERT INTO books VALUES (?, ?, ?, ?)";
             PreparedStatement pstm = con.prepareStatement(query);
@@ -27,7 +55,7 @@ public class BooksDao {
         }
     }
 
-    public void updateBook(Book book) {
+    public static void updateBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "UPDATE books SET title = ?, isbn = ?, publisher_id = ?, "
                     + "price = ?";
@@ -43,7 +71,7 @@ public class BooksDao {
         }
     }
 
-    public void delBook(Book book) {
+    public static void delBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "DELETE FROM books WHERE isbn = ?";
             PreparedStatement pstm = con.prepareStatement(query);
