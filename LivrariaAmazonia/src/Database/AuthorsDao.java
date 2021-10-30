@@ -36,6 +36,24 @@ public class AuthorsDao {
         }
         return authors;
     }
+    
+    public static Author getAuthor(Integer id) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM authors WHERE author_id = ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            
+            rs.next();
+            String name = rs.getString("name");
+            String fname = rs.getString("fname");
+            
+            return new Author(id, name, fname);
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public static void addAuthor(Author author) {        
         try(Connection conn = DriverManager.getConnection(URL, USER, PASS)) {

@@ -39,6 +39,25 @@ public class BooksDao {
         
         return books;
     }
+    
+    public static Book getBook(String isbn) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM books WHERE isbn = ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, isbn);
+            ResultSet rs = pstm.executeQuery();
+            
+            rs.next();
+            String title = rs.getString("title");
+            Integer publisherId = rs.getInt("publisher_id");
+            Double price = rs.getDouble("price");
+            
+            return new Book(title, isbn, publisherId, price);
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public static void addBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {

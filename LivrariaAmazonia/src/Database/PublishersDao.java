@@ -39,6 +39,24 @@ public class PublishersDao {
         
         return publishers;
     }
+    
+    public static Publisher getPublisher(Integer id) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM publishers WHERE publisher_id = ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            
+            rs.next();
+            String name = rs.getString("name");
+            String url = rs.getString("url");
+            
+            return new Publisher(id, name, url);
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public static void addPublisher(Publisher publisher) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
