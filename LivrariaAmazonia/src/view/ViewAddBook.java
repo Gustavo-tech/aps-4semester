@@ -21,9 +21,13 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         labelTitle = new javax.swing.JLabel();
         labelAuthor = new javax.swing.JLabel();
         labelPublisher = new javax.swing.JLabel();
+        labelPrice = new javax.swing.JLabel();
+        labelIsbn = new javax.swing.JLabel();
         textTitle = new javax.swing.JTextField();
         textAuthor = new javax.swing.JTextField();
         textPublisher = new javax.swing.JTextField();
+        textPrice = new javax.swing.JTextField();
+        textIsbn = new javax.swing.JTextField();
 
         labelAdd.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -54,6 +58,12 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         labelPublisher.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelPublisher.setText("Editora:");
 
+        labelPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelPrice.setText("Preço:");
+
+        labelIsbn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelIsbn.setText("ISBN:");
+
         textTitle.setToolTipText("");
         textTitle.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -75,6 +85,20 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             }
         });
 
+        textPrice.setToolTipText("");
+        textPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textPriceKeyReleased(evt);
+            }
+        });
+
+        textIsbn.setToolTipText("");
+        textIsbn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textIsbnKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
         panelAddLayout.setHorizontalGroup(
@@ -83,9 +107,9 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAddLayout.createSequentialGroup()
-                        .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(buttonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
                     .addGroup(panelAddLayout.createSequentialGroup()
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelAddLayout.createSequentialGroup()
@@ -98,8 +122,16 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(textTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
                             .addComponent(textAuthor, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(textPublisher, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(textPublisher, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(panelAddLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelIsbn)
+                            .addComponent(labelPrice))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textIsbn)
+                            .addComponent(textPrice))))
                 .addContainerGap())
         );
         panelAddLayout.setVerticalGroup(
@@ -117,7 +149,15 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textPublisher)
                     .addComponent(labelPublisher))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textIsbn)
+                    .addComponent(labelIsbn))
+                .addGap(13, 13, 13)
+                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textPrice)
+                    .addComponent(labelPrice))
+                .addGap(13, 13, 13)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -142,7 +182,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
                 .addComponent(labelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,6 +214,16 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         verifyText();
     }//GEN-LAST:event_textPublisherKeyReleased
 
+    // quando uma tecla é solta no "textPrice", chama o método verifyText() 
+    private void textPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textPriceKeyReleased
+        verifyText();
+    }//GEN-LAST:event_textPriceKeyReleased
+
+    // quando uma tecla é solta no "textIsbn", chama o método verifyText() 
+    private void textIsbnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textIsbnKeyReleased
+        verifyText();
+    }//GEN-LAST:event_textIsbnKeyReleased
+
     
     // NOT EVENTS
     
@@ -183,15 +233,17 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
     }
     
-    /* verifica se existe texto nos campos "Título", "Autor" e "Editora"
+    /* verifica se existe texto nos campos "Título", "Autor", "Editora", "ISBN" e "Preço"
        caso todos tenham texto: habilita o botão "Adicionar"
        caso não: desabilita o botão "Adicionar" */
     private void verifyText() {
         String textT = textTitle.getText();
         String textA = textAuthor.getText();
-        String textP = textPublisher.getText();
+        String textPu = textPublisher.getText();
+        String textI = textIsbn.getText();
+        String textPr = textPrice.getText();
         
-        if (textT.isBlank() || textA.isBlank() || textP.isBlank()) {
+        if (textT.isBlank() || textA.isBlank() || textPu.isBlank() || textI.isBlank() || textPr.isBlank()) {
             buttonAdd.setEnabled(false);
         } else {
             buttonAdd.setEnabled(true);
@@ -203,10 +255,14 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonCancel;
     private javax.swing.JLabel labelAdd;
     private javax.swing.JLabel labelAuthor;
+    private javax.swing.JLabel labelIsbn;
+    private javax.swing.JLabel labelPrice;
     private javax.swing.JLabel labelPublisher;
     private javax.swing.JLabel labelTitle;
     private javax.swing.JPanel panelAdd;
     private javax.swing.JTextField textAuthor;
+    private javax.swing.JTextField textIsbn;
+    private javax.swing.JTextField textPrice;
     private javax.swing.JTextField textPublisher;
     private javax.swing.JTextField textTitle;
     // End of variables declaration//GEN-END:variables

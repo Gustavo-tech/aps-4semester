@@ -8,6 +8,7 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
     protected ViewEditBook() {
         initComponents();
         buttonEdit.setEnabled(false);
+        textEdit.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -45,9 +46,12 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textEditKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textEditKeyTyped(evt);
+            }
         });
 
-        comboSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o que deseja editar:", "Título", "Autor", "Editora" }));
+        comboSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o que deseja editar:", "Título", "Autor", "Editora", "ISBN", "Preço" }));
         comboSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboSelectActionPerformed(evt);
@@ -123,10 +127,38 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         verifyEdit();
     }//GEN-LAST:event_textEditKeyReleased
 
-    // quando acontece uma ação no "comboSelect", chama o método verifyEdit() 
+    /* quando acontece uma ação no "comboSelect", chama o método verifyEdit() 
+       caso o usuário escolha uma opção, habilitar o "textEdit"
+       caso o usuário selecione a opção 0, limpa e desabilita o "textEdit" */
     private void comboSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSelectActionPerformed
+        int combo = comboSelect.getSelectedIndex();
+        
         verifyEdit();
+        
+        if (combo != 0) {
+            textEdit.setEnabled(true);
+        } else {
+            textEdit.setText("");
+            textEdit.setEnabled(false);
+        }
     }//GEN-LAST:event_comboSelectActionPerformed
+
+    //
+    private void textEditKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textEditKeyTyped
+        String isbn="0123456789";
+        String preco="0123456789,";
+        int combo = comboSelect.getSelectedIndex();
+        
+        // quando estiver na opção de "ISBN", só aceita números
+        if(combo == 4 && !isbn.contains(evt.getKeyChar()+"")){ 
+            evt.consume();
+        }
+        
+        // quando estiver na opção de "Preço" só aceita números e vírgula
+        if (combo == 5 && !preco.contains(evt.getKeyChar()+"")) { // ainda ta deixando 2 virgulas, preciso arrumar, depois converter a vírgula para ponto pra mandar pro bd
+            evt.consume();
+        }
+    }//GEN-LAST:event_textEditKeyTyped
 
     
     // NOT EVENTS

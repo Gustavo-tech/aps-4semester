@@ -127,16 +127,19 @@
           </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textEditKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textEditKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="comboSelect">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="6">
                 <StringItem index="0" value="Selecione o que deseja editar:"/>
                 <StringItem index="1" value="T&#xed;tulo"/>
                 <StringItem index="2" value="Autor"/>
                 <StringItem index="3" value="Editora"/>
+                <StringItem index="4" value="ISBN"/>
+                <StringItem index="5" value="Pre&#xe7;o"/>
               </StringArray>
             </Property>
           </Properties>

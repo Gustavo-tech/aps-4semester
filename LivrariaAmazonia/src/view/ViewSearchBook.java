@@ -10,7 +10,7 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
     
     protected ViewSearchBook() {
         initComponents();
-        radioGeneral.doClick();
+        
         buttonClean.setEnabled(false);
         buttonRemove.setEnabled(false);
         buttonSearch.setEnabled(false);
@@ -18,6 +18,10 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
         buttonGroupType.add(radioBook);
         buttonGroupType.add(radioGeneral);
         buttonGroupType.add(radioPublisher);
+        buttonGroupType.add(radioPrice);
+        buttonGroupType.add(radioIsbn);
+        radioAuthor.setFocusPainted(false);
+        radioGeneral.doClick();
     }
 
     @SuppressWarnings("unchecked")
@@ -30,6 +34,8 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
         radioBook = new javax.swing.JRadioButton();
         radioAuthor = new javax.swing.JRadioButton();
         radioPublisher = new javax.swing.JRadioButton();
+        radioIsbn = new javax.swing.JRadioButton();
+        radioPrice = new javax.swing.JRadioButton();
         buttonSearch = new javax.swing.JButton();
         buttonAdd = new javax.swing.JButton();
         buttonRemove = new javax.swing.JButton();
@@ -50,6 +56,10 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
         radioAuthor.setText("Autor");
 
         radioPublisher.setText("Editora");
+
+        radioIsbn.setText("ISBN");
+
+        radioPrice.setText("Preço");
 
         buttonSearch.setText("Pesquisar");
 
@@ -99,7 +109,7 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Livro", "Autor", "Editora"
+                "Preço", "Livro", "Autor", "Editora", "ISBN"
             }
         ));
         tableBooklist.setColumnSelectionAllowed(true);
@@ -119,42 +129,48 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
             panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLivrariaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLivrariaLayout.createSequentialGroup()
                         .addComponent(textSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(paneBooklist)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelLivrariaLayout.createSequentialGroup()
-                            .addComponent(radioGeneral)
-                            .addGap(12, 12, 12)
-                            .addComponent(radioBook)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(radioAuthor)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(radioPublisher))
-                        .addGroup(panelLivrariaLayout.createSequentialGroup()
-                            .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelLivrariaLayout.createSequentialGroup()
+                        .addComponent(radioGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioPublisher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioIsbn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(481, 481, 481))
+                    .addGroup(panelLivrariaLayout.createSequentialGroup()
+                        .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         panelLivrariaLayout.setVerticalGroup(
             panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLivrariaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioBook)
-                    .addComponent(radioGeneral)
-                    .addComponent(radioAuthor)
-                    .addComponent(radioPublisher))
+                    .addComponent(radioBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioPublisher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioIsbn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,6 +287,8 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radioAuthor;
     private javax.swing.JRadioButton radioBook;
     private javax.swing.JRadioButton radioGeneral;
+    private javax.swing.JRadioButton radioIsbn;
+    private javax.swing.JRadioButton radioPrice;
     private javax.swing.JRadioButton radioPublisher;
     private javax.swing.JTable tableBooklist;
     private javax.swing.JTextField textSearch;
