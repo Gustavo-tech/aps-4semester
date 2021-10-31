@@ -1,0 +1,33 @@
+// HORARIOS
+
+06/10 - 4h estudando sobre biblioteca swing
+07/10 - 5h criando a view
+20/10 - 4h melhorando a view base
+26/10 - 5h trocando modelo de varias janelas por internalFrames
+31/10 - 6h editando internalFrames
+
+TOTAL SOLO ATÉ AGORA: 24h
+
+
+
+
+
+// REFERÊNCIAS
+
+Organização: Oracle. Título: Class JTextField. Ano: c1995 Disponível em: <https://docs.oracle.com/javase/7/docs/api/javax/swing/JTextField.html> Acesso em: 06 de out. de 2021
+
+Organização: Oracle. Título: Class JOptionPane. Ano: c1995 Disponível em: <https://docs.oracle.com/javase/7/docs/api/javax/swing/JOptionPane.html> Acesso em: 06 de out. de 2021
+
+Organização: Oracle. Título: How to Use the ButtonGroup Component. Ano: c1995 Disponível em: <https://docs.oracle.com/javase/tutorial/uiswing/components/buttongroup.html> Acesso em: 06 de out. de 2021
+
+Organização: Oracle. Título: How to Use Buttons, Check Boxes, and Radio Buttons. Ano: c1995 Disponível em: <https://docs.oracle.com/javase/tutorial/uiswing/components/button.html#radiobutton> Acesso em: 06 de out. de 2021
+
+Organização: Oracle. Título: How to Use Icons. Ano: c1995 Disponível em: <https://docs.oracle.com/javase/tutorial/uiswing/components/icon.html> Acesso em: 26 de out. de 2021
+
+Organização: DevMedia. Título: Conhecendo Gerenciadores de Layout GUI do Java. Ano: 2012 Disponível em: <https://www.devmedia.com.br/conhecendo-gerenciadores-de-layout-gui-do-java/25869> Acesso em: 26 de out. de 2021
+
+Organização: DevMedia. Título: Utilizando JComboBox- Java Swing componentes NetBeans – Parte 11. Ano: 2011 Disponível em: <https://www.devmedia.com.br/utilizando-jcombobox-java-swing-componentes-netbeans-parte-11/22096> Acesso em: 31 de out. de 2021
+
+Organização: Oracle. Título: How to Use Internal Frames. Ano: c1995 Disponível em: <https://docs.oracle.com/javase/tutorial/uiswing/components/internalframe.html> Acesso em: 31 de out. de 2021
+
+Organização: Oracle. Título: Class JDesktopPane. Ano: c1995 Disponível em: <https://docs.oracle.com/javase/7/docs/api/javax/swing/JDesktopPane.html> Acesso em: 31 de out. de 2021
