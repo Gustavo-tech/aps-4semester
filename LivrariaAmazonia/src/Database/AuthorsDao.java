@@ -9,6 +9,7 @@ import Model.*;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class AuthorsDao {
     private static final String URL = DatabaseConstants.URL;
@@ -33,6 +34,8 @@ public class AuthorsDao {
             con.close();
         } catch(SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu ao buscar os autores",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
         return authors;
     }
@@ -51,6 +54,8 @@ public class AuthorsDao {
             return new Author(id, name, fname);
         } catch(SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu ao buscar esse autor",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -64,6 +69,8 @@ public class AuthorsDao {
           pstm.executeUpdate();
           conn.close();
         } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu ao salvar este autor",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
           e.printStackTrace();
         } 
     }
@@ -79,6 +86,8 @@ public class AuthorsDao {
           conn.close();
         } catch(SQLException e) {
           e.printStackTrace();
+          JOptionPane.showMessageDialog(null, "Um erro ocorreu ao atualizar este autor",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         } 
     }
 
@@ -91,6 +100,8 @@ public class AuthorsDao {
         conn.close();
       } catch (SQLException e) {
         e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Um erro ocorreu ao deletar este autor",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
       }
     }
 
@@ -102,6 +113,8 @@ public class AuthorsDao {
         pstm.executeUpdate();
         conn.close();
       } catch (SQLException e) {
+          JOptionPane.showMessageDialog(null, "Um erro ocorreu ao deletar este autor",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         e.printStackTrace();
       }
     }
