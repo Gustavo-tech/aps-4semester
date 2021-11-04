@@ -96,6 +96,11 @@ public class ViewAmazonia extends javax.swing.JFrame {
 
         menuDeleteAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         menuDeleteAutor.setText("Deletar autor");
+        menuDeleteAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDeleteAutorActionPerformed(evt);
+            }
+        });
         menuAutores.add(menuDeleteAutor);
 
         menuBarra.add(menuAutores);
@@ -169,6 +174,13 @@ public class ViewAmazonia extends javax.swing.JFrame {
         vw.setVisible(true);
         vw.setPositionCenter();
     }//GEN-LAST:event_menuAddAutorActionPerformed
+
+    private void menuDeleteAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDeleteAutorActionPerformed
+        ViewDeleteAuthor vw = new ViewDeleteAuthor();
+        desktopAmazonia.add(vw);
+        vw.setVisible(true);
+        vw.setPositionCenter();
+    }//GEN-LAST:event_menuDeleteAutorActionPerformed
     
     // NOT EVENTS
         // por enquanto nada
