@@ -58,6 +58,31 @@ public class PublishersDao {
         }
     }
 
+    public static List<Publisher> getPublisherStr(String name) {
+        List<Publisher> publishers = new ArrayList<Publisher>();
+
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM publishers WHERE name LIKE '%?%' ";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, name);
+            ResultSet rs = pstm.executeQuery();
+            
+            while(rs.next()) {
+                Integer id = rs.getInt("publisher_id");
+                String pName = rs.getString("name");
+                String url = rs.getString("url");
+                
+                Publisher publisher = new Publisher(id, pName, url);
+                publishers.add(publisher);
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return publishers;
+    }
+
     public static void addPublisher(Publisher publisher) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "INSERT INTO publishers (name, url) values (?, ?)";

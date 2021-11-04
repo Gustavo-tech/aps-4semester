@@ -40,6 +40,31 @@ public class AuthorsDao {
         return authors;
     }
     
+    public static List<Author> getAuthorsStr(String aName) {
+        List<Author> authors = new ArrayList<Author>();
+        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM authors WHERE name LIKE '%?%'";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, aName);
+            ResultSet rs = pstm.executeQuery(query);
+            
+            while(rs.next()) {
+                Integer id = rs.getInt("author_id");
+                String name = rs.getString("name");
+                String fname = rs.getString("fname");
+                Author author = new Author(id, name, fname);
+                authors.add(author);
+            }
+            
+            con.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu ao buscar os autores",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return authors;
+    }
+    
     public static Author getAuthor(Integer id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT * FROM authors WHERE author_id = ?";

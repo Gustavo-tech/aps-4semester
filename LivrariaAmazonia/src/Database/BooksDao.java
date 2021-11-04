@@ -40,6 +40,32 @@ public class BooksDao {
         return books;
     }
     
+    public static List<Book> getBooksStr(String bName) {
+        List<Book> books = new ArrayList<Book>();
+        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM books WHERE title LIKE '%?%'";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, bName);
+            ResultSet rs = pstm.executeQuery(query);
+            
+            while(rs.next()) {
+                String title = rs.getString("title");
+                String isbn = rs.getString("isbn");
+                Integer publisherId = rs.getInt("publisher_id");
+                Double price = rs.getDouble("price");
+                
+                Book book = new Book(title, isbn, publisherId, price);
+                books.add(book);
+            }
+            
+            con.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return books;
+    }
+    
     public static Book getBook(String isbn) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT * FROM books WHERE isbn = ?";
