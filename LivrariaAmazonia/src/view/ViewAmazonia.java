@@ -10,14 +10,21 @@ public class ViewAmazonia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem2 = new javax.swing.JMenuItem();
         desktopAmazonia = new javax.swing.JDesktopPane();
         menuBarra = new javax.swing.JMenuBar();
         menuLivraria = new javax.swing.JMenu();
         menuLivrariaBuscar = new javax.swing.JMenuItem();
         menuLivrariaAdd = new javax.swing.JMenuItem();
         menuLivrariaSair = new javax.swing.JMenuItem();
+        menuAutores = new javax.swing.JMenu();
+        menuAddAutor = new javax.swing.JMenuItem();
+        menuEditAutor = new javax.swing.JMenuItem();
+        menuDeleteAutor = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Livraria Amazônia");
@@ -26,7 +33,6 @@ public class ViewAmazonia extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(600, 500));
         setName("Livraria Amazônia"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 750));
         setSize(new java.awt.Dimension(1000, 500));
 
         javax.swing.GroupLayout desktopAmazoniaLayout = new javax.swing.GroupLayout(desktopAmazonia);
@@ -37,7 +43,7 @@ public class ViewAmazonia extends javax.swing.JFrame {
         );
         desktopAmazoniaLayout.setVerticalGroup(
             desktopAmazoniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 476, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         menuLivraria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-open-book.png"))); // NOI18N
@@ -71,6 +77,33 @@ public class ViewAmazonia extends javax.swing.JFrame {
         menuLivraria.add(menuLivrariaSair);
 
         menuBarra.add(menuLivraria);
+
+        menuAutores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/writer.png"))); // NOI18N
+        menuAutores.setText("Autores");
+
+        menuAddAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-add-book.png"))); // NOI18N
+        menuAddAutor.setText("Adicionar autor");
+        menuAddAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAddAutorActionPerformed(evt);
+            }
+        });
+        menuAutores.add(menuAddAutor);
+
+        menuEditAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pencil.png"))); // NOI18N
+        menuEditAutor.setText("Editar autor");
+        menuAutores.add(menuEditAutor);
+
+        menuDeleteAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
+        menuDeleteAutor.setText("Deletar autor");
+        menuDeleteAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDeleteAutorActionPerformed(evt);
+            }
+        });
+        menuAutores.add(menuDeleteAutor);
+
+        menuBarra.add(menuAutores);
 
         menuAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-about.png"))); // NOI18N
         menuAjuda.setText("Ajuda");
@@ -134,6 +167,20 @@ public class ViewAmazonia extends javax.swing.JFrame {
         viewAbout.setPositionCenter();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
+    // Abre a janela para adicionar um novo autor
+    private void menuAddAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAddAutorActionPerformed
+        ViewAddAuthor vw = new ViewAddAuthor();
+        desktopAmazonia.add(vw);
+        vw.setVisible(true);
+        vw.setPositionCenter();
+    }//GEN-LAST:event_menuAddAutorActionPerformed
+
+    private void menuDeleteAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDeleteAutorActionPerformed
+        ViewDeleteAuthor vw = new ViewDeleteAuthor();
+        desktopAmazonia.add(vw);
+        vw.setVisible(true);
+        vw.setPositionCenter();
+    }//GEN-LAST:event_menuDeleteAutorActionPerformed
     
     // NOT EVENTS
         // por enquanto nada
@@ -171,8 +218,13 @@ public class ViewAmazonia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JDesktopPane desktopAmazonia;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem menuAddAutor;
     private javax.swing.JMenu menuAjuda;
+    private javax.swing.JMenu menuAutores;
     private javax.swing.JMenuBar menuBarra;
+    private javax.swing.JMenuItem menuDeleteAutor;
+    private javax.swing.JMenuItem menuEditAutor;
     private javax.swing.JMenu menuLivraria;
     private javax.swing.JMenuItem menuLivrariaAdd;
     private javax.swing.JMenuItem menuLivrariaBuscar;
