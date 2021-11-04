@@ -1,0 +1,11 @@
+03/10/2021 - Reunião com grupo [2 horas]
+10/10/2021 - Desenvolvendo base do programa [5 horas]
+22/10/2021 - Desenvolvendo classes DAO [3 horas]
+25/10/2021 - Arrumando problema com o driver JDBC [2 horas]
+26/10/2021 - Modificando e testando DAO [4 horas]
+20/10/2021 - Modificando e testando DAO [6 horas]
+02/11/2021 - Modificando views [6 horas]
+06/11/2021 - Reunião para discutir como as telas estão sendo implementadas [4 horas]
+07/11/2021 - Reunião para discutirmos o design das telas [3 horas]
+
+Total: 35 horas
