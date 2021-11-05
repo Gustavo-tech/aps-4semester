@@ -40,6 +40,16 @@ public class PublishersDao {
         return publishers;
     }
     
+    public String getPublishersDropdown() {
+      StringBuilder publishers = new StringBuilder();
+      List<Publisher> editoras = PublishersDao.getPublishers();
+
+      editoras.forEach(a -> publishers.append(a.getName()).append(", "));
+
+      return publishers.toString();
+
+    }
+    
     public static Publisher getPublisher(Integer id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT * FROM publishers WHERE publisher_id = ?";
