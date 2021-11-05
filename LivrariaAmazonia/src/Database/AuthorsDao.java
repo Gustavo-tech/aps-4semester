@@ -9,13 +9,14 @@ import Model.*;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
 
 public class AuthorsDao {
     private static final String URL = DatabaseConstants.URL;
     private static final String USER = DatabaseConstants.USER;
     private static final String PASS = DatabaseConstants.PASS;
-    
+
     public static List<Author> getAuthors() {
         List<Author> authors = new ArrayList<Author>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
@@ -39,7 +40,17 @@ public class AuthorsDao {
         }
         return authors;
     }
-    
+        
+    public String getAuthorsDropdown() {
+      StringBuilder authors = new StringBuilder();
+      List<Author> autores = AuthorsDao.getAuthors();
+
+      autores.forEach(a -> authors.append(a.getName()).append(", "));
+
+      return authors.toString();
+
+    }
+
     public static List<Author> getAuthorsStr(String aName) {
         List<Author> authors = new ArrayList<Author>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
