@@ -43,10 +43,9 @@ public class AuthorsDao {
     public static List<Author> getAuthorsStr(String aName) {
         List<Author> authors = new ArrayList<Author>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "SELECT * FROM authors WHERE name LIKE '%?%'";
-            PreparedStatement pstm = con.prepareStatement(query);
-            pstm.setString(1, aName);
-            ResultSet rs = pstm.executeQuery(query);
+            String query = "SELECT * FROM authors WHERE name LIKE '%" + aName + "%'";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()) {
                 Integer id = rs.getInt("author_id");

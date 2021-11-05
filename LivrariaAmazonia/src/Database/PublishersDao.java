@@ -62,10 +62,9 @@ public class PublishersDao {
         List<Publisher> publishers = new ArrayList<Publisher>();
 
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "SELECT * FROM publishers WHERE name LIKE '%?%' ";
-            PreparedStatement pstm = con.prepareStatement(query);
-            pstm.setString(1, name);
-            ResultSet rs = pstm.executeQuery();
+            String query = "SELECT * FROM publishers WHERE name LIKE '%" + name + "%'";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()) {
                 Integer id = rs.getInt("publisher_id");

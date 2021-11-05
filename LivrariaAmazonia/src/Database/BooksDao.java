@@ -43,10 +43,9 @@ public class BooksDao {
     public static List<Book> getBooksStr(String bName) {
         List<Book> books = new ArrayList<Book>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "SELECT * FROM books WHERE title LIKE '%?%'";
-            PreparedStatement pstm = con.prepareStatement(query);
-            pstm.setString(1, bName);
-            ResultSet rs = pstm.executeQuery(query);
+            String query = "SELECT * FROM books WHERE title LIKE '%" + bName + "%'";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()) {
                 String title = rs.getString("title");
