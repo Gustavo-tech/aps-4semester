@@ -3,9 +3,9 @@ package view;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 
-public class ViewEditBook extends javax.swing.JInternalFrame {
+public class EditBook extends javax.swing.JInternalFrame {
 
-    protected ViewEditBook() {
+    protected EditBook() {
         initComponents();
         buttonEdit.setEnabled(false);
         textEdit.setEnabled(false);
@@ -70,7 +70,7 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
                         .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
-                    .addComponent(comboSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(comboSelect, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelEditLayout.setVerticalGroup(

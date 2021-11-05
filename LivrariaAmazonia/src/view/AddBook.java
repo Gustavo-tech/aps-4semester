@@ -2,10 +2,11 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import Database.*;
 
-public class ViewAddBook extends javax.swing.JInternalFrame {
+public class AddBook extends javax.swing.JInternalFrame {
 
-    protected ViewAddBook() {
+    protected AddBook() {
         initComponents();
         buttonAdd.setEnabled(false);
     }
@@ -24,10 +25,10 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         labelPrice = new javax.swing.JLabel();
         labelIsbn = new javax.swing.JLabel();
         textTitle = new javax.swing.JTextField();
-        textAuthor = new javax.swing.JTextField();
-        textPublisher = new javax.swing.JTextField();
         textPrice = new javax.swing.JTextField();
         textIsbn = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         labelAdd.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -71,20 +72,6 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             }
         });
 
-        textAuthor.setToolTipText("");
-        textAuthor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                textAuthorKeyReleased(evt);
-            }
-        });
-
-        textPublisher.setToolTipText("");
-        textPublisher.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                textPublisherKeyReleased(evt);
-            }
-        });
-
         textPrice.setToolTipText("");
         textPrice.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -98,6 +85,8 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
                 textIsbnKeyReleased(evt);
             }
         });
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
@@ -119,10 +108,11 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
                                     .addComponent(labelAuthor, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addComponent(labelPublisher))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
-                            .addComponent(textAuthor, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(textPublisher, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(textTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelAddLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -143,12 +133,12 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
                     .addComponent(labelTitle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textAuthor)
-                    .addComponent(labelAuthor))
+                    .addComponent(labelAuthor)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textPublisher)
-                    .addComponent(labelPublisher))
+                    .addComponent(labelPublisher)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textIsbn)
@@ -204,16 +194,6 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         verifyText();
     }//GEN-LAST:event_textTitleKeyReleased
 
-    // quando uma tecla é solta no "textAuthor", chama o método verifyText() 
-    private void textAuthorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textAuthorKeyReleased
-        verifyText();
-    }//GEN-LAST:event_textAuthorKeyReleased
-
-    // quando uma tecla é solta no "textPublisher", chama o método verifyText() 
-    private void textPublisherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textPublisherKeyReleased
-        verifyText();
-    }//GEN-LAST:event_textPublisherKeyReleased
-
     // quando uma tecla é solta no "textPrice", chama o método verifyText() 
     private void textPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textPriceKeyReleased
         verifyText();
@@ -238,12 +218,10 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
        caso não: desabilita o botão "Adicionar" */
     private void verifyText() {
         String textT = textTitle.getText();
-        String textA = textAuthor.getText();
-        String textPu = textPublisher.getText();
         String textI = textIsbn.getText();
         String textPr = textPrice.getText();
         
-        if (textT.isBlank() || textA.isBlank() || textPu.isBlank() || textI.isBlank() || textPr.isBlank()) {
+        if (textT.isBlank() || textI.isBlank() || textPr.isBlank()) {
             buttonAdd.setEnabled(false);
         } else {
             buttonAdd.setEnabled(true);
@@ -253,6 +231,8 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonCancel;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel labelAdd;
     private javax.swing.JLabel labelAuthor;
     private javax.swing.JLabel labelIsbn;
@@ -260,10 +240,8 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     private javax.swing.JLabel labelPublisher;
     private javax.swing.JLabel labelTitle;
     private javax.swing.JPanel panelAdd;
-    private javax.swing.JTextField textAuthor;
     private javax.swing.JTextField textIsbn;
     private javax.swing.JTextField textPrice;
-    private javax.swing.JTextField textPublisher;
     private javax.swing.JTextField textTitle;
     // End of variables declaration//GEN-END:variables
 }

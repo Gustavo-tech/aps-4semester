@@ -2,93 +2,138 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.JMenuItem" name="jMenuItem2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jMenuItem2"/>
-      </Properties>
-    </Component>
     <Menu class="javax.swing.JMenuBar" name="menuBarra">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menuLivraria">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/icon-open-book.png"/>
+              <Image iconType="3" name="/images/icon-search.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Livraria"/>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuLivrariaMouseClicked"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuAdd">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/icon-add-book.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Adicionar"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuLivrariaBuscar">
+            <MenuItem class="javax.swing.JMenuItem" name="menuAddBook">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icon-search.png"/>
+                  <Image iconType="3" name="/images/icon-open-book.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Buscar livro"/>
+                <Property name="text" type="java.lang.String" value="Livro"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLivrariaBuscarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAddBookActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuLivrariaAdd">
+            <MenuItem class="javax.swing.JMenuItem" name="menuAddAuthor">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icon-add-book.png"/>
+                  <Image iconType="3" name="/images/writer.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Adicionar livro"/>
+                <Property name="text" type="java.lang.String" value="Autor"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLivrariaAddActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAddAuthorActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuLivrariaSair">
+            <MenuItem class="javax.swing.JMenuItem" name="menuAddPublisher">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icon-exit.png"/>
+                  <Image iconType="3" name="/images/icon-publisher.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Sair"/>
+                <Property name="text" type="java.lang.String" value="Editora"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLivrariaSairActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAddPublisherActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuAutores">
+        <Menu class="javax.swing.JMenu" name="menuEdit">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/view/writer.png"/>
+              <Image iconType="3" name="/images/pencil.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Autores"/>
+            <Property name="text" type="java.lang.String" value="Editar"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuAddAutor">
+            <MenuItem class="javax.swing.JMenuItem" name="menuEditBook">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icon-add-book.png"/>
+                  <Image iconType="3" name="/images/icon-open-book.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Adicionar autor"/>
+                <Property name="text" type="java.lang.String" value="Livro"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAddAutorActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuEditBookActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuEditAutor">
+            <MenuItem class="javax.swing.JMenuItem" name="menuEditAuthor">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/pencil.png"/>
+                  <Image iconType="3" name="/images/writer.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Editar autor"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuDeleteAutor">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/delete.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Deletar autor"/>
+                <Property name="text" type="java.lang.String" value="Autor"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDeleteAutorActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuEditAuthorActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuEditPublisher">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/icon-publisher.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Editora"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuEditPublisherActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuDelete">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/icon-delete.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Remover"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuDeleteBook">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/icon-open-book.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Livro"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuDeleteAuthor">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/writer.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Autor"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuDeletePublisher">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/icon-publisher.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Editora"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -109,6 +154,17 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuLivrariaSair">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/icon-exit.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Sair"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLivrariaSairActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -172,12 +228,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="718" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1108" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="603" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

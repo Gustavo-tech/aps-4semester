@@ -67,16 +67,16 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="textSearch" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonSearch" min="-2" pref="160" max="-2" attributes="0"/>
                       </Group>
                       <Component id="paneBooklist" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="radioGeneral" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="radioBook" max="32767" attributes="0"/>
@@ -86,9 +86,7 @@
                           <Component id="radioPublisher" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="radioIsbn" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="radioPrice" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="481" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="540" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="buttonAdd" min="-2" pref="160" max="-2" attributes="0"/>
@@ -100,9 +98,10 @@
                           <Component id="buttonClean" min="-2" pref="160" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonClose" min="-2" pref="160" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -116,16 +115,15 @@
                       <Component id="radioAuthor" alignment="3" max="32767" attributes="0"/>
                       <Component id="radioPublisher" alignment="3" max="32767" attributes="0"/>
                       <Component id="radioIsbn" alignment="3" max="32767" attributes="0"/>
-                      <Component id="radioPrice" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="textSearch" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="buttonSearch" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="paneBooklist" pref="324" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="paneBooklist" min="-2" pref="318" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="buttonAdd" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="buttonRemove" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -164,15 +162,13 @@
             <Property name="text" type="java.lang.String" value="ISBN"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="radioPrice">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="buttonSearch">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pesquisar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSearchActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonAdd">
           <Properties>

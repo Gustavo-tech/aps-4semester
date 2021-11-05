@@ -2,13 +2,14 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import Database.*;
 
-public class ViewSearchBook extends javax.swing.JInternalFrame {
+public class Search extends javax.swing.JInternalFrame {
 
     boolean haveText = false;
     
     
-    protected ViewSearchBook() {
+    protected Search() {
         initComponents();
         
         buttonClean.setEnabled(false);
@@ -18,7 +19,6 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
         buttonGroupType.add(radioBook);
         buttonGroupType.add(radioGeneral);
         buttonGroupType.add(radioPublisher);
-        buttonGroupType.add(radioPrice);
         buttonGroupType.add(radioIsbn);
         radioAuthor.setFocusPainted(false);
         radioGeneral.doClick();
@@ -35,7 +35,6 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
         radioAuthor = new javax.swing.JRadioButton();
         radioPublisher = new javax.swing.JRadioButton();
         radioIsbn = new javax.swing.JRadioButton();
-        radioPrice = new javax.swing.JRadioButton();
         buttonSearch = new javax.swing.JButton();
         buttonAdd = new javax.swing.JButton();
         buttonRemove = new javax.swing.JButton();
@@ -59,9 +58,12 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
 
         radioIsbn.setText("ISBN");
 
-        radioPrice.setText("Preço");
-
         buttonSearch.setText("Pesquisar");
+        buttonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSearchActionPerformed(evt);
+            }
+        });
 
         buttonAdd.setText("Adicionar");
         buttonAdd.setMaximumSize(null);
@@ -127,15 +129,15 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
         panelLivraria.setLayout(panelLivrariaLayout);
         panelLivrariaLayout.setHorizontalGroup(
             panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLivrariaLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLivrariaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLivrariaLayout.createSequentialGroup()
+                .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelLivrariaLayout.createSequentialGroup()
                         .addComponent(textSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(paneBooklist)
-                    .addGroup(panelLivrariaLayout.createSequentialGroup()
+                    .addComponent(paneBooklist, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLivrariaLayout.createSequentialGroup()
                         .addComponent(radioGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -145,10 +147,8 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
                         .addComponent(radioPublisher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioIsbn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(481, 481, 481))
-                    .addGroup(panelLivrariaLayout.createSequentialGroup()
+                        .addGap(540, 540, 540))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLivrariaLayout.createSequentialGroup()
                         .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,7 +157,8 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelLivrariaLayout.setVerticalGroup(
@@ -169,14 +170,13 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
                     .addComponent(radioGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(radioAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(radioPublisher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(radioIsbn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(radioPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(radioIsbn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paneBooklist, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(paneBooklist, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,22 +239,6 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_textSearchKeyReleased
 
-    // quando é clicado em "Adicionar", abre a janela interna "Adicionar livro"
-    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        ViewAddBook viewAdd = new  ViewAddBook();
-        ViewAmazonia.desktopAmazonia.add(viewAdd);
-        viewAdd.setVisible(true);
-        viewAdd.setPositionCenter();
-    }//GEN-LAST:event_buttonAddActionPerformed
-
-    // quando é clicado em "Editar", abre a janela interna "Editar livro"
-    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        ViewEditBook viewModify = new ViewEditBook();
-        ViewAmazonia.desktopAmazonia.add(viewModify);
-        viewModify.setVisible(true);
-        viewModify.setPositionCenter();
-    }//GEN-LAST:event_buttonEditActionPerformed
-
     // quando é clicado em "Fechar", fecha a janela interna "Buscar livro"
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         try {
@@ -264,7 +248,27 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonCloseActionPerformed
 
-    
+    private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
+        String search = textSearch.getText();
+        
+    }//GEN-LAST:event_buttonSearchActionPerformed
+
+    // quando é clicado em "Editar", abre a janela interna "Editar livro"
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        EditBook viewModify = new EditBook();
+        LivrariaAmazonia.desktopAmazonia.add(viewModify);
+        viewModify.setVisible(true);
+        viewModify.setPositionCenter();
+    }//GEN-LAST:event_buttonEditActionPerformed
+
+    // quando é clicado em "Adicionar", abre a janela interna "Adicionar livro"
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        AddBook viewAdd = new  AddBook();
+        LivrariaAmazonia.desktopAmazonia.add(viewAdd);
+        viewAdd.setVisible(true);
+        viewAdd.setPositionCenter();
+    }//GEN-LAST:event_buttonAddActionPerformed
+
     // NOT EVENTS
     
     // define a posição da janela interna no centro do programa
@@ -288,7 +292,6 @@ public class ViewSearchBook extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radioBook;
     private javax.swing.JRadioButton radioGeneral;
     private javax.swing.JRadioButton radioIsbn;
-    private javax.swing.JRadioButton radioPrice;
     private javax.swing.JRadioButton radioPublisher;
     private javax.swing.JTable tableBooklist;
     private javax.swing.JTextField textSearch;
