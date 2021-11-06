@@ -97,9 +97,9 @@ public class AuthorDAO {
           JOptionPane.showMessageDialog(null, "Autor adicionado com sucesso", 
                   "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Um erro ocorreu ao salvar este autor",
                     "Erro", JOptionPane.ERROR_MESSAGE);
-          e.printStackTrace();
         } 
     }
 
