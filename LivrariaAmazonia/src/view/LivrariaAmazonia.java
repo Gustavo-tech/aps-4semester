@@ -26,8 +26,8 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
         menuDeleteAuthor = new javax.swing.JMenuItem();
         menuDeletePublisher = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        menuLivrariaSair = new javax.swing.JMenuItem();
+        menuAjudaSobre = new javax.swing.JMenuItem();
+        menuAjudaSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Livraria Amazônia");
@@ -144,23 +144,23 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
         menuAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-about.png"))); // NOI18N
         menuAjuda.setText("Ajuda");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-about.png"))); // NOI18N
-        jMenuItem1.setText("Sobre");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuAjudaSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-about.png"))); // NOI18N
+        menuAjudaSobre.setText("Sobre");
+        menuAjudaSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuAjudaSobreActionPerformed(evt);
             }
         });
-        menuAjuda.add(jMenuItem1);
+        menuAjuda.add(menuAjudaSobre);
 
-        menuLivrariaSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-exit.png"))); // NOI18N
-        menuLivrariaSair.setText("Sair");
-        menuLivrariaSair.addActionListener(new java.awt.event.ActionListener() {
+        menuAjudaSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-exit.png"))); // NOI18N
+        menuAjudaSair.setText("Sair");
+        menuAjudaSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuLivrariaSairActionPerformed(evt);
+                menuAjudaSairActionPerformed(evt);
             }
         });
-        menuAjuda.add(menuLivrariaSair);
+        menuAjuda.add(menuAjudaSair);
 
         menuBarra.add(menuAjuda);
 
@@ -182,17 +182,17 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // fecha o programa pelo "Sair" no menu superior
-    private void menuLivrariaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLivrariaSairActionPerformed
+    private void menuAjudaSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjudaSairActionPerformed
         System.exit(0); 
-    }//GEN-LAST:event_menuLivrariaSairActionPerformed
+    }//GEN-LAST:event_menuAjudaSairActionPerformed
 
     // abre a janela interna "Sobre" pelo menu superior
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjudaSobreActionPerformed
         About viewAbout = new About();
         desktopAmazonia.add(viewAbout);
         viewAbout.setVisible(true);
         viewAbout.setPositionCenter();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuAjudaSobreActionPerformed
     
     private void menuAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAddBookActionPerformed
         AddBook viewAddBook = new  AddBook();
@@ -245,20 +245,6 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
     
     // NOT EVENTS
         // por enquanto nada    
-    // NOT EVENTS
-        // por enquanto nada    
-    // NOT EVENTS
-        // por enquanto nada    
-    // NOT EVENTS
-        // por enquanto nada    
-    // NOT EVENTS
-        // por enquanto nada    
-    // NOT EVENTS
-        // por enquanto nada    
-    // NOT EVENTS
-        // por enquanto nada    
-    // NOT EVENTS
-        // por enquanto nada
     
     
     // MAIN
@@ -292,12 +278,13 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JDesktopPane desktopAmazonia;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuAdd;
     private javax.swing.JMenuItem menuAddAuthor;
     private javax.swing.JMenuItem menuAddBook;
     private javax.swing.JMenuItem menuAddPublisher;
     private javax.swing.JMenu menuAjuda;
+    private javax.swing.JMenuItem menuAjudaSair;
+    private javax.swing.JMenuItem menuAjudaSobre;
     private javax.swing.JMenuBar menuBarra;
     private javax.swing.JMenu menuDelete;
     private javax.swing.JMenuItem menuDeleteAuthor;
@@ -308,6 +295,5 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuEditBook;
     private javax.swing.JMenuItem menuEditPublisher;
     private javax.swing.JMenu menuLivraria;
-    private javax.swing.JMenuItem menuLivrariaSair;
     // End of variables declaration//GEN-END:variables
 }

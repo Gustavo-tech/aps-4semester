@@ -1,14 +1,11 @@
-import Database.*;
-import Model.*;
-import java.util.ArrayList;
+import model.dao.AuthorDAO;
+import model.Author;
 import java.util.List;
 
 public class Teste {
     public static void main(String[] args) {
-        List<Book> books = new ArrayList<Book>();
-        List<Author> authors = new ArrayList<Author>();
-        List<Publisher> publishers = new ArrayList<Publisher>();
-        List<BookAuthor> bookAuthors = new ArrayList<BookAuthor>();
+        List<Author> autores = AuthorDAO.getAuthors();
+        System.out.println(autores.toString());
         
         
     }

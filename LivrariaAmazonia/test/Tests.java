@@ -9,8 +9,8 @@
  * @author TR0NZ0D
  */
 
-import Database.BuscaGenerica;
-import Model.Author;
+import model.dao.BuscaGenerica;
+import model.Author;
 import java.util.List;
 
 public class Tests {

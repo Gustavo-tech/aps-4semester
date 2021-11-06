@@ -2,7 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import Database.*;
+import javax.swing.ComboBoxModel;
 
 public class AddBook extends javax.swing.JInternalFrame {
 
@@ -27,8 +27,8 @@ public class AddBook extends javax.swing.JInternalFrame {
         textTitle = new javax.swing.JTextField();
         textPrice = new javax.swing.JTextField();
         textIsbn = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboBoxAuthor = new javax.swing.JComboBox<>();
+        comboBoxPublisher = new javax.swing.JComboBox<>();
 
         labelAdd.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -86,7 +86,7 @@ public class AddBook extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxPublisher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
@@ -111,8 +111,8 @@ public class AddBook extends javax.swing.JInternalFrame {
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(textTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(comboBoxAuthor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(comboBoxPublisher, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelAddLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -134,11 +134,11 @@ public class AddBook extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelAuthor)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPublisher)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textIsbn)
@@ -182,11 +182,7 @@ public class AddBook extends javax.swing.JInternalFrame {
     
     // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            System.err.println("Closing Exception");
-        }
+        closeWindow();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     // quando uma tecla é solta no "textTitle", chama o método verifyText() 
@@ -206,6 +202,15 @@ public class AddBook extends javax.swing.JInternalFrame {
 
     
     // NOT EVENTS
+    
+    // fecha a janela atual
+    private void closeWindow() {
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            System.err.println("Closing Exception");
+        }
+    }
     
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
@@ -231,8 +236,8 @@ public class AddBook extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonCancel;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> comboBoxAuthor;
+    private javax.swing.JComboBox<String> comboBoxPublisher;
     private javax.swing.JLabel labelAdd;
     private javax.swing.JLabel labelAuthor;
     private javax.swing.JLabel labelIsbn;

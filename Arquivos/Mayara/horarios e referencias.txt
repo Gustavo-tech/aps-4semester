@@ -5,8 +5,8 @@
 20/10 - 4h melhorando a view base
 26/10 - 5h trocando modelo de varias janelas por internalFrames
 31/10 - 6h editando internalFrames
-
-TOTAL SOLO ATÉ AGORA: 24h
+04/11 - 5h Criando novas janelas de add/remove/edit
+TOTAL SOLO ATÉ AGORA: 29h
 
 
 

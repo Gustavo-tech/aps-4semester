@@ -2,7 +2,9 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import Database.*;
+import javax.swing.table.DefaultTableModel;
+import model.Publisher;
+import model.dao.PublisherDAO;
 
 public class Search extends javax.swing.JInternalFrame {
 
@@ -22,6 +24,7 @@ public class Search extends javax.swing.JInternalFrame {
         buttonGroupType.add(radioIsbn);
         radioAuthor.setFocusPainted(false);
         radioGeneral.doClick();
+        readJTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -248,9 +251,21 @@ public class Search extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonCloseActionPerformed
 
+    // realiza a pesquisa de acordo com o tipo selecionado
     private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
         String search = textSearch.getText();
         
+        if (radioAuthor.isFocusOwner()) {
+            
+        } else if (radioBook.isFocusOwner()) {
+            
+        } else if (radioIsbn.isFocusOwner()) {
+            
+        } else if (radioPublisher.isFocusOwner()) {
+            
+        } else if (radioGeneral.isFocusOwner()) {
+            
+        }
     }//GEN-LAST:event_buttonSearchActionPerformed
 
     // quando é clicado em "Editar", abre a janela interna "Editar livro"
@@ -270,6 +285,21 @@ public class Search extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonAddActionPerformed
 
     // NOT EVENTS
+    
+    // para trazer os dados de editora para a tabela
+    public void readJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) tableBooklist.getModel();
+        
+        PublisherDAO pdao = new PublisherDAO();
+        
+        for (Publisher p: pdao.getPublishers()) {
+                modelo.addRow(new Object[] {
+                    p.getName(),
+                    p.getId(),
+                    p.getUrl()
+                });
+        }
+    }
     
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {

@@ -1,9 +1,11 @@
 package view;
 
-import Database.AuthorsDao;
-import Model.Author;
+import model.dao.AuthorDAO;
+import model.Author;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class AddAuthor extends javax.swing.JInternalFrame {
@@ -141,11 +143,7 @@ public class AddAuthor extends javax.swing.JInternalFrame {
     
     // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            System.err.println("Closing Exception");
-        }
+        closeWindow();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     // quando uma tecla é solta no "textTitle", chama o método verifyText() 
@@ -158,16 +156,37 @@ public class AddAuthor extends javax.swing.JInternalFrame {
         verifyText();
     }//GEN-LAST:event_textLastNameKeyReleased
 
+    // adiciona um novo autor no banco de dados
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         String name = textName.getText();
         String lastName = textLastName.getText();
         
         Author author = new Author(lastName, name);
-        AuthorsDao.addAuthor(author);
+        AuthorDAO.addAuthor(author);
+        
+        Object[] options = { "Sim", "Não" };
+        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+        int option = JOptionPane.showOptionDialog(null, "Autor(a) adicionado.\nGostaria de adicionar mais?", "Adicionar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
+        
+        if (option == 1) {
+            closeWindow();
+        } else if (option == 0) {
+            textName.setText("");
+            textLastName.setText("");
+        }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     
     // NOT EVENTS
+    
+    // fecha a janela atual
+    private void closeWindow() {
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            System.err.println("Closing Exception");
+        }
+    }
     
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {

@@ -1,7 +1,8 @@
-package Database;
+package model.dao;
 
-import Model.Author;
-import Model.BookAuthor;
+import connection.DatabaseConstants;
+import model.Author;
+import model.BookAuthor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookAuthorsDao {
+public class BookAuthorDAO {
     private static final String URL = DatabaseConstants.URL;
     private static final String USER = DatabaseConstants.USER;
     private static final String PASS = DatabaseConstants.PASS;

@@ -1,9 +1,12 @@
 package view;
 
-import Database.*;
-import Model.*;
+import model.Publisher;
+import model.dao.PublisherDAO;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class AddPublisher extends javax.swing.JInternalFrame {
 
@@ -138,16 +141,12 @@ public class AddPublisher extends javax.swing.JInternalFrame {
     
     // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            System.err.println("Closing Exception");
-        }
+        closeWindow();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     // quando uma tecla é solta no "textTitle", chama o método verifyText() 
     private void textNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNameKeyReleased
-        verifyText();
+        verifyText(); 
     }//GEN-LAST:event_textNameKeyReleased
 
     // quando uma tecla é solta no "textAuthor", chama o método verifyText() 
@@ -158,13 +157,32 @@ public class AddPublisher extends javax.swing.JInternalFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         String name = textName.getText();
         String url = textURL.getText();
-        
+            
         Publisher publisher = new Publisher(name, url);
-        PublishersDao.addPublisher(publisher);
+        PublisherDAO.addPublisher(publisher);
+        
+        Object[] options = { "Sim", "Não" };
+        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+        int option = JOptionPane.showOptionDialog(null, "Editora adicionada.\nGostaria de adicionar mais?", "Adicionar editora", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
+        
+        if (option == 1) {
+            closeWindow();
+        } else if (option == 0) {
+            textName.setText("");
+            textURL.setText("");
+        }
     }//GEN-LAST:event_buttonAddActionPerformed
 
-    
     // NOT EVENTS
+    
+    // fecha a janela atual
+    private void closeWindow() {
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            System.err.println("Closing Exception");
+        }
+    }
     
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
