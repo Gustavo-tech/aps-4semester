@@ -2,9 +2,12 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Publisher;
 import model.dao.PublisherDAO;
+import model.dao.ViewModelsDAO;
+import view.model.SearchViewModel;
 
 public class ViewSearch extends javax.swing.JInternalFrame {
 
@@ -24,6 +27,7 @@ public class ViewSearch extends javax.swing.JInternalFrame {
         buttonGroupType.add(radioIsbn);
         radioAuthor.setFocusPainted(false);
         radioGeneral.doClick();
+        readTableSearch();
     }
 
     @SuppressWarnings("unchecked")
@@ -289,6 +293,22 @@ public class ViewSearch extends javax.swing.JInternalFrame {
     protected void setPositionCenter() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
+    }
+    
+    public void readTableSearch() {
+        DefaultTableModel modelo = (DefaultTableModel) tableBooklist.getModel();
+        modelo.setNumRows(0);
+        List<SearchViewModel> vmds = ViewModelsDAO.getSearchViewModels();
+        
+        for (SearchViewModel vm: vmds) {
+                modelo.addRow(new Object[] {
+                    vm.getPrice(),
+                    vm.getTitle(),
+                    vm.getAuthor(),
+                    vm.getPublisher(),
+                    vm.getIsbn()
+                });
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
