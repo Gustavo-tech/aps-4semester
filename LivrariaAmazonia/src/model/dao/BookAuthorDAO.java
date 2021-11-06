@@ -68,12 +68,8 @@ public class BookAuthorDAO {
           pstm.setInt(3, bookAuthor.getSeqNo());
           pstm.executeUpdate();
           conn.close();
-            JOptionPane.showMessageDialog(null, "Autor do livro adicionado com sucesso!",
-                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
           e.printStackTrace();
-          JOptionPane.showMessageDialog(null, "Ocorreu um erro ao adicionar este autor do livro",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         } 
     }
 
@@ -86,12 +82,8 @@ public class BookAuthorDAO {
           pstm.setInt(3, bookAuthor.getSeqNo());
           pstm.executeUpdate();
           conn.close();
-          JOptionPane.showMessageDialog(null, "Autor do livro atualizado com sucesso!",
-                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
           e.printStackTrace();
-          JOptionPane.showMessageDialog(null, "Ocorreu um erro ao atualizar este autor do livro",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         } 
     }
 
@@ -102,12 +94,20 @@ public class BookAuthorDAO {
         pstm.setString(1, isbn);
         pstm.executeUpdate();
         conn.close();
-        JOptionPane.showMessageDialog(null, "Autor do livro deletado com sucesso!",
-                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
       } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Ocorreu um erro ao deletar este autor do livro",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+      }
+    }
+    
+    public static void deleteBookAuthor(Integer authorId) {
+      try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
+        String query = "DELETE FROM booksauthors WHERE author_id = ?";
+        PreparedStatement pstm = conn.prepareStatement(query);
+        pstm.setInt(1, authorId);
+        pstm.executeUpdate();
+        conn.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
       }
     }
 }

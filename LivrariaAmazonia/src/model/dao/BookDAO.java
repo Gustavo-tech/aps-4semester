@@ -96,12 +96,8 @@ public class BookDAO {
             pstm.setDouble(4, book.getPrice());
             pstm.execute();
             con.close();
-            JOptionPane.showMessageDialog(null, "Livro adicionado com sucesso!",
-                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao adicionar este livro",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -116,12 +112,8 @@ public class BookDAO {
             pstm.setDouble(4, book.getPrice());
             pstm.execute();
             con.close();
-            JOptionPane.showMessageDialog(null, "Livro atualizado com sucesso!",
-                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao atualizar este livro",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -132,12 +124,8 @@ public class BookDAO {
             pstm.setString(1, book.getIsbn());
             pstm.execute();
             con.close();
-            JOptionPane.showMessageDialog(null, "Livro deletado com sucesso!",
-                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao deletar este livro",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
     

@@ -164,11 +164,8 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
 
     // quando é clicado em "Excluir" exclui o autor do banco de dados e atualiza a tabela
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        Author author = new Author();
-        AuthorDAO authorDAO = new AuthorDAO();
-
-        author.setId((int) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 0));
-        authorDAO.deleteAuthor(author);
+        Integer id = ((int) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 0));
+        AuthorDAO.deleteAuthor(id);
         readTableAuthor();
     }//GEN-LAST:event_buttonDeleteActionPerformed
 

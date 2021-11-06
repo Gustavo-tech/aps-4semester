@@ -17,7 +17,8 @@ public class AuthorDAO {
     private static final String URL = DatabaseConstants.URL;
     private static final String USER = DatabaseConstants.USER;
     private static final String PASS = DatabaseConstants.PASS;
-
+    
+    // Obtem todos os autores do banco
     public static List<Author> getAuthors() {
         List<Author> authors = new ArrayList<Author>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
@@ -36,12 +37,11 @@ public class AuthorDAO {
             con.close();
         } catch(SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Um erro ocorreu ao buscar os autores",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
         return authors;
     }
     
+    // Obtem todos os autores do banco com o nome especificado
     public static List<Author> getAuthorsStr(String aName) {
         List<Author> authors = new ArrayList<Author>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
@@ -60,12 +60,11 @@ public class AuthorDAO {
             con.close();
         } catch(SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Um erro ocorreu ao buscar os autores",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
         return authors;
     }
     
+    // Obtem um autor do banco com determinado id
     public static Author getAuthor(Integer id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT * FROM authors WHERE author_id = ?";
@@ -80,12 +79,11 @@ public class AuthorDAO {
             return new Author(id, name, fname);
         } catch(SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Um erro ocorreu ao buscar esse autor",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
-
+    
+    // Adiciona um autor ao banco
     public static void addAuthor(Author author) {        
         try(Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
           String query = "INSERT INTO authors (name, fname) VALUES (?, ?)";
@@ -94,15 +92,12 @@ public class AuthorDAO {
           pstm.setString(2, author.getFName());
           pstm.executeUpdate();
           conn.close();
-          JOptionPane.showMessageDialog(null, "Autor adicionado com sucesso", 
-                  "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Um erro ocorreu ao salvar este autor",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         } 
     }
-
+    
+    // Atualiza um autor no banco de dados
     public static void updateAuthor(Author author) {
         try(Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
           String query = "UPDATE authors SET name = ?, fname = ? WHERE author_id = ?";
@@ -112,43 +107,36 @@ public class AuthorDAO {
           pstm.setInt(3, author.getId());
           pstm.executeUpdate();
           conn.close();
-          JOptionPane.showMessageDialog(null, "Autor atualizado com sucesso", 
-                  "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
           e.printStackTrace();
-          JOptionPane.showMessageDialog(null, "Um erro ocorreu ao atualizar este autor",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         } 
     }
 
+    // Delete um autor no banco de dados que tenha o id especificado
     public static void deleteAuthor(Integer id) {
       try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
         String query = "DELETE FROM authors WHERE author_id = ?";
+        BookAuthorDAO.deleteBookAuthor(id);
         PreparedStatement pstm = conn.prepareStatement(query);
         pstm.setInt(1, id);
         pstm.executeUpdate();
         conn.close();
-        JOptionPane.showMessageDialog(null, "Autor deletado com sucesso", 
-                  "Sucesso", JOptionPane.INFORMATION_MESSAGE);
       } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Um erro ocorreu ao deletar este autor",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
       }
     }
 
-    public void deleteAuthor(Author author) {
+    // Deleta um autor no banco de dados que tenha o id igual ao do autor especificado
+    public static void deleteAuthor(Author author) {
       try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
+        
         String query = "DELETE FROM authors WHERE author_id = ?";
+        BookAuthorDAO.deleteBookAuthor(author.getId());
         PreparedStatement pstm = conn.prepareStatement(query);
         pstm.setInt(1, author.getId());
         pstm.executeUpdate();
         conn.close();
-        JOptionPane.showMessageDialog(null, "Autor deletado com sucesso", 
-                  "Sucesso", JOptionPane.INFORMATION_MESSAGE);
       } catch (SQLException e) {
-          JOptionPane.showMessageDialog(null, "Um erro ocorreu ao deletar este autor",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
         e.printStackTrace();
       }
     }
