@@ -94,6 +94,8 @@ public class AuthorDAO {
           pstm.setString(2, author.getFName());
           pstm.executeUpdate();
           conn.close();
+          JOptionPane.showMessageDialog(null, "Autor adicionado com sucesso", 
+                  "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Um erro ocorreu ao salvar este autor",
                     "Erro", JOptionPane.ERROR_MESSAGE);
@@ -110,6 +112,8 @@ public class AuthorDAO {
           pstm.setInt(3, author.getId());
           pstm.executeUpdate();
           conn.close();
+          JOptionPane.showMessageDialog(null, "Autor atualizado com sucesso", 
+                  "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
           e.printStackTrace();
           JOptionPane.showMessageDialog(null, "Um erro ocorreu ao atualizar este autor",
@@ -124,6 +128,8 @@ public class AuthorDAO {
         pstm.setInt(1, id);
         pstm.executeUpdate();
         conn.close();
+        JOptionPane.showMessageDialog(null, "Autor deletado com sucesso", 
+                  "Sucesso", JOptionPane.INFORMATION_MESSAGE);
       } catch (SQLException e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(null, "Um erro ocorreu ao deletar este autor",
@@ -138,6 +144,8 @@ public class AuthorDAO {
         pstm.setInt(1, author.getId());
         pstm.executeUpdate();
         conn.close();
+        JOptionPane.showMessageDialog(null, "Autor deletado com sucesso", 
+                  "Sucesso", JOptionPane.INFORMATION_MESSAGE);
       } catch (SQLException e) {
           JOptionPane.showMessageDialog(null, "Um erro ocorreu ao deletar este autor",
                     "Erro", JOptionPane.ERROR_MESSAGE);

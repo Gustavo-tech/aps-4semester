@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 public class PublisherDAO {
 
@@ -91,8 +92,12 @@ public class PublisherDAO {
             pstm.setString(2, publisher.getUrl());
             pstm.executeUpdate();
             con.close();
+            JOptionPane.showMessageDialog(null, "Editora adicionada com sucesso!",
+                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao adicionar esta editora",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -104,8 +109,12 @@ public class PublisherDAO {
             pstm.setString(2, publisher.getUrl());
             pstm.executeUpdate();
             con.close();
+            JOptionPane.showMessageDialog(null, "Editora atualizada com sucesso!",
+                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao atualizar esta editora",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -116,8 +125,12 @@ public class PublisherDAO {
             pstm.setInt(1, publisher.getId());
             pstm.executeUpdate();
             con.close();
+            JOptionPane.showMessageDialog(null, "Editora deletada com sucesso!",
+                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao deletar esta editora",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

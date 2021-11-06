@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class BookAuthorDAO {
     private static final String URL = DatabaseConstants.URL;
@@ -67,8 +68,12 @@ public class BookAuthorDAO {
           pstm.setInt(3, bookAuthor.getSeqNo());
           pstm.executeUpdate();
           conn.close();
+            JOptionPane.showMessageDialog(null, "Autor do livro adicionado com sucesso!",
+                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
           e.printStackTrace();
+          JOptionPane.showMessageDialog(null, "Ocorreu um erro ao adicionar este autor do livro",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         } 
     }
 
@@ -81,8 +86,12 @@ public class BookAuthorDAO {
           pstm.setInt(3, bookAuthor.getSeqNo());
           pstm.executeUpdate();
           conn.close();
+          JOptionPane.showMessageDialog(null, "Autor do livro atualizado com sucesso!",
+                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e) {
           e.printStackTrace();
+          JOptionPane.showMessageDialog(null, "Ocorreu um erro ao atualizar este autor do livro",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         } 
     }
 
@@ -93,8 +102,12 @@ public class BookAuthorDAO {
         pstm.setString(1, isbn);
         pstm.executeUpdate();
         conn.close();
+        JOptionPane.showMessageDialog(null, "Autor do livro deletado com sucesso!",
+                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
       } catch (SQLException e) {
         e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Ocorreu um erro ao deletar este autor do livro",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
       }
     }
 }
