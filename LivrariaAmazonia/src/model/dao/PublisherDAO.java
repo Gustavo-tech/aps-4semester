@@ -109,7 +109,7 @@ public class PublisherDAO {
         }
     }
 
-    public static void deletePublisher(Publisher publisher) {
+    public void deletePublisher(Publisher publisher) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "DELETE FROM publishers WHERE publisher_id = ?";
             PreparedStatement pstm = con.prepareStatement(query);

@@ -6,12 +6,12 @@ import javax.swing.table.DefaultTableModel;
 import model.Publisher;
 import model.dao.PublisherDAO;
 
-public class Search extends javax.swing.JInternalFrame {
+public class ViewSearch extends javax.swing.JInternalFrame {
 
     boolean haveText = false;
     
     
-    protected Search() {
+    protected ViewSearch() {
         initComponents();
         
         buttonClean.setEnabled(false);
@@ -24,7 +24,6 @@ public class Search extends javax.swing.JInternalFrame {
         buttonGroupType.add(radioIsbn);
         radioAuthor.setFocusPainted(false);
         radioGeneral.doClick();
-        readJTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -270,36 +269,21 @@ public class Search extends javax.swing.JInternalFrame {
 
     // quando é clicado em "Editar", abre a janela interna "Editar livro"
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        EditBook viewModify = new EditBook();
-        LivrariaAmazonia.desktopAmazonia.add(viewModify);
+        ViewEditBook viewModify = new ViewEditBook();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewModify);
         viewModify.setVisible(true);
         viewModify.setPositionCenter();
     }//GEN-LAST:event_buttonEditActionPerformed
 
     // quando é clicado em "Adicionar", abre a janela interna "Adicionar livro"
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        AddBook viewAdd = new  AddBook();
-        LivrariaAmazonia.desktopAmazonia.add(viewAdd);
+        ViewAddBook viewAdd = new  ViewAddBook();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAdd);
         viewAdd.setVisible(true);
         viewAdd.setPositionCenter();
     }//GEN-LAST:event_buttonAddActionPerformed
 
     // NOT EVENTS
-    
-    // para trazer os dados de editora para a tabela
-    public void readJTable() {
-        DefaultTableModel modelo = (DefaultTableModel) tableBooklist.getModel();
-        
-        PublisherDAO pdao = new PublisherDAO();
-        
-        for (Publisher p: pdao.getPublishers()) {
-                modelo.addRow(new Object[] {
-                    p.getName(),
-                    p.getId(),
-                    p.getUrl()
-                });
-        }
-    }
     
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {

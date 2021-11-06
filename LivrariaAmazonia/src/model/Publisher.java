@@ -15,6 +15,10 @@ public class Publisher {
         this.name = name;
         this.url = url;
     }
+    
+    public Publisher() {
+        
+    }
 
     public int getId() {
         return id;

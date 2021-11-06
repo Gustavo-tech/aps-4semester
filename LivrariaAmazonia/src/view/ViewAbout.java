@@ -3,9 +3,9 @@ package view;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 
-public class About extends javax.swing.JInternalFrame {
+public class ViewAbout extends javax.swing.JInternalFrame {
 
-    public About() {
+    public ViewAbout() {
         initComponents();
     }
 

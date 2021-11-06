@@ -8,9 +8,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class AddPublisher extends javax.swing.JInternalFrame {
+public class ViewAddPublisher extends javax.swing.JInternalFrame {
 
-    protected AddPublisher() {
+    protected ViewAddPublisher() {
         initComponents();
         buttonAdd.setEnabled(false);
     }

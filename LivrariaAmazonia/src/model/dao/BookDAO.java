@@ -91,7 +91,7 @@ public class BookDAO {
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, book.getTitle());
             pstm.setString(2, book.getIsbn());
-            pstm.setInt(3, book.getpublisherId());
+            pstm.setInt(3, book.getPublisherId());
             pstm.setDouble(4, book.getPrice());
             pstm.execute();
             con.close();
@@ -107,7 +107,7 @@ public class BookDAO {
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, book.getTitle());
             pstm.setString(2, book.getIsbn());
-            pstm.setInt(3, book.getpublisherId());
+            pstm.setInt(3, book.getPublisherId());
             pstm.setDouble(4, book.getPrice());
             pstm.execute();
             con.close();
@@ -116,7 +116,7 @@ public class BookDAO {
         }
     }
 
-    public static void delBook(Book book) {
+    public void deleteBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "DELETE FROM books WHERE isbn = ?";
             PreparedStatement pstm = con.prepareStatement(query);

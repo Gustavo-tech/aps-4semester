@@ -1,8 +1,8 @@
 package view;
 
-public class LivrariaAmazonia extends javax.swing.JFrame {
+public class ViewLivrariaAmazonia extends javax.swing.JFrame {
 
-    public LivrariaAmazonia() {
+    public ViewLivrariaAmazonia() {
         initComponents();
     }
     
@@ -21,10 +21,6 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
         menuEditBook = new javax.swing.JMenuItem();
         menuEditAuthor = new javax.swing.JMenuItem();
         menuEditPublisher = new javax.swing.JMenuItem();
-        menuDelete = new javax.swing.JMenu();
-        menuDeleteBook = new javax.swing.JMenuItem();
-        menuDeleteAuthor = new javax.swing.JMenuItem();
-        menuDeletePublisher = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuAjudaSobre = new javax.swing.JMenuItem();
         menuAjudaSair = new javax.swing.JMenuItem();
@@ -93,7 +89,7 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
         menuBarra.add(menuAdd);
 
         menuEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pencil.png"))); // NOI18N
-        menuEdit.setText("Editar");
+        menuEdit.setText("Editar/Remover");
 
         menuEditBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-open-book.png"))); // NOI18N
         menuEditBook.setText("Livro");
@@ -123,23 +119,6 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
         menuEdit.add(menuEditPublisher);
 
         menuBarra.add(menuEdit);
-
-        menuDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-delete.png"))); // NOI18N
-        menuDelete.setText("Remover");
-
-        menuDeleteBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-open-book.png"))); // NOI18N
-        menuDeleteBook.setText("Livro");
-        menuDelete.add(menuDeleteBook);
-
-        menuDeleteAuthor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/writer.png"))); // NOI18N
-        menuDeleteAuthor.setText("Autor");
-        menuDelete.add(menuDeleteAuthor);
-
-        menuDeletePublisher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-publisher.png"))); // NOI18N
-        menuDeletePublisher.setText("Editora");
-        menuDelete.add(menuDeletePublisher);
-
-        menuBarra.add(menuDelete);
 
         menuAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-about.png"))); // NOI18N
         menuAjuda.setText("Ajuda");
@@ -188,61 +167,63 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
 
     // abre a janela interna "Sobre" pelo menu superior
     private void menuAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjudaSobreActionPerformed
-        About viewAbout = new About();
+        ViewAbout viewAbout = new ViewAbout();
         desktopAmazonia.add(viewAbout);
         viewAbout.setVisible(true);
         viewAbout.setPositionCenter();
     }//GEN-LAST:event_menuAjudaSobreActionPerformed
     
     private void menuAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAddBookActionPerformed
-        AddBook viewAddBook = new  AddBook();
+        ViewAddBook viewAddBook = new  ViewAddBook();
         desktopAmazonia.add(viewAddBook);
         viewAddBook.setVisible(true);
         viewAddBook.setPositionCenter();
     }//GEN-LAST:event_menuAddBookActionPerformed
 
     private void menuLivrariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLivrariaMouseClicked
-        Search viewSearch = new Search();
+        ViewSearch viewSearch = new ViewSearch();
         desktopAmazonia.add(viewSearch);
         viewSearch.setVisible(true);
         viewSearch.setPositionCenter();
     }//GEN-LAST:event_menuLivrariaMouseClicked
 
     private void menuEditBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditBookActionPerformed
-        EditBook viewEditBook = new EditBook();
-        LivrariaAmazonia.desktopAmazonia.add(viewEditBook);
+        ViewEditBook viewEditBook = new ViewEditBook();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditBook);
         viewEditBook.setVisible(true);
         viewEditBook.setPositionCenter();
     }//GEN-LAST:event_menuEditBookActionPerformed
 
     private void menuAddAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAddAuthorActionPerformed
-        AddAuthor viewAddAuthor = new AddAuthor();
+        ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
         desktopAmazonia.add(viewAddAuthor);
         viewAddAuthor.setVisible(true);
         viewAddAuthor.setPositionCenter();
     }//GEN-LAST:event_menuAddAuthorActionPerformed
 
     private void menuAddPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAddPublisherActionPerformed
-        AddPublisher viewAddPublisher = new  AddPublisher();
+        ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
         desktopAmazonia.add(viewAddPublisher);
         viewAddPublisher.setVisible(true);
         viewAddPublisher.setPositionCenter();
     }//GEN-LAST:event_menuAddPublisherActionPerformed
 
     private void menuEditAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditAuthorActionPerformed
-        EditAuthor viewEditAuthor = new EditAuthor();
-        LivrariaAmazonia.desktopAmazonia.add(viewEditAuthor);
+        ViewEditAuthor viewEditAuthor = new ViewEditAuthor();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditAuthor);
         viewEditAuthor.setVisible(true);
         viewEditAuthor.setPositionCenter();
     }//GEN-LAST:event_menuEditAuthorActionPerformed
 
     private void menuEditPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditPublisherActionPerformed
-        EditPublisher viewEditPublisher = new EditPublisher();
-        LivrariaAmazonia.desktopAmazonia.add(viewEditPublisher);
+        ViewEditPublisher viewEditPublisher = new ViewEditPublisher();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditPublisher);
         viewEditPublisher.setVisible(true);
         viewEditPublisher.setPositionCenter();
     }//GEN-LAST:event_menuEditPublisherActionPerformed
     
+    // NOT EVENTS
+        // por enquanto nada        
     // NOT EVENTS
         // por enquanto nada    
     
@@ -257,20 +238,20 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LivrariaAmazonia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewLivrariaAmazonia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LivrariaAmazonia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewLivrariaAmazonia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LivrariaAmazonia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewLivrariaAmazonia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LivrariaAmazonia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewLivrariaAmazonia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                LivrariaAmazonia vla = new LivrariaAmazonia();
+                ViewLivrariaAmazonia vla = new ViewLivrariaAmazonia();
                 vla.setVisible(true);
             }
         });
@@ -286,10 +267,6 @@ public class LivrariaAmazonia extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuAjudaSair;
     private javax.swing.JMenuItem menuAjudaSobre;
     private javax.swing.JMenuBar menuBarra;
-    private javax.swing.JMenu menuDelete;
-    private javax.swing.JMenuItem menuDeleteAuthor;
-    private javax.swing.JMenuItem menuDeleteBook;
-    private javax.swing.JMenuItem menuDeletePublisher;
     private javax.swing.JMenu menuEdit;
     private javax.swing.JMenuItem menuEditAuthor;
     private javax.swing.JMenuItem menuEditBook;

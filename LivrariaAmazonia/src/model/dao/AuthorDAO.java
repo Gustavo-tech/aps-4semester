@@ -131,7 +131,7 @@ public class AuthorDAO {
       }
     }
 
-    public static void deleteAuthor(Author author) {
+    public void deleteAuthor(Author author) {
       try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
         String query = "DELETE FROM authors WHERE author_id = ?";
         PreparedStatement pstm = conn.prepareStatement(query);
