@@ -3,10 +3,12 @@ package view;
 import model.dao.AuthorDAO;
 import model.bean.Author;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import static view.ViewAuthor.readTableAuthor;
 
 public class ViewAddAuthor extends javax.swing.JInternalFrame {
 
@@ -163,6 +165,7 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
         
         Author author = new Author(name, lastName);
         AuthorDAO.addAuthor(author);
+        readTableAuthor();
         
         Object[] options = { "Sim", "Não" };
         Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 

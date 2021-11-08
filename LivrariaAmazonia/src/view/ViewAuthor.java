@@ -3,17 +3,18 @@ package view;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import javax.swing.table.DefaultTableModel;
-import model.bean.Book;
-import model.dao.BookDAO;
+import model.bean.Author;
+import model.dao.AuthorDAO;
+import view.ViewAddAuthor;
 import static view.ViewLivrariaAmazonia.desktopAmazonia;
 
-public class ViewEditBook extends javax.swing.JInternalFrame {
+public class ViewAuthor extends javax.swing.JInternalFrame {
 
-    protected ViewEditBook() {
+    protected ViewAuthor() {
         initComponents();
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
-        readTableBook();
+        readTableAuthor();
     }
 
     @SuppressWarnings("unchecked")
@@ -22,34 +23,18 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
 
         labelEdit = new javax.swing.JLabel();
         panelEdit = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableBook = new javax.swing.JTable();
         buttonAdd = new javax.swing.JButton();
-        buttonEdit = new javax.swing.JButton();
+        buttonFechar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableAuthor = new javax.swing.JTable();
         buttonDelete = new javax.swing.JButton();
-        buttonCancel = new javax.swing.JButton();
+        buttonEdit = new javax.swing.JButton();
 
         labelEdit.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         labelEdit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelEdit.setText("Livros");
+        labelEdit.setText("Autores");
 
         panelEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        tableBook.setAutoCreateRowSorter(true);
-        tableBook.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Preço", "Título", "Editora", "ISBN"
-            }
-        ));
-        tableBook.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableBookMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tableBook);
 
         buttonAdd.setText("Adicionar");
         buttonAdd.setMinimumSize(new java.awt.Dimension(134, 22));
@@ -60,9 +45,30 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonEdit.setText("Editar");
-        buttonEdit.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonEdit.setPreferredSize(new java.awt.Dimension(134, 22));
+        buttonFechar.setText("Fechar");
+        buttonFechar.setMinimumSize(new java.awt.Dimension(134, 22));
+        buttonFechar.setPreferredSize(new java.awt.Dimension(134, 22));
+        buttonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFecharActionPerformed(evt);
+            }
+        });
+
+        tableAuthor.setAutoCreateRowSorter(true);
+        tableAuthor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "Sobrenome"
+            }
+        ));
+        tableAuthor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableAuthorMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableAuthor);
 
         buttonDelete.setText("Excluir");
         buttonDelete.setMinimumSize(new java.awt.Dimension(134, 22));
@@ -73,12 +79,12 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonCancel.setText("Cancelar");
-        buttonCancel.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonCancel.setPreferredSize(new java.awt.Dimension(134, 22));
-        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
+        buttonEdit.setText("Editar");
+        buttonEdit.setMinimumSize(new java.awt.Dimension(134, 22));
+        buttonEdit.setPreferredSize(new java.awt.Dimension(134, 22));
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCancelActionPerformed(evt);
+                buttonEditActionPerformed(evt);
             }
         });
 
@@ -99,7 +105,7 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                        .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelEditLayout.setVerticalGroup(
@@ -110,7 +116,7 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -123,8 +129,10 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -140,50 +148,68 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // EVENTS
+    
+    // quando é clicado em "Cancelar", fecha a janela interna "Autores"
+    private void buttonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFecharActionPerformed
+        closeWindow();
+    }//GEN-LAST:event_buttonFecharActionPerformed
+
     // quando um item da tabela é selecionado, ativa os botões "buttonEdit" e "buttonDelete"
-    private void tableBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBookMouseClicked
+    private void tableAuthorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAuthorMouseClicked
         buttonEdit.setEnabled(true);
         buttonDelete.setEnabled(true);
-    }//GEN-LAST:event_tableBookMouseClicked
-    
-    // quando é clicado em "Cancelar", fecha a janela interna "Livros"
-    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        closeWindow();
-    }//GEN-LAST:event_buttonCancelActionPerformed
+    }//GEN-LAST:event_tableAuthorMouseClicked
 
-    // quando é clicado em "Adicionar" chama a view "ViewAddBook"
+    // quando é clicado em "Adicionar" chama a view "ViewAddAuthor"
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        ViewAddBook viewAddBook = new  ViewAddBook();
-        desktopAmazonia.add(viewAddBook);
-        viewAddBook.setVisible(true);
-        viewAddBook.setPositionCenter();
+        ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
+        desktopAmazonia.add(viewAddAuthor);
+        viewAddAuthor.setVisible(true);
+        viewAddAuthor.setPositionCenter();
     }//GEN-LAST:event_buttonAddActionPerformed
 
-    // quando é clicado em "Excluir" exclui o livro do banco de dados e atualiza a tabela
+    // quando é clicado em "Excluir" exclui o autor do banco de dados e atualiza a tabela
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        Book book = new Book();
-        BookDAO bookDAO = new BookDAO();
-
-        book.setIsbn((String) tableBook.getValueAt(tableBook.getSelectedRow(), 3));
-        bookDAO.deleteBook(book);
-        readTableBook();
+        Integer id = ((int) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 0));
+        AuthorDAO.deleteAuthor(id);
+        buttonDelete.setEnabled(false);
+        buttonEdit.setEnabled(false);
+        readTableAuthor();
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    
+    /* quando é clicado em "editar" chama a internalFrame "viewEditAuthor" já com as 
+       informações do autor selecionado */
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        ViewEditAuthor viewEditAuthor = new ViewEditAuthor();
+        desktopAmazonia.add(viewEditAuthor);
+        viewEditAuthor.setVisible(true);
+        viewEditAuthor.setPositionCenter();
+        viewEditAuthor.textId.setEnabled(false);
+        
+        String name = ((String) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 1));
+        viewEditAuthor.textName.setText(name);
+        
+        String lastName = ((String) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 2));
+        viewEditAuthor.textLastName.setText(lastName);
+        
+        Integer id = ((int) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 0));
+        viewEditAuthor.textId.setText(id.toString());
+    }//GEN-LAST:event_buttonEditActionPerformed
+
     // NOT EVENTS
     
-    // para trazer os dados de livros para a tabela
-    public void readTableBook() {
-        DefaultTableModel modelo = (DefaultTableModel) tableBook.getModel();
+    // para trazer os dados de editora para a tabela
+    public static void readTableAuthor() {
+        DefaultTableModel modelo = (DefaultTableModel) tableAuthor.getModel();
         modelo.setNumRows(0);
-        BookDAO pdao = new BookDAO();
+        AuthorDAO pdao = new AuthorDAO();
         
-        for (Book book: pdao.getBooks()) {
+        for (Author author: pdao.getAuthors()) {
                 modelo.addRow(new Object[] {
-                    book.getPrice(),
-                    book.getTitle(),
-                    book.getPublisherId(),
-                    book.getIsbn()
+                    author.getId(),
+                    author.getName(),
+                    author.getFName()
                 });
         }
     }
@@ -205,12 +231,12 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
-    private javax.swing.JButton buttonCancel;
-    private javax.swing.JButton buttonDelete;
-    private javax.swing.JButton buttonEdit;
+    protected static javax.swing.JButton buttonDelete;
+    protected static javax.swing.JButton buttonEdit;
+    private javax.swing.JButton buttonFechar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEdit;
     private javax.swing.JPanel panelEdit;
-    private javax.swing.JTable tableBook;
+    protected static javax.swing.JTable tableAuthor;
     // End of variables declaration//GEN-END:variables
 }

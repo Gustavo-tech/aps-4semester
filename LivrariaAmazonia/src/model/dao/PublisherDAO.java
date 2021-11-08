@@ -99,10 +99,11 @@ public class PublisherDAO {
 
     public static void updatePublisher(Publisher publisher) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "UPDATE publishers set name = ?, url = ?";
+            String query = "UPDATE publishers set name = ?, url = ? WHERE publisher_id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, publisher.getName());
             pstm.setString(2, publisher.getUrl());
+            pstm.setInt(3, publisher.getId());
             pstm.executeUpdate();
             con.close();
         } catch (SQLException e) {
@@ -121,4 +122,5 @@ public class PublisherDAO {
             e.printStackTrace();
         }
     }
+    
 }

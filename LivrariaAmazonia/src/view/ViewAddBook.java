@@ -103,6 +103,11 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         comboBoxAuthor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um autor(a)" }));
 
         comboBoxPublisher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma editora" }));
+        comboBoxPublisher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxPublisherActionPerformed(evt);
+            }
+        });
 
         buttonAddAuthor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonAddAuthor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-add-book.png"))); // NOI18N
@@ -242,35 +247,32 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
 
     // adiciona um novo livro no banco de dados
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-//        String title = textTitle.getText();
-//        String isbn = textIsbn.getText();
-//        // String author = comboBoxAuthor.getSelectedItem().toString();
-//        
-//        String priceString = textPrice.getText();
-//        priceString = priceString.replace(".","");
-//        priceString = priceString.replace(',', '.');
-//        Double price = Double.parseDouble(priceString);
-//        
-//        PublisherDAO dao = (PublisherDAO) comboBoxPublisher.getSelectedItem();
-//        Publisher publisher = (Publisher) comboBoxPublisher.getSelectedItem();
-//        Integer publisherId = publisher.getId();
-//        
-//        Book book = new Book(title, isbn, publisherId, price);
-//        BookDAO.addBook(book);
-//        
-//        Object[] options = { "Sim", "Não" };
-//        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
-//        int option = JOptionPane.showOptionDialog(null, "Autor(a) adicionado.\nGostaria de adicionar mais?", "Adicionar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
-//        
-//        if (option == 1) {
-//            closeWindow();
-//        } else if (option == 0) {
-//            textTitle.setText("");
-//            textIsbn.setText("");
-//            textPrice.setText("");
-//            comboBoxAuthor.setSelectedItem(0);
-//            comboBoxPublisher.setSelectedItem(0);
-//        }
+        String title = textTitle.getText();
+        String isbn = textIsbn.getText();
+        // String author = comboBoxAuthor.getSelectedItem().toString();
+        
+        String priceString = textPrice.getText();
+        priceString = priceString.replace(".","");
+        priceString = priceString.replace(',', '.');
+        Double price = Double.parseDouble(priceString);
+        Integer publisherId = null;
+        
+        Book book = new Book(title, isbn, publisherId, price);
+        BookDAO.addBook(book);
+        
+        Object[] options = { "Sim", "Não" };
+        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+        int option = JOptionPane.showOptionDialog(null, "Autor(a) adicionado.\nGostaria de adicionar mais?", "Adicionar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
+        
+        if (option == 1) {
+            closeWindow();
+        } else if (option == 0) {
+            textTitle.setText("");
+            textIsbn.setText("");
+            textPrice.setText("");
+            comboBoxAuthor.setSelectedItem(0);
+            comboBoxPublisher.setSelectedItem(0);
+        }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonAddAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddAuthorActionPerformed
@@ -286,6 +288,12 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         viewAddPublisher.setVisible(true);
         viewAddPublisher.setPositionCenter();
     }//GEN-LAST:event_buttonAddPublisherActionPerformed
+
+    private void comboBoxPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPublisherActionPerformed
+        Publisher selectedPublisher = (Publisher) comboBoxPublisher.getModel().getSelectedItem();
+        
+        System.out.println(selectedPublisher.getName());
+    }//GEN-LAST:event_comboBoxPublisherActionPerformed
 
     
     // NOT EVENTS

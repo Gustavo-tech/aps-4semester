@@ -160,6 +160,9 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
             
         Publisher publisher = new Publisher(name, url);
         PublisherDAO.addPublisher(publisher);
+        ViewPublisher.buttonDelete.setEnabled(false);
+        ViewPublisher.buttonEdit.setEnabled(false);
+        ViewPublisher.readTablePublisher();
         
         Object[] options = { "Sim", "Não" };
         Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
@@ -194,10 +197,10 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
        caso todos tenham texto: habilita o botão "Adicionar"
        caso não: desabilita o botão "Adicionar" */
     private void verifyText() {
-        String textT = textName.getText();
-        String textA = textURL.getText();
+        String textN = textName.getText();
+        String textU = textURL.getText();
         
-        if (textT.isBlank() || textA.isBlank()) {
+        if (textN.isBlank() || textU.isBlank()) {
             buttonAdd.setEnabled(false);
         } else {
             buttonAdd.setEnabled(true);

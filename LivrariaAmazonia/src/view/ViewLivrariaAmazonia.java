@@ -11,16 +11,17 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopAmazonia = new javax.swing.JDesktopPane();
+        buttonAuthors = new javax.swing.JButton();
+        buttonBooks = new javax.swing.JButton();
+        buttonGeneral = new javax.swing.JButton();
+        buttonPublishers = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         menuBarra = new javax.swing.JMenuBar();
         menuLivraria = new javax.swing.JMenu();
-        menuAdd = new javax.swing.JMenu();
-        menuAddBook = new javax.swing.JMenuItem();
-        menuAddAuthor = new javax.swing.JMenuItem();
-        menuAddPublisher = new javax.swing.JMenuItem();
-        menuEdit = new javax.swing.JMenu();
-        menuEditBook = new javax.swing.JMenuItem();
-        menuEditAuthor = new javax.swing.JMenuItem();
-        menuEditPublisher = new javax.swing.JMenuItem();
+        menuLivrariaGeneral = new javax.swing.JMenuItem();
+        menuLivrariaBook = new javax.swing.JMenuItem();
+        menuLivrariaAuthor = new javax.swing.JMenuItem();
+        menuLivrariaPublisher = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuAjudaSobre = new javax.swing.JMenuItem();
         menuAjudaSair = new javax.swing.JMenuItem();
@@ -34,91 +35,122 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
         setName("Livraria Amazônia"); // NOI18N
         setSize(new java.awt.Dimension(1000, 500));
 
+        buttonAuthors.setText("Autores");
+        buttonAuthors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAuthorsActionPerformed(evt);
+            }
+        });
+
+        buttonBooks.setText("Livros");
+        buttonBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBooksActionPerformed(evt);
+            }
+        });
+
+        buttonGeneral.setText("Geral");
+        buttonGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGeneralActionPerformed(evt);
+            }
+        });
+
+        buttonPublishers.setText("Editoras");
+        buttonPublishers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPublishersActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Bem vindo(a) à Livraria Amazônia!");
+
+        desktopAmazonia.setLayer(buttonAuthors, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopAmazonia.setLayer(buttonBooks, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopAmazonia.setLayer(buttonGeneral, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopAmazonia.setLayer(buttonPublishers, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopAmazonia.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout desktopAmazoniaLayout = new javax.swing.GroupLayout(desktopAmazonia);
         desktopAmazonia.setLayout(desktopAmazoniaLayout);
         desktopAmazoniaLayout.setHorizontalGroup(
             desktopAmazoniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1108, Short.MAX_VALUE)
+            .addGroup(desktopAmazoniaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(desktopAmazoniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(desktopAmazoniaLayout.createSequentialGroup()
+                        .addComponent(buttonBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonAuthors, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonPublishers, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
+
+        desktopAmazoniaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {buttonAuthors, buttonBooks, buttonGeneral, buttonPublishers});
+
         desktopAmazoniaLayout.setVerticalGroup(
             desktopAmazoniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 603, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopAmazoniaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
+                .addGroup(desktopAmazoniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAuthors, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonPublishers, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         menuLivraria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-search.png"))); // NOI18N
         menuLivraria.setText("Buscar");
         menuLivraria.setFocusable(false);
         menuLivraria.setRequestFocusEnabled(false);
-        menuLivraria.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuLivrariaMouseClicked(evt);
+
+        menuLivrariaGeneral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-search.png"))); // NOI18N
+        menuLivrariaGeneral.setText("Geral");
+        menuLivrariaGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLivrariaGeneralActionPerformed(evt);
             }
         });
+        menuLivraria.add(menuLivrariaGeneral);
+
+        menuLivrariaBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-open-book.png"))); // NOI18N
+        menuLivrariaBook.setText("Livro");
+        menuLivrariaBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLivrariaBookActionPerformed(evt);
+            }
+        });
+        menuLivraria.add(menuLivrariaBook);
+
+        menuLivrariaAuthor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/writer.png"))); // NOI18N
+        menuLivrariaAuthor.setText("Autor");
+        menuLivrariaAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLivrariaAuthorActionPerformed(evt);
+            }
+        });
+        menuLivraria.add(menuLivrariaAuthor);
+
+        menuLivrariaPublisher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-publisher.png"))); // NOI18N
+        menuLivrariaPublisher.setText("Editora");
+        menuLivrariaPublisher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLivrariaPublisherActionPerformed(evt);
+            }
+        });
+        menuLivraria.add(menuLivrariaPublisher);
+
         menuBarra.add(menuLivraria);
-
-        menuAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-add-book.png"))); // NOI18N
-        menuAdd.setText("Adicionar");
-
-        menuAddBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-open-book.png"))); // NOI18N
-        menuAddBook.setText("Livro");
-        menuAddBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAddBookActionPerformed(evt);
-            }
-        });
-        menuAdd.add(menuAddBook);
-
-        menuAddAuthor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/writer.png"))); // NOI18N
-        menuAddAuthor.setText("Autor");
-        menuAddAuthor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAddAuthorActionPerformed(evt);
-            }
-        });
-        menuAdd.add(menuAddAuthor);
-
-        menuAddPublisher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-publisher.png"))); // NOI18N
-        menuAddPublisher.setText("Editora");
-        menuAddPublisher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAddPublisherActionPerformed(evt);
-            }
-        });
-        menuAdd.add(menuAddPublisher);
-
-        menuBarra.add(menuAdd);
-
-        menuEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pencil.png"))); // NOI18N
-        menuEdit.setText("Editar/Remover");
-
-        menuEditBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-open-book.png"))); // NOI18N
-        menuEditBook.setText("Livro");
-        menuEditBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEditBookActionPerformed(evt);
-            }
-        });
-        menuEdit.add(menuEditBook);
-
-        menuEditAuthor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/writer.png"))); // NOI18N
-        menuEditAuthor.setText("Autor");
-        menuEditAuthor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEditAuthorActionPerformed(evt);
-            }
-        });
-        menuEdit.add(menuEditAuthor);
-
-        menuEditPublisher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-publisher.png"))); // NOI18N
-        menuEditPublisher.setText("Editora");
-        menuEditPublisher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEditPublisherActionPerformed(evt);
-            }
-        });
-        menuEdit.add(menuEditPublisher);
-
-        menuBarra.add(menuEdit);
 
         menuAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-about.png"))); // NOI18N
         menuAjuda.setText("Ajuda");
@@ -173,54 +205,61 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
         viewAbout.setPositionCenter();
     }//GEN-LAST:event_menuAjudaSobreActionPerformed
     
-    private void menuAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAddBookActionPerformed
-        ViewAddBook viewAddBook = new  ViewAddBook();
-        desktopAmazonia.add(viewAddBook);
-        viewAddBook.setVisible(true);
-        viewAddBook.setPositionCenter();
-    }//GEN-LAST:event_menuAddBookActionPerformed
-
-    private void menuLivrariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLivrariaMouseClicked
-        ViewSearch viewSearch = new ViewSearch();
-        desktopAmazonia.add(viewSearch);
-        viewSearch.setVisible(true);
-        viewSearch.setPositionCenter();
-    }//GEN-LAST:event_menuLivrariaMouseClicked
-
-    private void menuEditBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditBookActionPerformed
-        ViewEditBook viewEditBook = new ViewEditBook();
+    private void menuLivrariaBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLivrariaBookActionPerformed
+        ViewBook viewEditBook = new ViewBook();
         ViewLivrariaAmazonia.desktopAmazonia.add(viewEditBook);
         viewEditBook.setVisible(true);
         viewEditBook.setPositionCenter();
-    }//GEN-LAST:event_menuEditBookActionPerformed
+    }//GEN-LAST:event_menuLivrariaBookActionPerformed
 
-    private void menuAddAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAddAuthorActionPerformed
-        ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
-        desktopAmazonia.add(viewAddAuthor);
-        viewAddAuthor.setVisible(true);
-        viewAddAuthor.setPositionCenter();
-    }//GEN-LAST:event_menuAddAuthorActionPerformed
-
-    private void menuAddPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAddPublisherActionPerformed
-        ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
-        desktopAmazonia.add(viewAddPublisher);
-        viewAddPublisher.setVisible(true);
-        viewAddPublisher.setPositionCenter();
-    }//GEN-LAST:event_menuAddPublisherActionPerformed
-
-    private void menuEditAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditAuthorActionPerformed
-        ViewEditAuthor viewEditAuthor = new ViewEditAuthor();
+    private void menuLivrariaAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLivrariaAuthorActionPerformed
+        ViewAuthor viewEditAuthor = new ViewAuthor();
         ViewLivrariaAmazonia.desktopAmazonia.add(viewEditAuthor);
         viewEditAuthor.setVisible(true);
         viewEditAuthor.setPositionCenter();
-    }//GEN-LAST:event_menuEditAuthorActionPerformed
+    }//GEN-LAST:event_menuLivrariaAuthorActionPerformed
 
-    private void menuEditPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditPublisherActionPerformed
-        ViewEditPublisher viewEditPublisher = new ViewEditPublisher();
+    private void menuLivrariaPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLivrariaPublisherActionPerformed
+        ViewPublisher viewEditPublisher = new ViewPublisher();
         ViewLivrariaAmazonia.desktopAmazonia.add(viewEditPublisher);
         viewEditPublisher.setVisible(true);
         viewEditPublisher.setPositionCenter();
-    }//GEN-LAST:event_menuEditPublisherActionPerformed
+    }//GEN-LAST:event_menuLivrariaPublisherActionPerformed
+
+    private void menuLivrariaGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLivrariaGeneralActionPerformed
+        ViewGeneral viewSearch = new ViewGeneral();
+        desktopAmazonia.add(viewSearch);
+        viewSearch.setVisible(true);
+        viewSearch.setPositionCenter();
+    }//GEN-LAST:event_menuLivrariaGeneralActionPerformed
+
+    private void buttonBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBooksActionPerformed
+        ViewBook viewEditBook = new ViewBook();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditBook);
+        viewEditBook.setVisible(true);
+        viewEditBook.setPositionCenter();
+    }//GEN-LAST:event_buttonBooksActionPerformed
+
+    private void buttonAuthorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAuthorsActionPerformed
+        ViewAuthor viewEditAuthor = new ViewAuthor();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditAuthor);
+        viewEditAuthor.setVisible(true);
+        viewEditAuthor.setPositionCenter();
+    }//GEN-LAST:event_buttonAuthorsActionPerformed
+
+    private void buttonPublishersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPublishersActionPerformed
+        ViewPublisher viewEditPublisher = new ViewPublisher();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditPublisher);
+        viewEditPublisher.setVisible(true);
+        viewEditPublisher.setPositionCenter();
+    }//GEN-LAST:event_buttonPublishersActionPerformed
+
+    private void buttonGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGeneralActionPerformed
+        ViewGeneral viewSearch = new ViewGeneral();
+        desktopAmazonia.add(viewSearch);
+        viewSearch.setVisible(true);
+        viewSearch.setPositionCenter();
+    }//GEN-LAST:event_buttonGeneralActionPerformed
    
     // MAIN
     public static void main(String args[]) {
@@ -252,19 +291,20 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAuthors;
+    private javax.swing.JButton buttonBooks;
+    private javax.swing.JButton buttonGeneral;
+    private javax.swing.JButton buttonPublishers;
     protected static javax.swing.JDesktopPane desktopAmazonia;
-    private javax.swing.JMenu menuAdd;
-    private javax.swing.JMenuItem menuAddAuthor;
-    private javax.swing.JMenuItem menuAddBook;
-    private javax.swing.JMenuItem menuAddPublisher;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuItem menuAjudaSair;
     private javax.swing.JMenuItem menuAjudaSobre;
     private javax.swing.JMenuBar menuBarra;
-    private javax.swing.JMenu menuEdit;
-    private javax.swing.JMenuItem menuEditAuthor;
-    private javax.swing.JMenuItem menuEditBook;
-    private javax.swing.JMenuItem menuEditPublisher;
     private javax.swing.JMenu menuLivraria;
+    private javax.swing.JMenuItem menuLivrariaAuthor;
+    private javax.swing.JMenuItem menuLivrariaBook;
+    private javax.swing.JMenuItem menuLivrariaGeneral;
+    private javax.swing.JMenuItem menuLivrariaPublisher;
     // End of variables declaration//GEN-END:variables
 }

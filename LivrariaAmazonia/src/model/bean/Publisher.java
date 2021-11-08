@@ -46,8 +46,6 @@ public class Publisher {
 
     @Override
     public String toString() {
-        return getName(); //To change body of generated methods, choose Tools | Templates.
+        return getName();
     }
-    
-    
 }

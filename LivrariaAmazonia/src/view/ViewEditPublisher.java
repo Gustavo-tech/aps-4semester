@@ -1,75 +1,52 @@
 package view;
 
+import model.dao.AuthorDAO;
+import model.bean.Author;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import model.bean.Publisher;
 import model.dao.PublisherDAO;
-import static view.ViewLivrariaAmazonia.desktopAmazonia;
 
 public class ViewEditPublisher extends javax.swing.JInternalFrame {
-
-    protected ViewEditPublisher() {
+  
+    public ViewEditPublisher() {
         initComponents();
-        buttonEdit.setEnabled(false);
-        buttonDelete.setEnabled(false);
-        readTablePublisher();
+        buttonSave.setEnabled(false);
+
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelEdit = new javax.swing.JLabel();
-        panelEdit = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablePublisher = new javax.swing.JTable();
-        buttonAdd = new javax.swing.JButton();
-        buttonEdit = new javax.swing.JButton();
-        buttonDelete = new javax.swing.JButton();
+        labelAdd = new javax.swing.JLabel();
+        panelAdd = new javax.swing.JPanel();
+        buttonSave = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
+        labelName = new javax.swing.JLabel();
+        labelUrl = new javax.swing.JLabel();
+        textName = new javax.swing.JTextField();
+        textUrl = new javax.swing.JTextField();
+        labelId = new javax.swing.JLabel();
+        textId = new javax.swing.JTextField();
 
-        labelEdit.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        labelEdit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelEdit.setText("Editoras");
+        setMinimumSize(new java.awt.Dimension(421, 192));
 
-        panelEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelAdd.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelAdd.setText("Editar editora");
 
-        tablePublisher.setAutoCreateRowSorter(true);
-        tablePublisher.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        panelAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-            },
-            new String [] {
-                "ID", "Nome", "URL"
-            }
-        ));
-        tablePublisher.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablePublisherMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tablePublisher);
-
-        buttonAdd.setText("Adicionar");
-        buttonAdd.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonAdd.setPreferredSize(new java.awt.Dimension(134, 22));
-        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+        buttonSave.setText("Salvar");
+        buttonSave.setMinimumSize(new java.awt.Dimension(134, 22));
+        buttonSave.setPreferredSize(new java.awt.Dimension(134, 22));
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddActionPerformed(evt);
-            }
-        });
-
-        buttonEdit.setText("Editar");
-        buttonEdit.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonEdit.setPreferredSize(new java.awt.Dimension(134, 22));
-
-        buttonDelete.setText("Excluir");
-        buttonDelete.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonDelete.setPreferredSize(new java.awt.Dimension(134, 22));
-        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonDeleteActionPerformed(evt);
+                buttonSaveActionPerformed(evt);
             }
         });
 
@@ -82,37 +59,74 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout panelEditLayout = new javax.swing.GroupLayout(panelEdit);
-        panelEdit.setLayout(panelEditLayout);
-        panelEditLayout.setHorizontalGroup(
-            panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEditLayout.createSequentialGroup()
+        labelName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelName.setText("Nome:");
+
+        labelUrl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelUrl.setText("URL:");
+
+        textName.setToolTipText("");
+        textName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textNameKeyReleased(evt);
+            }
+        });
+
+        textUrl.setToolTipText("");
+        textUrl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textUrlKeyReleased(evt);
+            }
+        });
+
+        labelId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelId.setText("ID:");
+
+        textId.setToolTipText("");
+
+        javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
+        panelAdd.setLayout(panelAddLayout);
+        panelAddLayout.setHorizontalGroup(
+            panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAddLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEditLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelEditLayout.createSequentialGroup()
-                        .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAddLayout.createSequentialGroup()
+                        .addComponent(buttonSave, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                    .addGroup(panelAddLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelName)
+                            .addComponent(labelUrl)
+                            .addComponent(labelId))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textId)
+                            .addComponent(textName)
+                            .addComponent(textUrl))))
                 .addContainerGap())
         );
-        panelEditLayout.setVerticalGroup(
-            panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEditLayout.createSequentialGroup()
+        panelAddLayout.setVerticalGroup(
+            panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAddLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textId)
+                    .addComponent(labelId))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textName)
+                    .addComponent(labelName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textUrl)
+                    .addComponent(labelUrl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -123,76 +137,60 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                    .addComponent(panelAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // quando um item da tabela é selecionado, ativa os botões "buttonEdit" e "buttonDelete"
-    private void tablePublisherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePublisherMouseClicked
-        buttonEdit.setEnabled(true);
-        buttonDelete.setEnabled(true);
-    }//GEN-LAST:event_tablePublisherMouseClicked
-
-    // quando é clicado em "Cancelar", fecha a janela interna "Editoras"
+    // EVENTS
+    
+    // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         closeWindow();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
-    // quando é clicado em "Adicionar" chama a view "ViewAddPublisher"
-    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
-        desktopAmazonia.add(viewAddPublisher);
-        viewAddPublisher.setVisible(true);
-        viewAddPublisher.setPositionCenter();
-    }//GEN-LAST:event_buttonAddActionPerformed
+    // quando uma tecla é solta no "textTitle", chama o método verifyText() 
+    private void textNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNameKeyReleased
+        verifyText();
+    }//GEN-LAST:event_textNameKeyReleased
 
-    // quando é clicado em "Excluir" exclui a editora do banco de dados e atualiza a tabela
-    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        Publisher publisher = new Publisher();
-        PublisherDAO publisherDAO = new PublisherDAO();
+    // quando uma tecla é solta no "textAuthor", chama o método verifyText() 
+    private void textUrlKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textUrlKeyReleased
+        verifyText();
+    }//GEN-LAST:event_textUrlKeyReleased
 
-        publisher.setId((int) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 0));
-        publisherDAO.deletePublisher(publisher);
-        readTablePublisher();
-    }//GEN-LAST:event_buttonDeleteActionPerformed
+    // adiciona um novo autor no banco de dados
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        String name = textName.getText();
+        String url = textUrl.getText();
+        Integer publisherId = ((int) ViewPublisher.tablePublisher.getValueAt(ViewPublisher.tablePublisher.getSelectedRow(), 0));
+        
+        Publisher publisher = new Publisher(publisherId, name, url);
+        PublisherDAO.updatePublisher(publisher);
+        
+        Object[] options = { "Ok" };
+        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+        JOptionPane.showOptionDialog(null, "Editora atualizada!", "Editar editora", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[0]);
+        closeWindow();
+        ViewPublisher.readTablePublisher();
+        ViewPublisher.buttonEdit.setEnabled(false);
+        ViewPublisher.buttonDelete.setEnabled(false);
+    }//GEN-LAST:event_buttonSaveActionPerformed
 
-    
     // NOT EVENTS
     
-    // para trazer os dados de editoras para a tabela
-    public void readTablePublisher() {
-        DefaultTableModel modelo = (DefaultTableModel) tablePublisher.getModel();
-        modelo.setNumRows(0);
-        PublisherDAO pdao = new PublisherDAO();
-        
-        for (Publisher publisher: pdao.getPublishers()) {
-                modelo.addRow(new Object[] {
-                    publisher.getId(),
-                    publisher.getName(),
-                    publisher.getUrl()
-                });
-        }
-    }
-    
-    // define a posição da janela interna no centro do programa
-    protected void setPositionCenter() {
-        Dimension d = this.getDesktopPane().getSize();
-        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
-    }
-
     // fecha a janela atual
     private void closeWindow() {
         try {
@@ -202,14 +200,36 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
         }
     }
     
+    // define a posição da janela interna no centro do programa
+    protected void setPositionCenter() {
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
+    }
+    
+    /* verifica se existe texto nos campos "Título", "Autor", "Editora", "ISBN" e "Preço"
+       caso todos tenham texto: habilita o botão "Adicionar"
+       caso não: desabilita o botão "Adicionar" */
+    private void verifyText() {
+        String textT = textName.getText();
+        String textA = textUrl.getText();
+        
+        if (textT.isBlank() || textA.isBlank()) {
+            buttonSave.setEnabled(false);
+        } else {
+            buttonSave.setEnabled(true);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonCancel;
-    private javax.swing.JButton buttonDelete;
-    private javax.swing.JButton buttonEdit;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelEdit;
-    private javax.swing.JPanel panelEdit;
-    private javax.swing.JTable tablePublisher;
+    private javax.swing.JButton buttonSave;
+    private javax.swing.JLabel labelAdd;
+    private javax.swing.JLabel labelId;
+    private javax.swing.JLabel labelName;
+    private javax.swing.JLabel labelUrl;
+    private javax.swing.JPanel panelAdd;
+    protected javax.swing.JTextField textId;
+    protected javax.swing.JTextField textName;
+    protected javax.swing.JTextField textUrl;
     // End of variables declaration//GEN-END:variables
 }
