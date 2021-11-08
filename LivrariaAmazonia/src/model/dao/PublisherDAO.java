@@ -1,16 +1,18 @@
-package Database;
+package model.dao;
 
+import connection.DatabaseConstants;
+import model.Publisher;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
-import Model.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
-public class PublishersDao {
+public class PublisherDAO {
 
     private static final String URL = DatabaseConstants.URL;
     private static final String USER = DatabaseConstants.USER;
@@ -39,17 +41,7 @@ public class PublishersDao {
         
         return publishers;
     }
-    
-    public String getPublishersDropdown() {
-      StringBuilder publishers = new StringBuilder();
-      List<Publisher> editoras = PublishersDao.getPublishers();
 
-      editoras.forEach(a -> publishers.append(a.getName()).append(", "));
-
-      return publishers.toString();
-
-    }
-    
     public static Publisher getPublisher(Integer id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT * FROM publishers WHERE publisher_id = ?";
@@ -118,7 +110,7 @@ public class PublishersDao {
         }
     }
 
-    public static void deletePublisher(Publisher publisher) {
+    public void deletePublisher(Publisher publisher) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "DELETE FROM publishers WHERE publisher_id = ?";
             PreparedStatement pstm = con.prepareStatement(query);

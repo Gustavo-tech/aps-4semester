@@ -12,10 +12,10 @@
 /* Arquivo apenas para eu poder rodar o programa, que por algum motivo não
 funciona rodando diretamente o ViewAmazonia.Java.
 */
-import view.ViewAmazonia;
+import view.ViewLivrariaAmazonia;
 
 public class RunProgram {
     public static void main(String[] args) {
-        ViewAmazonia.main(args);
+        ViewLivrariaAmazonia.main(args);
     }
 }

@@ -1,10 +1,14 @@
-package Model;
+package model;
 
 public class Author {
   private Integer id;
   private String name;
   private String fName;
 
+  public Author() {
+      
+  }
+  
   public Author(String name, String fName) { 
     this.name = name;
     this.fName = fName;
@@ -34,5 +38,9 @@ public class Author {
 
   public void setFName(String fName) {
     this.fName = fName;
+  }
+  
+  public void setId (Integer id) {
+    this.id = id;
   }
 }

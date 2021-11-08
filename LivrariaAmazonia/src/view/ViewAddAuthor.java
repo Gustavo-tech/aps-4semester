@@ -1,13 +1,16 @@
 package view;
 
-import Database.*;
-import Model.*;
+import model.dao.AuthorDAO;
+import model.Author;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
-public class AddPublisher extends javax.swing.JInternalFrame {
+public class ViewAddAuthor extends javax.swing.JInternalFrame {
 
-    protected AddPublisher() {
+    protected ViewAddAuthor() {
         initComponents();
         buttonAdd.setEnabled(false);
     }
@@ -21,13 +24,15 @@ public class AddPublisher extends javax.swing.JInternalFrame {
         buttonAdd = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
         labelName = new javax.swing.JLabel();
-        labelURL = new javax.swing.JLabel();
+        labelLastName = new javax.swing.JLabel();
         textName = new javax.swing.JTextField();
-        textURL = new javax.swing.JTextField();
+        textLastName = new javax.swing.JTextField();
+
+        setMinimumSize(new java.awt.Dimension(421, 192));
 
         labelAdd.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelAdd.setText("Adicionar editora");
+        labelAdd.setText("Adicionar autor");
 
         panelAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -53,8 +58,8 @@ public class AddPublisher extends javax.swing.JInternalFrame {
         labelName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelName.setText("Nome:");
 
-        labelURL.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelURL.setText("URL:");
+        labelLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelLastName.setText("Sobrenome:");
 
         textName.setToolTipText("");
         textName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -63,10 +68,10 @@ public class AddPublisher extends javax.swing.JInternalFrame {
             }
         });
 
-        textURL.setToolTipText("");
-        textURL.addKeyListener(new java.awt.event.KeyAdapter() {
+        textLastName.setToolTipText("");
+        textLastName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                textURLKeyReleased(evt);
+                textLastNameKeyReleased(evt);
             }
         });
 
@@ -85,11 +90,11 @@ public class AddPublisher extends javax.swing.JInternalFrame {
                         .addGap(8, 8, 8)
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelURL, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(labelLastName, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textName)
-                            .addComponent(textURL))))
+                            .addComponent(textLastName))))
                 .addContainerGap())
         );
         panelAddLayout.setVerticalGroup(
@@ -101,9 +106,9 @@ public class AddPublisher extends javax.swing.JInternalFrame {
                     .addComponent(labelName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textURL)
-                    .addComponent(labelURL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                    .addComponent(textLastName)
+                    .addComponent(labelLastName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -128,7 +133,7 @@ public class AddPublisher extends javax.swing.JInternalFrame {
                 .addComponent(labelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,11 +143,7 @@ public class AddPublisher extends javax.swing.JInternalFrame {
     
     // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            System.err.println("Closing Exception");
-        }
+        closeWindow();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     // quando uma tecla é solta no "textTitle", chama o método verifyText() 
@@ -151,20 +152,41 @@ public class AddPublisher extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_textNameKeyReleased
 
     // quando uma tecla é solta no "textAuthor", chama o método verifyText() 
-    private void textURLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textURLKeyReleased
+    private void textLastNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textLastNameKeyReleased
         verifyText();
-    }//GEN-LAST:event_textURLKeyReleased
+    }//GEN-LAST:event_textLastNameKeyReleased
 
+    // adiciona um novo autor no banco de dados
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         String name = textName.getText();
-        String url = textURL.getText();
+        String lastName = textLastName.getText();
         
-        Publisher publisher = new Publisher(name, url);
-        PublishersDao.addPublisher(publisher);
+        Author author = new Author(name, lastName);
+        AuthorDAO.addAuthor(author);
+        
+        Object[] options = { "Sim", "Não" };
+        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+        int option = JOptionPane.showOptionDialog(null, "Autor(a) adicionado.\nGostaria de adicionar mais?", "Adicionar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
+        
+        if (option == 1) {
+            closeWindow();
+        } else if (option == 0) {
+            textName.setText("");
+            textLastName.setText("");
+        }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     
     // NOT EVENTS
+    
+    // fecha a janela atual
+    private void closeWindow() {
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            System.err.println("Closing Exception");
+        }
+    }
     
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
@@ -177,7 +199,7 @@ public class AddPublisher extends javax.swing.JInternalFrame {
        caso não: desabilita o botão "Adicionar" */
     private void verifyText() {
         String textT = textName.getText();
-        String textA = textURL.getText();
+        String textA = textLastName.getText();
         
         if (textT.isBlank() || textA.isBlank()) {
             buttonAdd.setEnabled(false);
@@ -190,10 +212,10 @@ public class AddPublisher extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonCancel;
     private javax.swing.JLabel labelAdd;
+    private javax.swing.JLabel labelLastName;
     private javax.swing.JLabel labelName;
-    private javax.swing.JLabel labelURL;
     private javax.swing.JPanel panelAdd;
+    private javax.swing.JTextField textLastName;
     private javax.swing.JTextField textName;
-    private javax.swing.JTextField textURL;
     // End of variables declaration//GEN-END:variables
 }

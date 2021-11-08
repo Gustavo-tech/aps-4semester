@@ -1,7 +1,8 @@
-package Database;
+package model.dao;
 
-import Model.Author;
-import Model.BookAuthor;
+import connection.DatabaseConstants;
+import model.Author;
+import model.BookAuthor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,8 +11,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
-public class BookAuthorsDao {
+public class BookAuthorDAO {
     private static final String URL = DatabaseConstants.URL;
     private static final String USER = DatabaseConstants.USER;
     private static final String PASS = DatabaseConstants.PASS;
@@ -90,6 +92,18 @@ public class BookAuthorsDao {
         String query = "DELETE FROM booksauthors WHERE isbn = ?";
         PreparedStatement pstm = conn.prepareStatement(query);
         pstm.setString(1, isbn);
+        pstm.executeUpdate();
+        conn.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    
+    public static void deleteBookAuthor(Integer authorId) {
+      try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
+        String query = "DELETE FROM booksauthors WHERE author_id = ?";
+        PreparedStatement pstm = conn.prepareStatement(query);
+        pstm.setInt(1, authorId);
         pstm.executeUpdate();
         conn.close();
       } catch (SQLException e) {

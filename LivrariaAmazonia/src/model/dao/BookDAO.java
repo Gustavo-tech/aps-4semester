@@ -1,16 +1,18 @@
-package Database;
+package model.dao;
 
+import connection.DatabaseConstants;
+import model.Book;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
-import Model.*;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
-public class BooksDao {
+public class BookDAO {
     private static final String URL = DatabaseConstants.URL;
     private static final String USER = DatabaseConstants.USER;
     private static final String PASS = DatabaseConstants.PASS;
@@ -90,7 +92,7 @@ public class BooksDao {
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, book.getTitle());
             pstm.setString(2, book.getIsbn());
-            pstm.setInt(3, book.getpublisherId());
+            pstm.setInt(3, book.getPublisherId());
             pstm.setDouble(4, book.getPrice());
             pstm.execute();
             con.close();
@@ -106,7 +108,7 @@ public class BooksDao {
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, book.getTitle());
             pstm.setString(2, book.getIsbn());
-            pstm.setInt(3, book.getpublisherId());
+            pstm.setInt(3, book.getPublisherId());
             pstm.setDouble(4, book.getPrice());
             pstm.execute();
             con.close();
@@ -115,7 +117,7 @@ public class BooksDao {
         }
     }
 
-    public static void delBook(Book book) {
+    public void deleteBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "DELETE FROM books WHERE isbn = ?";
             PreparedStatement pstm = con.prepareStatement(query);

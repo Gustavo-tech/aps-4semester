@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Publisher {
     private int id;
@@ -14,6 +14,10 @@ public class Publisher {
         this.id = publisherId;
         this.name = name;
         this.url = url;
+    }
+    
+    public Publisher() {
+        
     }
 
     public int getId() {

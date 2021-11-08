@@ -1,14 +1,16 @@
 package view;
 
-import Database.AuthorsDao;
-import Model.Author;
+import model.Publisher;
+import model.dao.PublisherDAO;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class AddAuthor extends javax.swing.JInternalFrame {
+public class ViewAddPublisher extends javax.swing.JInternalFrame {
 
-    protected AddAuthor() {
+    protected ViewAddPublisher() {
         initComponents();
         buttonAdd.setEnabled(false);
     }
@@ -22,15 +24,13 @@ public class AddAuthor extends javax.swing.JInternalFrame {
         buttonAdd = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
         labelName = new javax.swing.JLabel();
-        labelLastName = new javax.swing.JLabel();
+        labelURL = new javax.swing.JLabel();
         textName = new javax.swing.JTextField();
-        textLastName = new javax.swing.JTextField();
-
-        setMinimumSize(new java.awt.Dimension(421, 192));
+        textURL = new javax.swing.JTextField();
 
         labelAdd.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelAdd.setText("Adicionar autor");
+        labelAdd.setText("Adicionar editora");
 
         panelAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -56,8 +56,8 @@ public class AddAuthor extends javax.swing.JInternalFrame {
         labelName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelName.setText("Nome:");
 
-        labelLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelLastName.setText("Sobrenome:");
+        labelURL.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelURL.setText("URL:");
 
         textName.setToolTipText("");
         textName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -66,10 +66,10 @@ public class AddAuthor extends javax.swing.JInternalFrame {
             }
         });
 
-        textLastName.setToolTipText("");
-        textLastName.addKeyListener(new java.awt.event.KeyAdapter() {
+        textURL.setToolTipText("");
+        textURL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                textLastNameKeyReleased(evt);
+                textURLKeyReleased(evt);
             }
         });
 
@@ -88,11 +88,11 @@ public class AddAuthor extends javax.swing.JInternalFrame {
                         .addGap(8, 8, 8)
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelLastName, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(labelURL, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textName)
-                            .addComponent(textLastName))))
+                            .addComponent(textURL))))
                 .addContainerGap())
         );
         panelAddLayout.setVerticalGroup(
@@ -104,9 +104,9 @@ public class AddAuthor extends javax.swing.JInternalFrame {
                     .addComponent(labelName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textLastName)
-                    .addComponent(labelLastName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                    .addComponent(textURL)
+                    .addComponent(labelURL))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -131,7 +131,7 @@ public class AddAuthor extends javax.swing.JInternalFrame {
                 .addComponent(labelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -141,33 +141,48 @@ public class AddAuthor extends javax.swing.JInternalFrame {
     
     // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        closeWindow();
+    }//GEN-LAST:event_buttonCancelActionPerformed
+
+    // quando uma tecla é solta no "textTitle", chama o método verifyText() 
+    private void textNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNameKeyReleased
+        verifyText(); 
+    }//GEN-LAST:event_textNameKeyReleased
+
+    // quando uma tecla é solta no "textAuthor", chama o método verifyText() 
+    private void textURLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textURLKeyReleased
+        verifyText();
+    }//GEN-LAST:event_textURLKeyReleased
+
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        String name = textName.getText();
+        String url = textURL.getText();
+            
+        Publisher publisher = new Publisher(name, url);
+        PublisherDAO.addPublisher(publisher);
+        
+        Object[] options = { "Sim", "Não" };
+        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+        int option = JOptionPane.showOptionDialog(null, "Editora adicionada.\nGostaria de adicionar mais?", "Adicionar editora", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
+        
+        if (option == 1) {
+            closeWindow();
+        } else if (option == 0) {
+            textName.setText("");
+            textURL.setText("");
+        }
+    }//GEN-LAST:event_buttonAddActionPerformed
+
+    // NOT EVENTS
+    
+    // fecha a janela atual
+    private void closeWindow() {
         try {
             this.setClosed(true);
         } catch (PropertyVetoException ex) {
             System.err.println("Closing Exception");
         }
-    }//GEN-LAST:event_buttonCancelActionPerformed
-
-    // quando uma tecla é solta no "textTitle", chama o método verifyText() 
-    private void textNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNameKeyReleased
-        verifyText();
-    }//GEN-LAST:event_textNameKeyReleased
-
-    // quando uma tecla é solta no "textAuthor", chama o método verifyText() 
-    private void textLastNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textLastNameKeyReleased
-        verifyText();
-    }//GEN-LAST:event_textLastNameKeyReleased
-
-    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        String name = textName.getText();
-        String lastName = textLastName.getText();
-        
-        Author author = new Author(lastName, name);
-        AuthorsDao.addAuthor(author);
-    }//GEN-LAST:event_buttonAddActionPerformed
-
-    
-    // NOT EVENTS
+    }
     
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
@@ -180,7 +195,7 @@ public class AddAuthor extends javax.swing.JInternalFrame {
        caso não: desabilita o botão "Adicionar" */
     private void verifyText() {
         String textT = textName.getText();
-        String textA = textLastName.getText();
+        String textA = textURL.getText();
         
         if (textT.isBlank() || textA.isBlank()) {
             buttonAdd.setEnabled(false);
@@ -193,10 +208,10 @@ public class AddAuthor extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonCancel;
     private javax.swing.JLabel labelAdd;
-    private javax.swing.JLabel labelLastName;
     private javax.swing.JLabel labelName;
+    private javax.swing.JLabel labelURL;
     private javax.swing.JPanel panelAdd;
-    private javax.swing.JTextField textLastName;
     private javax.swing.JTextField textName;
+    private javax.swing.JTextField textURL;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Book {
     private String title;
@@ -6,6 +6,7 @@ public class Book {
     private Integer publisherId;
     private Double price;
 
+    // construtor
     public Book(String title, String isbn, Integer publisherId, Double price) {
         this.title = title;
         this.isbn = isbn;
@@ -13,38 +14,48 @@ public class Book {
         this.price = price;
     }
 
+    // construtor
+    public Book() {
+        
+    }
+
+    // getter do título
     public String getTitle() {
         return title;
     }
 
+    // setter do título
     public void setTitle(String title) {
         this.title = title;
     }
 
+    // getter do ISBN
     public String getIsbn() {
         return isbn;
     }
 
+    // setter do ISBN
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public int getpublisherId() {
+    // getter do id da editora
+    public int getPublisherId() {
         return publisherId;
     }
 
-    public void setpublisherId(Integer publisherId) {
+    // setter do id da editora
+    public void setPublisherId(Integer publisherId) {
         this.publisherId = publisherId;
     }
 
+    // getter de preço
     public double getPrice() {
         return price;
     }
 
+    // setter de preço
     public void setPrice(Double price) {
         this.price = price;
     }
-    
-    
-    
 }
