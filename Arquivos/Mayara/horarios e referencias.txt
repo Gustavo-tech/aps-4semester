@@ -8,6 +8,7 @@
 04/11 - 5h criando novas janelas de add/remove/edit
 05/11 - 4h editando telas de remove/edit
 06/11 - 5h entendendo e aplicando jtables
+08/11 - 6h criando telas de edição 
 TOTAL SOLO ATÉ AGORA: 29h
 
 
