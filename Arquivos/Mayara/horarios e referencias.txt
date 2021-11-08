@@ -5,7 +5,9 @@
 20/10 - 4h melhorando a view base
 26/10 - 5h trocando modelo de varias janelas por internalFrames
 31/10 - 6h editando internalFrames
-04/11 - 5h Criando novas janelas de add/remove/edit
+04/11 - 5h criando novas janelas de add/remove/edit
+05/11 - 4h editando telas de remove/edit
+06/11 - 5h entendendo e aplicando jtables
 TOTAL SOLO ATÉ AGORA: 29h
 
 

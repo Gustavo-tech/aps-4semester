@@ -4,10 +4,10 @@ import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import model.Publisher;
+import model.bean.Publisher;
 import model.dao.PublisherDAO;
 import model.dao.ViewModelsDAO;
-import view.model.SearchViewModel;
+import model.view.SearchViewModel;
 
 public class ViewSearch extends javax.swing.JInternalFrame {
 

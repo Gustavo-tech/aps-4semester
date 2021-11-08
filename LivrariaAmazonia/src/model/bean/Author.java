@@ -1,4 +1,4 @@
-package model;
+package model.bean;
 
 public class Author {
   private Integer id;
@@ -43,4 +43,11 @@ public class Author {
   public void setId (Integer id) {
     this.id = id;
   }
+
+    @Override
+    public String toString() {
+        return getName() + " " + getFName(); //To change body of generated methods, choose Tools | Templates.
+    }
+  
+  
 }

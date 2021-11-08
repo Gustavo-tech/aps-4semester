@@ -1,4 +1,4 @@
-package model;
+package model.bean;
 
 public class Publisher {
     private int id;
@@ -43,4 +43,11 @@ public class Publisher {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public String toString() {
+        return getName(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

@@ -2,10 +2,10 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Author;
+import model.bean.Author;
 import model.dao.AuthorDAO;
+import view.ViewAddAuthor;
 import static view.ViewLivrariaAmazonia.desktopAmazonia;
 
 public class ViewEditAuthor extends javax.swing.JInternalFrame {

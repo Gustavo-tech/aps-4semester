@@ -3,7 +3,7 @@ package view;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import javax.swing.table.DefaultTableModel;
-import model.Publisher;
+import model.bean.Publisher;
 import model.dao.PublisherDAO;
 import static view.ViewLivrariaAmazonia.desktopAmazonia;
 

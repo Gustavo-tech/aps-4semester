@@ -1,7 +1,7 @@
 package model.dao;
 
 import connection.DatabaseConstants;
-import model.Book;
+import model.bean.Book;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

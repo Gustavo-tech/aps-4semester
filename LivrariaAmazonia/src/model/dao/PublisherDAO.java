@@ -1,7 +1,7 @@
 package model.dao;
 
 import connection.DatabaseConstants;
-import model.Publisher;
+import model.bean.Publisher;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -83,7 +83,7 @@ public class PublisherDAO {
         
         return publishers;
     }
-
+    
     public static void addPublisher(Publisher publisher) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "INSERT INTO publishers (name, url) values (?, ?)";

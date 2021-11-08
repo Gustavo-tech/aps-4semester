@@ -221,13 +221,7 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
         viewEditPublisher.setVisible(true);
         viewEditPublisher.setPositionCenter();
     }//GEN-LAST:event_menuEditPublisherActionPerformed
-    
-    // NOT EVENTS
-        // por enquanto nada        
-    // NOT EVENTS
-        // por enquanto nada    
-    
-    
+   
     // MAIN
     public static void main(String args[]) {
         try {

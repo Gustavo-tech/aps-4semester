@@ -1,6 +1,7 @@
 
 package model.dao;
 
+import model.view.SearchViewModel;
 import connection.DatabaseConstants;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import view.model.SearchViewModel;
 
 public class ViewModelsDAO {
     private static final String URL = DatabaseConstants.URL;

@@ -1,5 +1,5 @@
 
-package view.model;
+package model.view;
 
 // Classe que representa os dados da tela de busca
 public class SearchViewModel {

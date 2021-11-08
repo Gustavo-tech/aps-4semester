@@ -1,8 +1,8 @@
 package model.dao;
 
 import connection.DatabaseConstants;
-import model.Author;
-import model.BookAuthor;
+import model.bean.Author;
+import model.bean.BookAuthor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

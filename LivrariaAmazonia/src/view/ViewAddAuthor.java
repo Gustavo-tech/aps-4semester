@@ -1,7 +1,7 @@
 package view;
 
 import model.dao.AuthorDAO;
-import model.Author;
+import model.bean.Author;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import javax.swing.Icon;
@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 public class ViewAddAuthor extends javax.swing.JInternalFrame {
 
-    protected ViewAddAuthor() {
+    public ViewAddAuthor() {
         initComponents();
         buttonAdd.setEnabled(false);
     }
@@ -176,7 +176,6 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonAddActionPerformed
 
-    
     // NOT EVENTS
     
     // fecha a janela atual
