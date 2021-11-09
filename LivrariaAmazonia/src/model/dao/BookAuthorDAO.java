@@ -18,6 +18,7 @@ public class BookAuthorDAO {
     private static final String USER = DatabaseConstants.USER;
     private static final String PASS = DatabaseConstants.PASS;
     
+    // Obtem todos autores dos livros
     public static List<BookAuthor> getBookAuthors() {
         List<BookAuthor> bookAuthors = new ArrayList<BookAuthor>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
@@ -41,6 +42,7 @@ public class BookAuthorDAO {
         return bookAuthors;
     }
     
+    // Obtem um autor do livro com isbn
     public static BookAuthor getBookAuthor(String isbn) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT * FROM booksauthors WHERE isbn = ?";
@@ -58,7 +60,8 @@ public class BookAuthorDAO {
             return null;
         }
     }
-
+    
+    // Adiciona um autor do livro
     public static void addBookAuthor(BookAuthor bookAuthor) {        
         try(Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
           String query = "INSERT INTO booksauthors VALUES (?, ?, ?)";
@@ -73,6 +76,7 @@ public class BookAuthorDAO {
         } 
     }
 
+    // Atualiza um autor do livro
     public static void updateBookAuthor(BookAuthor bookAuthor) {
         try(Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
           String query = "UPDATE booksauthors SET isbn = ?, author_id = ?, seq_no = ?";
@@ -87,6 +91,7 @@ public class BookAuthorDAO {
         } 
     }
 
+    // Deleta um autor do livro
     public static void deleteBookAuthor(String isbn) {
       try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
         String query = "DELETE FROM booksauthors WHERE isbn = ?";

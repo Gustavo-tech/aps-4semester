@@ -18,6 +18,7 @@ public class BookDAO {
     private static final String USER = DatabaseConstants.USER;
     private static final String PASS = DatabaseConstants.PASS;
     
+    // Obtem todos os livros
     public static List<Book> getBooks() {
         List<Book> books = new ArrayList<Book>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
@@ -43,6 +44,7 @@ public class BookDAO {
         return books;
     }
     
+    // Obtem todos os livros com determinado titulo
     public static List<Book> getBooksStr(String bName) {
         List<Book> books = new ArrayList<Book>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
@@ -68,6 +70,7 @@ public class BookDAO {
         return books;
     }
     
+    // Obtem todos os livros com determinada editora
     public static List<Book> getBooksWithPublisher(Publisher p) {
         List<Book> books = new ArrayList<Book>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
@@ -94,6 +97,7 @@ public class BookDAO {
         return books;
     }
     
+    // Obtem determinado livro de acordo com a ISBN
     public static Book getBook(String isbn) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT * FROM books WHERE isbn = ?";
@@ -113,6 +117,7 @@ public class BookDAO {
         }
     }
 
+    // Adiciona um livro novo
     public static void addBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "INSERT INTO books VALUES (?, ?, ?, ?)";
@@ -127,7 +132,8 @@ public class BookDAO {
             e.printStackTrace();
         }
     }
-
+    
+    // Atualiza um livro
     public static void updateBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "UPDATE books SET title = ?, isbn = ?, publisher_id = ?, "
@@ -143,7 +149,8 @@ public class BookDAO {
             e.printStackTrace();
         }
     }
-
+    
+    // Deleta um livro
     public static void deleteBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "DELETE FROM books WHERE isbn = ?";
@@ -157,6 +164,7 @@ public class BookDAO {
         }
     }
     
+    // Deleta todos os livros que tenha determinada editora
     public static void deleteBook(Publisher publisher) {
        List<Book> books = getBooksWithPublisher(publisher);
         
