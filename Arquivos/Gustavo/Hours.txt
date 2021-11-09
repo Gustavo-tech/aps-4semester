@@ -6,6 +6,7 @@
 20/10/2021 - Modificando e testando DAO [6 horas]
 02/11/2021 - Modificando views [6 horas]
 06/11/2021 - Reunião para discutir como as telas estão sendo implementadas [4 horas]
+06/11/2021 - Criando select e editando view [5 horas]
 07/11/2021 - Reunião para discutirmos o design das telas [3 horas]
 
-Total: 35 horas
+Total: 40 horas

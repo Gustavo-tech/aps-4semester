@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.bean.Publisher;
 
 public class BookDAO {
     private static final String URL = DatabaseConstants.URL;
@@ -67,6 +68,32 @@ public class BookDAO {
         return books;
     }
     
+    public static List<Book> getBooksWithPublisher(Publisher p) {
+        List<Book> books = new ArrayList<Book>();
+        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM books WHERE publisher_id = ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setInt(1, p.getId());
+            
+            ResultSet rs = pstm.executeQuery(query);
+            while(rs.next()) {
+                String title = rs.getString("title");
+                String isbn = rs.getString("isbn");
+                Integer publisherId = rs.getInt("publisher_id");
+                Double price = rs.getDouble("price");
+                
+                Book book = new Book(title, isbn, publisherId, price);
+                books.add(book);
+            }
+            
+            con.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return books;
+    }
+    
     public static Book getBook(String isbn) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT * FROM books WHERE isbn = ?";
@@ -94,7 +121,7 @@ public class BookDAO {
             pstm.setString(2, book.getIsbn());
             pstm.setInt(3, book.getPublisherId());
             pstm.setDouble(4, book.getPrice());
-            pstm.execute();
+            pstm.executeUpdate();
             con.close();
         } catch(SQLException e) {
             e.printStackTrace();
@@ -110,23 +137,31 @@ public class BookDAO {
             pstm.setString(2, book.getIsbn());
             pstm.setInt(3, book.getPublisherId());
             pstm.setDouble(4, book.getPrice());
-            pstm.execute();
+            pstm.executeUpdate();
             con.close();
         } catch(SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteBook(Book book) {
+    public static void deleteBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "DELETE FROM books WHERE isbn = ?";
+            BookAuthorDAO.deleteBookAuthor(book.getIsbn());
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, book.getIsbn());
-            pstm.execute();
+            pstm.executeUpdate();
             con.close();
         } catch(SQLException e) {
             e.printStackTrace();
         }
     }
     
+    public static void deleteBook(Publisher publisher) {
+       List<Book> books = getBooksWithPublisher(publisher);
+        
+        for(Book b: books) {
+            deleteBook(b);
+        }
+    }
 }
