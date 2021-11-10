@@ -2,14 +2,11 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.bean.*;
 import model.dao.*;
-import static model.dao.AuthorDAO.getAuthorId;
-import static view.ViewLivrariaAmazonia.desktopAmazonia;
 
 public class ViewAddBook extends javax.swing.JInternalFrame {
 
@@ -286,7 +283,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         // pegando o id do autor, a partir do nome e sobrenome
         String name = splitAuthor((String) comboBoxAuthor.getModel().getSelectedItem(), 0);
         String fname = splitAuthor((String) comboBoxAuthor.getModel().getSelectedItem(), 1);
-        Integer authorId = getAuthorId(name, fname);
+        Integer authorId = AuthorDAO.getAuthorId(name, fname);
 
         // adicionando o livro e o autor do livro
         Book book = new Book(title, isbn, publisherId, price);
@@ -317,7 +314,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     // chama a janela interna para adicionar um novo autor
     private void buttonAddAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddAuthorActionPerformed
         ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
-        desktopAmazonia.add(viewAddAuthor);
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddAuthor);
         viewAddAuthor.setVisible(true);
         viewAddAuthor.setPositionCenter();
     }//GEN-LAST:event_buttonAddAuthorActionPerformed
@@ -325,7 +322,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     // chama a janela interna para adicionar uma nova editora
     private void buttonAddPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddPublisherActionPerformed
         ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
-        desktopAmazonia.add(viewAddPublisher);
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddPublisher);
         viewAddPublisher.setVisible(true);
         viewAddPublisher.setPositionCenter();
     }//GEN-LAST:event_buttonAddPublisherActionPerformed

@@ -16,16 +16,13 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         initComponents();
         
         buttonClean.setEnabled(false);
-        buttonDelete.setEnabled(false);
         buttonSearch.setEnabled(false);
-        buttonEdit.setEnabled(false);
         buttonGroupType.add(radioAuthor);
         buttonGroupType.add(radioTitle);
         buttonGroupType.add(radioPublisher);
         buttonGroupType.add(radioIsbn);
         radioAuthor.setFocusPainted(false);
         radioTitle.doClick();
-        readTableGeneral();
     }
 
     @SuppressWarnings("unchecked")
@@ -39,9 +36,6 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         radioPublisher = new javax.swing.JRadioButton();
         radioIsbn = new javax.swing.JRadioButton();
         buttonSearch = new javax.swing.JButton();
-        buttonAdd = new javax.swing.JButton();
-        buttonDelete = new javax.swing.JButton();
-        buttonEdit = new javax.swing.JButton();
         buttonClean = new javax.swing.JButton();
         buttonClose = new javax.swing.JButton();
         paneBooklist = new javax.swing.JScrollPane();
@@ -59,6 +53,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
 
         radioIsbn.setText("ISBN");
 
+        buttonSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-search.png"))); // NOI18N
         buttonSearch.setText("Pesquisar");
         buttonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,30 +61,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonAdd.setText("Adicionar");
-        buttonAdd.setMaximumSize(null);
-        buttonAdd.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonAdd.setPreferredSize(new java.awt.Dimension(134, 22));
-        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddActionPerformed(evt);
-            }
-        });
-
-        buttonDelete.setText("Excluir");
-        buttonDelete.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonDelete.setPreferredSize(new java.awt.Dimension(134, 22));
-
-        buttonEdit.setText("Editar");
-        buttonEdit.setToolTipText("");
-        buttonEdit.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonEdit.setPreferredSize(new java.awt.Dimension(134, 22));
-        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEditActionPerformed(evt);
-            }
-        });
-
+        buttonClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-clear.png"))); // NOI18N
         buttonClean.setText("Limpar");
         buttonClean.setToolTipText("");
         buttonClean.setMinimumSize(new java.awt.Dimension(134, 22));
@@ -100,6 +72,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-exit.png"))); // NOI18N
         buttonClose.setText("Fechar");
         buttonClose.setToolTipText("");
         buttonClose.setMinimumSize(new java.awt.Dimension(134, 22));
@@ -120,11 +93,6 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         ));
         tableGeneral.setColumnSelectionAllowed(true);
         tableGeneral.getTableHeader().setReorderingAllowed(false);
-        tableGeneral.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableGeneralMouseClicked(evt);
-            }
-        });
         paneBooklist.setViewportView(tableGeneral);
 
         textSearch.setToolTipText("");
@@ -152,18 +120,12 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                         .addGap(540, 540, 540))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLivrariaLayout.createSequentialGroup()
                         .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(paneBooklist)
+                            .addComponent(paneBooklist, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLivrariaLayout.createSequentialGroup()
                                 .addComponent(textSearch)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLivrariaLayout.createSequentialGroup()
-                                .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -186,15 +148,12 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                 .addComponent(paneBooklist, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        panelLivrariaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonAdd, buttonClean, buttonClose, buttonDelete, buttonEdit});
+        panelLivrariaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonClean, buttonClose});
 
         labelSearch.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         labelSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -249,22 +208,6 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonCloseActionPerformed
 
-    // quando é clicado em "Editar", abre a janela interna "Editar livro"
-    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        ViewBook viewModify = new ViewBook();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewModify);
-        viewModify.setVisible(true);
-        viewModify.setPositionCenter();
-    }//GEN-LAST:event_buttonEditActionPerformed
-
-    // quando é clicado em "Adicionar", abre a janela interna "Adicionar livro"
-    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        ViewAddBook viewAdd = new  ViewAddBook();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewAdd);
-        viewAdd.setVisible(true);
-        viewAdd.setPositionCenter();
-    }//GEN-LAST:event_buttonAddActionPerformed
-
     // realiza a pesquisa de acordo com o tipo selecionado
     private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
         String search = textSearch.getText();
@@ -282,14 +225,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         buttonClean.setEnabled(true);
     }//GEN-LAST:event_buttonSearchActionPerformed
 
-    // quando é clicado em algum item da tabela, ativa o botão "Editar" e "Excluir"
-    private void tableGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableGeneralMouseClicked
-        buttonEdit.setEnabled(true);
-        buttonDelete.setEnabled(true);
-    }//GEN-LAST:event_tableGeneralMouseClicked
-
     private void buttonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanActionPerformed
-        readTableGeneral();
         buttonClean.setEnabled(false);
         buttonSearch.setEnabled(false);
         textSearch.setText("");
@@ -338,6 +274,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         
         if (modelo.getRowCount() == 0) {
             JOptionPane.showInternalMessageDialog(null, "Livro não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+            buttonClean.setEnabled(false);
         }
     }
     
@@ -359,6 +296,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         
         if (modelo.getRowCount() == 0) {
             JOptionPane.showInternalMessageDialog(null, "Autor(a) não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+            buttonClean.setEnabled(false);
         }
     }
     
@@ -380,6 +318,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         
         if (modelo.getRowCount() == 0) {
             JOptionPane.showInternalMessageDialog(null, "Editora não encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE );
+            buttonClean.setEnabled(false);
         }
     }
     
@@ -401,15 +340,13 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         
         if (modelo.getRowCount() == 0) {
             JOptionPane.showInternalMessageDialog(null, "ISBN não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+            buttonClean.setEnabled(false);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonClean;
     private javax.swing.JButton buttonClose;
-    private javax.swing.JButton buttonDelete;
-    private javax.swing.JButton buttonEdit;
     private javax.swing.ButtonGroup buttonGroupType;
     private javax.swing.JButton buttonSearch;
     private javax.swing.JLabel labelSearch;

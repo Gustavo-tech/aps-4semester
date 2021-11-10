@@ -35,6 +35,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
 
         panelEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-add-book.png"))); // NOI18N
         buttonAdd.setText("Adicionar");
         buttonAdd.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonAdd.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -44,6 +45,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-exit.png"))); // NOI18N
         buttonFechar.setText("Fechar");
         buttonFechar.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonFechar.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -69,6 +71,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tableAuthor);
 
+        buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-delete.png"))); // NOI18N
         buttonDelete.setText("Excluir");
         buttonDelete.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonDelete.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -78,6 +81,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-pencil.png"))); // NOI18N
         buttonEdit.setText("Editar");
         buttonEdit.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonEdit.setPreferredSize(new java.awt.Dimension(134, 22));

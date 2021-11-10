@@ -7,7 +7,6 @@ import java.beans.PropertyVetoException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import static view.ViewPublisher.*;
 
 public class ViewAddPublisher extends javax.swing.JInternalFrame {
 
@@ -163,9 +162,9 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
         PublisherDAO.addPublisher(publisher);
         
         try {
-            readTablePublisher();
-            buttonDelete.setEnabled(false);
-            buttonEdit.setEnabled(false);
+            ViewPublisher.readTablePublisher();
+            ViewPublisher.buttonDelete.setEnabled(false);
+            ViewPublisher.buttonEdit.setEnabled(false);
         } catch (NullPointerException ignored) {}
         
         Object[] options = { "Sim", "Não" };

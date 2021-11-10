@@ -5,8 +5,6 @@ import java.beans.PropertyVetoException;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Publisher;
 import model.dao.PublisherDAO;
-import static view.ViewLivrariaAmazonia.desktopAmazonia;
-import view.*;
 
 public class ViewPublisher extends javax.swing.JInternalFrame {
 
@@ -52,6 +50,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablePublisher);
 
+        buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-add-book.png"))); // NOI18N
         buttonAdd.setText("Adicionar");
         buttonAdd.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonAdd.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -61,6 +60,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-pencil.png"))); // NOI18N
         buttonEdit.setText("Editar");
         buttonEdit.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonEdit.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -70,6 +70,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-delete.png"))); // NOI18N
         buttonDelete.setText("Excluir");
         buttonDelete.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonDelete.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -79,6 +80,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-exit.png"))); // NOI18N
         buttonClose.setText("Fechar");
         buttonClose.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonClose.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -160,7 +162,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
     // quando é clicado em "Adicionar" chama a view "ViewAddPublisher"
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
-        desktopAmazonia.add(viewAddPublisher);
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddPublisher);
         viewAddPublisher.setVisible(true);
         viewAddPublisher.setPositionCenter();
     }//GEN-LAST:event_buttonAddActionPerformed
@@ -181,7 +183,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
        informações da editora selecionada */
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         ViewEditPublisher viewEditPublisher = new ViewEditPublisher();
-        desktopAmazonia.add(viewEditPublisher);
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditPublisher);
         viewEditPublisher.setVisible(true);
         viewEditPublisher.setPositionCenter();
         

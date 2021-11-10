@@ -1,7 +1,5 @@
 package view;
 
-import model.dao.AuthorDAO;
-import model.bean.Author;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import javax.swing.Icon;

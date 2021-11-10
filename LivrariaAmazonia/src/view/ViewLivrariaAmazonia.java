@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 public class ViewLivrariaAmazonia extends javax.swing.JFrame {
 
     public ViewLivrariaAmazonia() {
@@ -10,7 +14,14 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopAmazonia = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/background.jpg"));
+        Image img = icon.getImage();
+        desktopAmazonia = new javax.swing.JDesktopPane() {
+
+            public void paintComponent(Graphics g) {
+                g.drawImage(img,0,0,2560,1440,this);
+            }
+        };
         buttonAuthors = new javax.swing.JButton();
         buttonBooks = new javax.swing.JButton();
         buttonGeneral = new javax.swing.JButton();
@@ -35,28 +46,36 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
         setName("Livraria Amazônia"); // NOI18N
         setSize(new java.awt.Dimension(1000, 500));
 
+        buttonAuthors.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         buttonAuthors.setText("Autores");
+        buttonAuthors.setPreferredSize(new java.awt.Dimension(180, 38));
         buttonAuthors.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAuthorsActionPerformed(evt);
             }
         });
 
+        buttonBooks.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         buttonBooks.setText("Livros");
+        buttonBooks.setPreferredSize(new java.awt.Dimension(180, 38));
         buttonBooks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBooksActionPerformed(evt);
             }
         });
 
-        buttonGeneral.setText("Geral");
+        buttonGeneral.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        buttonGeneral.setText("Buscar");
+        buttonGeneral.setPreferredSize(new java.awt.Dimension(180, 38));
         buttonGeneral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonGeneralActionPerformed(evt);
             }
         });
 
+        buttonPublishers.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         buttonPublishers.setText("Editoras");
+        buttonPublishers.setPreferredSize(new java.awt.Dimension(180, 38));
         buttonPublishers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPublishersActionPerformed(evt);
@@ -64,7 +83,7 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 102, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bem vindo(a) à Livraria Amazônia!");
 
@@ -83,29 +102,27 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
                 .addGroup(desktopAmazoniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(desktopAmazoniaLayout.createSequentialGroup()
-                        .addComponent(buttonBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonBooks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonAuthors, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonAuthors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonPublishers, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(buttonPublishers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(8, 8, 8)))
+                .addGap(0, 0, 0))
         );
-
-        desktopAmazoniaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {buttonAuthors, buttonBooks, buttonGeneral, buttonPublishers});
-
         desktopAmazoniaLayout.setVerticalGroup(
             desktopAmazoniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopAmazoniaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
                 .addGroup(desktopAmazoniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAuthors, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPublishers, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAuthors, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonPublishers, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -132,7 +149,7 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
         });
         menuLivraria.add(menuLivrariaBook);
 
-        menuLivrariaAuthor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/writer.png"))); // NOI18N
+        menuLivrariaAuthor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-writer.png"))); // NOI18N
         menuLivrariaAuthor.setText("Autor");
         menuLivrariaAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

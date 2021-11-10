@@ -50,6 +50,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tableBook);
 
+        buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-add-book.png"))); // NOI18N
         buttonAdd.setText("Adicionar");
         buttonAdd.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonAdd.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -59,6 +60,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-pencil.png"))); // NOI18N
         buttonEdit.setText("Editar");
         buttonEdit.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonEdit.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -68,6 +70,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-delete.png"))); // NOI18N
         buttonDelete.setText("Excluir");
         buttonDelete.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonDelete.setPreferredSize(new java.awt.Dimension(134, 22));
@@ -77,7 +80,8 @@ public class ViewBook extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonCancel.setText("Cancelar");
+        buttonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-exit.png"))); // NOI18N
+        buttonCancel.setText("Fechar");
         buttonCancel.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonCancel.setPreferredSize(new java.awt.Dimension(134, 22));
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
