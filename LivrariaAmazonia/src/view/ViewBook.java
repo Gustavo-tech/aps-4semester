@@ -5,8 +5,6 @@ import java.beans.PropertyVetoException;
 import javax.swing.table.DefaultTableModel;
 import model.bean.*;
 import model.dao.*;
-import static model.dao.AuthorDAO.getAuthorId;
-import static view.ViewLivrariaAmazonia.desktopAmazonia;
 
 public class ViewBook extends javax.swing.JInternalFrame {
 
@@ -45,7 +43,6 @@ public class ViewBook extends javax.swing.JInternalFrame {
             }
         ));
         tableBook.setCellSelectionEnabled(true);
-        tableBook.setRowSorter(null);
         tableBook.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableBookMouseClicked(evt);
@@ -163,7 +160,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
     // quando é clicado em "Adicionar" chama a view "ViewAddBook"
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         ViewAddBook viewAddBook = new  ViewAddBook();
-        desktopAmazonia.add(viewAddBook);
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddBook);
         viewAddBook.setVisible(true);
         viewAddBook.setPositionCenter();
     }//GEN-LAST:event_buttonAddActionPerformed
@@ -183,7 +180,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
     // quando é clicado em "Editar" abre a janela interna de edição já com os dados do livro selecionado
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         ViewEditBook ViewEditBook = new ViewEditBook();
-        desktopAmazonia.add(ViewEditBook);
+        ViewLivrariaAmazonia.desktopAmazonia.add(ViewEditBook);
         ViewEditBook.setVisible(true);
         ViewEditBook.setPositionCenter();
                 
@@ -247,6 +244,6 @@ public class ViewBook extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEdit;
     private javax.swing.JPanel panelEdit;
-    private static javax.swing.JTable tableBook;
+    protected static javax.swing.JTable tableBook;
     // End of variables declaration//GEN-END:variables
 }

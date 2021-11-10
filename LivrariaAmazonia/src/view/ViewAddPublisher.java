@@ -7,6 +7,7 @@ import java.beans.PropertyVetoException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import static view.ViewPublisher.*;
 
 public class ViewAddPublisher extends javax.swing.JInternalFrame {
 
@@ -160,9 +161,12 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
             
         Publisher publisher = new Publisher(name, url);
         PublisherDAO.addPublisher(publisher);
-        ViewPublisher.buttonDelete.setEnabled(false);
-        ViewPublisher.buttonEdit.setEnabled(false);
-        ViewPublisher.readTablePublisher();
+        
+        try {
+            readTablePublisher();
+            buttonDelete.setEnabled(false);
+            buttonEdit.setEnabled(false);
+        } catch (NullPointerException ignored) {}
         
         Object[] options = { "Sim", "Não" };
         Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 

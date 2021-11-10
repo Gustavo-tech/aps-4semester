@@ -62,8 +62,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="radioGeneral" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="radioBook" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="radioAuthor" max="32767" attributes="0"/>
@@ -84,7 +83,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="buttonAdd" min="-2" pref="120" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="buttonRemove" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="buttonDelete" min="-2" pref="120" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="buttonEdit" min="-2" pref="120" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -105,7 +104,6 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="radioBook" alignment="3" max="32767" attributes="0"/>
-                      <Component id="radioGeneral" alignment="3" max="32767" attributes="0"/>
                       <Component id="radioAuthor" alignment="3" max="32767" attributes="0"/>
                       <Component id="radioPublisher" alignment="3" max="32767" attributes="0"/>
                       <Component id="radioIsbn" alignment="3" max="32767" attributes="0"/>
@@ -120,7 +118,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="buttonAdd" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="buttonRemove" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="buttonDelete" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="buttonEdit" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="buttonClean" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="buttonClose" linkSize="2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -131,11 +129,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="radioGeneral">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Geral"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JRadioButton" name="radioBook">
           <Properties>
             <Property name="text" type="java.lang.String" value="Livro"/>
@@ -181,12 +174,9 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="buttonRemove">
+        <Component class="javax.swing.JButton" name="buttonDelete">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Remover"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Excluir"/>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[134, 22]"/>
             </Property>
@@ -260,6 +250,9 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableGeneralMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

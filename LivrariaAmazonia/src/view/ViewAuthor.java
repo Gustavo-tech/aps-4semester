@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import model.bean.Author;
 import model.dao.AuthorDAO;
 import view.ViewAddAuthor;
-import static view.ViewLivrariaAmazonia.desktopAmazonia;
 
 public class ViewAuthor extends javax.swing.JInternalFrame {
 
@@ -164,7 +163,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
     // quando é clicado em "Adicionar" chama a view "ViewAddAuthor"
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
-        desktopAmazonia.add(viewAddAuthor);
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddAuthor);
         viewAddAuthor.setVisible(true);
         viewAddAuthor.setPositionCenter();
     }//GEN-LAST:event_buttonAddActionPerformed
@@ -182,7 +181,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
        informações do autor selecionado */
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         ViewEditAuthor viewEditAuthor = new ViewEditAuthor();
-        desktopAmazonia.add(viewEditAuthor);
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditAuthor);
         viewEditAuthor.setVisible(true);
         viewEditAuthor.setPositionCenter();
         viewEditAuthor.textId.setEnabled(false);
@@ -200,7 +199,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
     // NOT EVENTS
     
     // para trazer os dados de editora para a tabela
-    public static void readTableAuthor() {
+    protected static void readTableAuthor() {
         DefaultTableModel modelo = (DefaultTableModel) tableAuthor.getModel();
         modelo.setNumRows(0);
         AuthorDAO pdao = new AuthorDAO();

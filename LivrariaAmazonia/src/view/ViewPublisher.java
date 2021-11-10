@@ -201,7 +201,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
     // NOT EVENTS
     
     // para trazer os dados de editoras para a tabela
-    public static void readTablePublisher() {
+    protected static void readTablePublisher() {
         DefaultTableModel modelo = (DefaultTableModel) tablePublisher.getModel();
         modelo.setNumRows(0);
         PublisherDAO pdao = new PublisherDAO();

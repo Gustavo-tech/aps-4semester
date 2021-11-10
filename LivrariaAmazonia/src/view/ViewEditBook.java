@@ -7,15 +7,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.bean.*;
 import model.dao.*;
-import static view.ViewLivrariaAmazonia.desktopAmazonia;
 
 public class ViewEditBook extends javax.swing.JInternalFrame {
 
     protected ViewEditBook() {
         initComponents();
         buttonSave.setEnabled(false);
-        getComboAuthor();
-        getComboPublisher();
+        updateComboAuthor();
+        updateComboPublisher();
     }
 
     @SuppressWarnings("unchecked")
@@ -101,9 +100,17 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
             }
         });
 
-        comboBoxAuthor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um autor(a)" }));
+        comboBoxAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxAuthorActionPerformed(evt);
+            }
+        });
 
-        comboBoxPublisher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma editora" }));
+        comboBoxPublisher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxPublisherActionPerformed(evt);
+            }
+        });
 
         buttonAddAuthor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonAddAuthor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-add-book.png"))); // NOI18N
@@ -125,6 +132,11 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         labelSequence.setText("Seq. n°:");
 
         textSequence.setToolTipText("");
+        textSequence.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textSequenceKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
@@ -255,35 +267,25 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         verifyText();
     }//GEN-LAST:event_textIsbnKeyReleased
 
-    // adiciona um novo livro no banco de dados
+    // edita um livro no banco de dados
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
-//        String title = textTitle.getText();
-//        String isbn = textIsbn.getText();
-//        Integer publisherId = PublisherDAO.getPublisherId((String) comboBoxPublisher.getModel().getSelectedItem());
-//        Double price = setToDouble(textPrice.getText());
-//        
-//        Book book = new Book(title, isbn, publisherId, price);
-//        BookDAO.updateBook(book);
-//        
-//        Object[] options = { "Sim", "Não" };
-//        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
-//        int option = JOptionPane.showOptionDialog(null, "Autor(a) adicionado.\nGostaria de adicionar mais?", "Adicionar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
-//        
-//        if (option == 1) {
-//            closeWindow();
-//        } else if (option == 0) {
-//            textTitle.setText("");
-//            textIsbn.setText("");
-//            textPrice.setText("");
-//            comboBoxAuthor.setSelectedItem(0);
-//            comboBoxPublisher.setSelectedItem(0);
-//        }
+        String title = textTitle.getText();
+        String isbn = textIsbn.getText();
+        Integer publisherId = PublisherDAO.getPublisherId((String) comboBoxPublisher.getModel().getSelectedItem());
+        Double price = setToDouble(textPrice.getText());
+        
+        Book book = new Book(title, isbn, publisherId, price);
+        BookDAO.updateBook(book);
+        
+        Object[] options = { "Ok" };
+        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+        JOptionPane.showOptionDialog(null, "Livro atualizado!", "Editar livro", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[0]);
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     // chama a janela de adicionar autor
     private void buttonAddAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddAuthorActionPerformed
         ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
-        desktopAmazonia.add(viewAddAuthor);
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddAuthor);
         viewAddAuthor.setVisible(true);
         viewAddAuthor.setPositionCenter();
     }//GEN-LAST:event_buttonAddAuthorActionPerformed
@@ -291,10 +293,22 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
     // chama a janela de adicionar editora
     private void buttonAddPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddPublisherActionPerformed
         ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
-        desktopAmazonia.add(viewAddPublisher);
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddPublisher);
         viewAddPublisher.setVisible(true);
         viewAddPublisher.setPositionCenter();
     }//GEN-LAST:event_buttonAddPublisherActionPerformed
+
+    private void textSequenceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSequenceKeyReleased
+        verifyText();
+    }//GEN-LAST:event_textSequenceKeyReleased
+
+    private void comboBoxAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAuthorActionPerformed
+        verifyText();
+    }//GEN-LAST:event_comboBoxAuthorActionPerformed
+
+    private void comboBoxPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPublisherActionPerformed
+        verifyText();
+    }//GEN-LAST:event_comboBoxPublisherActionPerformed
 
     // NOT EVENTS
     
@@ -308,16 +322,20 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
     }
     
     // coloca os autores no "comboBoxAuthor"
-    private void getComboAuthor() {
+    protected static void updateComboAuthor() {
         AuthorDAO dao = new AuthorDAO();
+        comboBoxAuthor.removeAllItems();
+        comboBoxAuthor.addItem("Selecione um autor(a)");
         for (Author author: dao.getAuthors()) {
             comboBoxAuthor.addItem(author.toString());
         }
     }
     
     // coloca os autores no "comboBoxPublisher"
-    private void getComboPublisher() {
+    protected static void updateComboPublisher() {
         PublisherDAO dao = new PublisherDAO();
+        comboBoxPublisher.removeAllItems();
+        comboBoxPublisher.addItem("Selecione uma editora");
         for (Publisher publisher: dao.getPublishers()) {
             comboBoxPublisher.addItem(publisher.toString());
         }
@@ -346,8 +364,10 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         String textI = textIsbn.getText();
         String textPr = textPrice.getText();
         String textS = textSequence.getText();
+        int comboA = comboBoxAuthor.getSelectedIndex();
+        int comboP = comboBoxPublisher.getSelectedIndex();
         
-        if (textT.isBlank() || textI.isBlank() || textPr.isBlank() || textS.isBlank()) {
+        if (textT.isBlank() || textI.isBlank() || textPr.isBlank() || textS.isBlank() || comboA == 0 || comboP == 0) {
             buttonSave.setEnabled(false);
         } else {
             buttonSave.setEnabled(true);
@@ -359,8 +379,8 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonAddPublisher;
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonSave;
-    protected javax.swing.JComboBox<Object> comboBoxAuthor;
-    protected javax.swing.JComboBox<Object> comboBoxPublisher;
+    protected static javax.swing.JComboBox<Object> comboBoxAuthor;
+    protected static javax.swing.JComboBox<Object> comboBoxPublisher;
     private javax.swing.JLabel labelAuthor;
     private javax.swing.JLabel labelEdit;
     private javax.swing.JLabel labelIsbn;

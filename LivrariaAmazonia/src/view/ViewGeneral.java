@@ -15,15 +15,15 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         initComponents();
         
         buttonClean.setEnabled(false);
-        buttonRemove.setEnabled(false);
+        buttonDelete.setEnabled(false);
         buttonSearch.setEnabled(false);
+        buttonEdit.setEnabled(false);
         buttonGroupType.add(radioAuthor);
         buttonGroupType.add(radioBook);
-        buttonGroupType.add(radioGeneral);
         buttonGroupType.add(radioPublisher);
         buttonGroupType.add(radioIsbn);
         radioAuthor.setFocusPainted(false);
-        radioGeneral.doClick();
+        radioBook.doClick();
         readTableGeneral();
     }
 
@@ -33,14 +33,13 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
 
         buttonGroupType = new javax.swing.ButtonGroup();
         panelLivraria = new javax.swing.JPanel();
-        radioGeneral = new javax.swing.JRadioButton();
         radioBook = new javax.swing.JRadioButton();
         radioAuthor = new javax.swing.JRadioButton();
         radioPublisher = new javax.swing.JRadioButton();
         radioIsbn = new javax.swing.JRadioButton();
         buttonSearch = new javax.swing.JButton();
         buttonAdd = new javax.swing.JButton();
-        buttonRemove = new javax.swing.JButton();
+        buttonDelete = new javax.swing.JButton();
         buttonEdit = new javax.swing.JButton();
         buttonClean = new javax.swing.JButton();
         buttonClose = new javax.swing.JButton();
@@ -50,8 +49,6 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         labelSearch = new javax.swing.JLabel();
 
         panelLivraria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        radioGeneral.setText("Geral");
 
         radioBook.setText("Livro");
 
@@ -78,10 +75,9 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonRemove.setText("Remover");
-        buttonRemove.setMaximumSize(null);
-        buttonRemove.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonRemove.setPreferredSize(new java.awt.Dimension(134, 22));
+        buttonDelete.setText("Excluir");
+        buttonDelete.setMinimumSize(new java.awt.Dimension(134, 22));
+        buttonDelete.setPreferredSize(new java.awt.Dimension(134, 22));
 
         buttonEdit.setText("Editar");
         buttonEdit.setToolTipText("");
@@ -118,6 +114,11 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         ));
         tableGeneral.setColumnSelectionAllowed(true);
         tableGeneral.getTableHeader().setReorderingAllowed(false);
+        tableGeneral.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableGeneralMouseClicked(evt);
+            }
+        });
         paneBooklist.setViewportView(tableGeneral);
 
         textSearch.setToolTipText("");
@@ -135,8 +136,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLivrariaLayout.createSequentialGroup()
-                        .addComponent(radioGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(radioBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,7 +155,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLivrariaLayout.createSequentialGroup()
                                 .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,7 +170,6 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(radioGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(radioAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(radioPublisher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(radioIsbn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -183,14 +182,14 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        panelLivrariaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonAdd, buttonClean, buttonClose, buttonEdit, buttonRemove});
+        panelLivrariaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonAdd, buttonClean, buttonClose, buttonDelete, buttonEdit});
 
         labelSearch.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         labelSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -273,10 +272,13 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
 
         } else if (radioPublisher.isFocusOwner()) {
 
-        } else if (radioGeneral.isFocusOwner()) {
-
         }
     }//GEN-LAST:event_buttonSearchActionPerformed
+
+    private void tableGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableGeneralMouseClicked
+        buttonEdit.setEnabled(true);
+        buttonDelete.setEnabled(true);
+    }//GEN-LAST:event_tableGeneralMouseClicked
 
     // NOT EVENTS
     
@@ -306,16 +308,15 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonClean;
     private javax.swing.JButton buttonClose;
+    private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
     private javax.swing.ButtonGroup buttonGroupType;
-    private javax.swing.JButton buttonRemove;
     private javax.swing.JButton buttonSearch;
     private javax.swing.JLabel labelSearch;
     private javax.swing.JScrollPane paneBooklist;
     private javax.swing.JPanel panelLivraria;
     private javax.swing.JRadioButton radioAuthor;
     private javax.swing.JRadioButton radioBook;
-    private javax.swing.JRadioButton radioGeneral;
     private javax.swing.JRadioButton radioIsbn;
     private javax.swing.JRadioButton radioPublisher;
     private javax.swing.JTable tableGeneral;

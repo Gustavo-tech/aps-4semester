@@ -16,8 +16,8 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     protected ViewAddBook() {
         initComponents();
         buttonAdd.setEnabled(false);
-        getComboAuthor();
-        getComboPublisher();
+        updateComboAuthor();
+        updateComboPublisher();
     }
 
     @SuppressWarnings("unchecked")
@@ -104,9 +104,17 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             }
         });
 
-        comboBoxAuthor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um autor(a)" }));
+        comboBoxAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxAuthorActionPerformed(evt);
+            }
+        });
 
-        comboBoxPublisher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma editora" }));
+        comboBoxPublisher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxPublisherActionPerformed(evt);
+            }
+        });
 
         buttonAddAuthor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonAddAuthor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-add-book.png"))); // NOI18N
@@ -128,6 +136,11 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         labelSequence.setText("Seq. n°:");
 
         textSequence.setToolTipText("");
+        textSequence.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textSequenceKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
@@ -317,6 +330,18 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         viewAddPublisher.setPositionCenter();
     }//GEN-LAST:event_buttonAddPublisherActionPerformed
 
+    private void textSequenceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSequenceKeyReleased
+        verifyText();
+    }//GEN-LAST:event_textSequenceKeyReleased
+
+    private void comboBoxAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAuthorActionPerformed
+        verifyText();
+    }//GEN-LAST:event_comboBoxAuthorActionPerformed
+
+    private void comboBoxPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPublisherActionPerformed
+        verifyText();
+    }//GEN-LAST:event_comboBoxPublisherActionPerformed
+
     // NOT EVENTS
     
     // fecha a janela atual
@@ -329,16 +354,20 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     }
     
     // coloca os autores no "comboBoxAuthor"
-    private void getComboAuthor() {
+    protected static void updateComboAuthor() {
         AuthorDAO dao = new AuthorDAO();
+        comboBoxAuthor.removeAllItems();
+        comboBoxAuthor.addItem("Selecione um autor(a)");
         for (Author author: dao.getAuthors()) {
             comboBoxAuthor.addItem(author.toString());
         }
     }
     
     // coloca os autores no "comboBoxPublisher"
-    private void getComboPublisher() {
+    protected static void updateComboPublisher() {
         PublisherDAO dao = new PublisherDAO();
+        comboBoxPublisher.removeAllItems();
+        comboBoxPublisher.addItem("Selecione uma editora");
         for (Publisher publisher: dao.getPublishers()) {
             comboBoxPublisher.addItem(publisher.toString());
         }
@@ -372,8 +401,11 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         String textT = textTitle.getText();
         String textI = textIsbn.getText();
         String textPr = textPrice.getText();
+        String textS = textSequence.getText();
+        int comboA = comboBoxAuthor.getSelectedIndex();
+        int comboP = comboBoxPublisher.getSelectedIndex();
         
-        if (textT.isBlank() || textI.isBlank() || textPr.isBlank()) {
+        if (textT.isBlank() || textI.isBlank() || textPr.isBlank() || textS.isBlank() || comboA == 0 || comboP == 0) {
             buttonAdd.setEnabled(false);
         } else {
             buttonAdd.setEnabled(true);
@@ -385,8 +417,8 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonAddAuthor;
     private javax.swing.JButton buttonAddPublisher;
     private javax.swing.JButton buttonCancel;
-    private javax.swing.JComboBox<Object> comboBoxAuthor;
-    private javax.swing.JComboBox<Object> comboBoxPublisher;
+    protected static javax.swing.JComboBox<Object> comboBoxAuthor;
+    protected static javax.swing.JComboBox<Object> comboBoxPublisher;
     private javax.swing.JLabel labelAdd;
     private javax.swing.JLabel labelAuthor;
     private javax.swing.JLabel labelIsbn;

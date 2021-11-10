@@ -21,7 +21,7 @@ public class ViewModelsDAO {
         List<SearchViewModel> searchViewModels = new ArrayList<SearchViewModel>();
         
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "select price, title, a.name as author, " +
+            String query = "select price, title, CONCAT (a.name,\" \",a.fname) as author, " +
                 "p.name as publisher, b.isbn from books b\n" +
                 "inner join publishers p on p.publisher_id = b.publisher_id\n" +
                 "inner join booksauthors ba on ba.isbn = b.isbn\n" +
