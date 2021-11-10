@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.ViewModelsDAO;
 import model.view.SearchViewModel;
@@ -19,11 +20,11 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         buttonSearch.setEnabled(false);
         buttonEdit.setEnabled(false);
         buttonGroupType.add(radioAuthor);
-        buttonGroupType.add(radioBook);
+        buttonGroupType.add(radioTitle);
         buttonGroupType.add(radioPublisher);
         buttonGroupType.add(radioIsbn);
         radioAuthor.setFocusPainted(false);
-        radioBook.doClick();
+        radioTitle.doClick();
         readTableGeneral();
     }
 
@@ -33,7 +34,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
 
         buttonGroupType = new javax.swing.ButtonGroup();
         panelLivraria = new javax.swing.JPanel();
-        radioBook = new javax.swing.JRadioButton();
+        radioTitle = new javax.swing.JRadioButton();
         radioAuthor = new javax.swing.JRadioButton();
         radioPublisher = new javax.swing.JRadioButton();
         radioIsbn = new javax.swing.JRadioButton();
@@ -50,7 +51,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
 
         panelLivraria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        radioBook.setText("Livro");
+        radioTitle.setText("Título");
 
         radioAuthor.setText("Autor");
 
@@ -93,6 +94,11 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         buttonClean.setToolTipText("");
         buttonClean.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonClean.setPreferredSize(new java.awt.Dimension(134, 22));
+        buttonClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCleanActionPerformed(evt);
+            }
+        });
 
         buttonClose.setText("Fechar");
         buttonClose.setToolTipText("");
@@ -136,8 +142,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLivrariaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(radioBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(radioTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -169,7 +174,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
             .addGroup(panelLivrariaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(radioAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(radioPublisher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(radioIsbn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -264,21 +269,31 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
     private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
         String search = textSearch.getText();
 
-        if (radioAuthor.isFocusOwner()) {
-
-        } else if (radioBook.isFocusOwner()) {
-
-        } else if (radioIsbn.isFocusOwner()) {
-
-        } else if (radioPublisher.isFocusOwner()) {
-
+        if (radioTitle.isSelected()) {
+            readTableTitle(search);
+        } else if (radioAuthor.isSelected()) {
+            readTableAuthor(search);
+        } else if (radioPublisher.isSelected()) {
+            readTablePublisher(search);
+        } else if (radioIsbn.isSelected()) {
+            readTableIsbn(search);
         }
+        
+        buttonClean.setEnabled(true);
     }//GEN-LAST:event_buttonSearchActionPerformed
 
+    // quando é clicado em algum item da tabela, ativa o botão "Editar" e "Excluir"
     private void tableGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableGeneralMouseClicked
         buttonEdit.setEnabled(true);
         buttonDelete.setEnabled(true);
     }//GEN-LAST:event_tableGeneralMouseClicked
+
+    private void buttonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanActionPerformed
+        readTableGeneral();
+        buttonClean.setEnabled(false);
+        buttonSearch.setEnabled(false);
+        textSearch.setText("");
+    }//GEN-LAST:event_buttonCleanActionPerformed
 
     // NOT EVENTS
     
@@ -288,6 +303,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
     }
     
+    // exibe todos os livros cadastrados na tabela
     public void readTableGeneral() {
         DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
         modelo.setNumRows(0);
@@ -303,6 +319,90 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                 });
         }
     }
+    
+    // exibe os livros da busca por título na tabela
+    public void readTableTitle(String title) {
+        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
+        modelo.setNumRows(0);
+        ViewModelsDAO vmdao = new ViewModelsDAO();
+        
+        for (SearchViewModel search: vmdao.getSearchByTitle(title)) {
+                modelo.addRow(new Object[] {
+                    search.getPrice(),
+                    search.getTitle(),
+                    search.getAuthor(),
+                    search.getPublisher(),
+                    search.getIsbn()
+                });
+        }
+        
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showInternalMessageDialog(null, "Livro não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+        }
+    }
+    
+    // exibe os livros da busca por autor na tabela
+    public void readTableAuthor(String author) {
+        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
+        modelo.setNumRows(0);
+        ViewModelsDAO vmdao = new ViewModelsDAO();
+        
+        for (SearchViewModel search: vmdao.getSearchByAuthor(author)) {
+                modelo.addRow(new Object[] {
+                    search.getPrice(),
+                    search.getTitle(),
+                    search.getAuthor(),
+                    search.getPublisher(),
+                    search.getIsbn()
+                });
+        }
+        
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showInternalMessageDialog(null, "Autor(a) não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+        }
+    }
+    
+    // exibe os livros da busca por editora na tabela
+    public void readTablePublisher(String publisher) {
+        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
+        modelo.setNumRows(0);
+        ViewModelsDAO vmdao = new ViewModelsDAO();
+        
+        for (SearchViewModel search: vmdao.getSearchByPublisher(publisher)) {
+                modelo.addRow(new Object[] {
+                    search.getPrice(),
+                    search.getTitle(),
+                    search.getAuthor(),
+                    search.getPublisher(),
+                    search.getIsbn()
+                });
+        }
+        
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showInternalMessageDialog(null, "Editora não encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE );
+        }
+    }
+    
+    // exibe os livros da busca por isbn na tabela
+    public void readTableIsbn(String isbn) {
+        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
+        modelo.setNumRows(0);
+        ViewModelsDAO vmdao = new ViewModelsDAO();
+        
+        for (SearchViewModel search: vmdao.getSearchByIsbn(isbn)) {
+                modelo.addRow(new Object[] {
+                    search.getPrice(),
+                    search.getTitle(),
+                    search.getAuthor(),
+                    search.getPublisher(),
+                    search.getIsbn()
+                });
+        }
+        
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showInternalMessageDialog(null, "ISBN não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
@@ -316,9 +416,9 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane paneBooklist;
     private javax.swing.JPanel panelLivraria;
     private javax.swing.JRadioButton radioAuthor;
-    private javax.swing.JRadioButton radioBook;
     private javax.swing.JRadioButton radioIsbn;
     private javax.swing.JRadioButton radioPublisher;
+    private javax.swing.JRadioButton radioTitle;
     private javax.swing.JTable tableGeneral;
     private javax.swing.JTextField textSearch;
     // End of variables declaration//GEN-END:variables

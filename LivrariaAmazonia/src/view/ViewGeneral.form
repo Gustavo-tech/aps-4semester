@@ -62,8 +62,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="radioBook" max="32767" attributes="0"/>
+                          <Component id="radioTitle" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="radioAuthor" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -103,7 +102,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="radioBook" alignment="3" max="32767" attributes="0"/>
+                      <Component id="radioTitle" alignment="3" max="32767" attributes="0"/>
                       <Component id="radioAuthor" alignment="3" max="32767" attributes="0"/>
                       <Component id="radioPublisher" alignment="3" max="32767" attributes="0"/>
                       <Component id="radioIsbn" alignment="3" max="32767" attributes="0"/>
@@ -129,9 +128,9 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="radioBook">
+        <Component class="javax.swing.JRadioButton" name="radioTitle">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Livro"/>
+            <Property name="text" type="java.lang.String" value="T&#xed;tulo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radioAuthor">
@@ -211,6 +210,9 @@
               <Dimension value="[134, 22]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCleanActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonClose">
           <Properties>
