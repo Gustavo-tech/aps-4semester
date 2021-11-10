@@ -1,7 +1,6 @@
 package model.dao;
 
 import connection.DatabaseConstants;
-import model.bean.Author;
 import model.bean.BookAuthor;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class BookAuthorDAO {
     private static final String URL = DatabaseConstants.URL;
@@ -55,6 +53,23 @@ public class BookAuthorDAO {
             Integer seqNo = rs.getInt("seq_no");
             
             return new BookAuthor(isbn, authorId, seqNo);
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static Integer getSeq(String isbn) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT seq_no FROM booksauthors WHERE isbn= ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, isbn);
+            ResultSet rs = pstm.executeQuery();
+            
+            rs.next();
+            Integer id = rs.getInt("seq_no");
+            
+            return id;
         } catch(SQLException e) {
             e.printStackTrace();
             return null;

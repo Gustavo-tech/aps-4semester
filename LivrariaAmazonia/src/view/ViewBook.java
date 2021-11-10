@@ -3,8 +3,9 @@ package view;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import javax.swing.table.DefaultTableModel;
-import model.bean.Book;
-import model.dao.BookDAO;
+import model.bean.*;
+import model.dao.*;
+import static model.dao.AuthorDAO.getAuthorId;
 import static view.ViewLivrariaAmazonia.desktopAmazonia;
 
 public class ViewBook extends javax.swing.JInternalFrame {
@@ -35,7 +36,6 @@ public class ViewBook extends javax.swing.JInternalFrame {
 
         panelEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tableBook.setAutoCreateRowSorter(true);
         tableBook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -44,6 +44,8 @@ public class ViewBook extends javax.swing.JInternalFrame {
                 "Preço", "Título", "Editora", "ISBN"
             }
         ));
+        tableBook.setCellSelectionEnabled(true);
+        tableBook.setRowSorter(null);
         tableBook.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableBookMouseClicked(evt);
@@ -63,6 +65,11 @@ public class ViewBook extends javax.swing.JInternalFrame {
         buttonEdit.setText("Editar");
         buttonEdit.setMinimumSize(new java.awt.Dimension(134, 22));
         buttonEdit.setPreferredSize(new java.awt.Dimension(134, 22));
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
 
         buttonDelete.setText("Excluir");
         buttonDelete.setMinimumSize(new java.awt.Dimension(134, 22));
@@ -140,6 +147,8 @@ public class ViewBook extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // EVENTS 
+    
     // quando um item da tabela é selecionado, ativa os botões "buttonEdit" e "buttonDelete"
     private void tableBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBookMouseClicked
         buttonEdit.setEnabled(true);
@@ -163,17 +172,44 @@ public class ViewBook extends javax.swing.JInternalFrame {
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         Book book = new Book();
         BookDAO bookDAO = new BookDAO();
-
+        
         book.setIsbn((String) tableBook.getValueAt(tableBook.getSelectedRow(), 3));
         bookDAO.deleteBook(book);
+        buttonEdit.setEnabled(false);
+        buttonDelete.setEnabled(false);
         readTableBook();
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    
+    // quando é clicado em "Editar" abre a janela interna de edição já com os dados do livro selecionado
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        ViewEditBook ViewEditBook = new ViewEditBook();
+        desktopAmazonia.add(ViewEditBook);
+        ViewEditBook.setVisible(true);
+        ViewEditBook.setPositionCenter();
+                
+        Double price = ((double) tableBook.getValueAt(tableBook.getSelectedRow(), 0));
+        ViewEditBook.textPrice.setText(price.toString());
+        
+        String title = ((String) tableBook.getValueAt(tableBook.getSelectedRow(), 1));
+        ViewEditBook.textTitle.setText(title);
+        
+        String isbn = ((String) tableBook.getValueAt(tableBook.getSelectedRow(), 3));
+        ViewEditBook.textIsbn.setText(isbn);
+                  
+        Integer sequence = BookAuthorDAO.getSeq(isbn);
+        ViewEditBook.textSequence.setText(sequence.toString());
+        
+        String author = AuthorDAO.getAuthorName(isbn);
+        ViewEditBook.comboBoxAuthor.setSelectedItem(author);
+        
+        String publisher = PublisherDAO.getPublisherName(((Integer) tableBook.getValueAt(tableBook.getSelectedRow(), 2)));
+        ViewEditBook.comboBoxPublisher.setSelectedItem(publisher);
+    }//GEN-LAST:event_buttonEditActionPerformed
+
     // NOT EVENTS
     
     // para trazer os dados de livros para a tabela
-    public void readTableBook() {
+    public static void readTableBook() {
         DefaultTableModel modelo = (DefaultTableModel) tableBook.getModel();
         modelo.setNumRows(0);
         BookDAO pdao = new BookDAO();
@@ -211,6 +247,6 @@ public class ViewBook extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEdit;
     private javax.swing.JPanel panelEdit;
-    private javax.swing.JTable tableBook;
+    private static javax.swing.JTable tableBook;
     // End of variables declaration//GEN-END:variables
 }

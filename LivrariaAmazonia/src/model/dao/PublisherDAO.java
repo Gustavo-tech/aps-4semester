@@ -87,6 +87,44 @@ public class PublisherDAO {
         return publishers;
     }
     
+    public static Integer getPublisherId(String name) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT publisher_id FROM publishers WHERE name= ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, name);
+            ResultSet rs = pstm.executeQuery();
+            
+            rs.next();
+            Integer id = rs.getInt("publisher_id");
+            
+            return id;
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static String getPublisherName(Integer id) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT name FROM publishers " +
+                           "INNER JOIN books " +
+                           "ON books.publisher_id = publishers.publisher_id " +
+                           "WHERE publishers.publisher_id = ? " +
+                           "LIMIT 1";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            
+            rs.next();
+            String name = rs.getString("name");
+            
+            return name;
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     // Adiciona uma editora nova ao banco
     public static void addPublisher(Publisher publisher) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {

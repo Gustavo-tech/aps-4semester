@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 public class AuthorDAO {
     private static final String URL = DatabaseConstants.URL;
     private static final String USER = DatabaseConstants.USER;
@@ -77,6 +75,46 @@ public class AuthorDAO {
             String fname = rs.getString("fname");
             
             return new Author(id, name, fname);
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    // Obtem o id do autor de acordo com o nome e sobrenome
+    public static Integer getAuthorId(String name, String fname) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT author_id FROM authors WHERE name= ? AND fname= ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, name);
+            pstm.setString(2, fname);
+            ResultSet rs = pstm.executeQuery();
+            
+            rs.next();
+            Integer id = rs.getInt("author_id");
+            
+            return id;
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    // Obtem o nome de um autor do banco com determinado isbn
+    public static String getAuthorName(String isbn) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT CONCAT (name,\" \",fname) FROM authors \n" +
+                           "INNER JOIN booksauthors\n" +
+                           "ON booksauthors.author_id = authors.author_id\n" +
+                           "WHERE isbn= ? ;";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, isbn);
+            ResultSet rs = pstm.executeQuery();
+            
+            rs.next();
+            String name = rs.getString("CONCAT (name,\" \",fname)");
+            
+            return name;
         } catch(SQLException e) {
             e.printStackTrace();
             return null;

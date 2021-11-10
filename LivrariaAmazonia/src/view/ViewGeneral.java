@@ -2,10 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import model.bean.Publisher;
-import model.dao.PublisherDAO;
 import model.dao.ViewModelsDAO;
 import model.view.SearchViewModel;
 
@@ -27,7 +24,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         buttonGroupType.add(radioIsbn);
         radioAuthor.setFocusPainted(false);
         radioGeneral.doClick();
-        readTableSearch();
+        readTableGeneral();
     }
 
     @SuppressWarnings("unchecked")
@@ -48,7 +45,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         buttonClean = new javax.swing.JButton();
         buttonClose = new javax.swing.JButton();
         paneBooklist = new javax.swing.JScrollPane();
-        tableBooklist = new javax.swing.JTable();
+        tableGeneral = new javax.swing.JTable();
         textSearch = new javax.swing.JTextField();
         labelSearch = new javax.swing.JLabel();
 
@@ -111,7 +108,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
             }
         });
 
-        tableBooklist.setModel(new javax.swing.table.DefaultTableModel(
+        tableGeneral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -119,9 +116,9 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                 "Preço", "Livro", "Autor", "Editora", "ISBN"
             }
         ));
-        tableBooklist.setColumnSelectionAllowed(true);
-        tableBooklist.getTableHeader().setReorderingAllowed(false);
-        paneBooklist.setViewportView(tableBooklist);
+        tableGeneral.setColumnSelectionAllowed(true);
+        tableGeneral.getTableHeader().setReorderingAllowed(false);
+        paneBooklist.setViewportView(tableGeneral);
 
         textSearch.setToolTipText("");
         textSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -289,18 +286,18 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
     }
     
-    public void readTableSearch() {
-        DefaultTableModel modelo = (DefaultTableModel) tableBooklist.getModel();
+    public void readTableGeneral() {
+        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
         modelo.setNumRows(0);
-        List<SearchViewModel> vmds = ViewModelsDAO.getSearchViewModels();
+        ViewModelsDAO vmdao = new ViewModelsDAO();
         
-        for (SearchViewModel vm: vmds) {
+        for (SearchViewModel search: vmdao.getSearchViewModels()) {
                 modelo.addRow(new Object[] {
-                    vm.getPrice(),
-                    vm.getTitle(),
-                    vm.getAuthor(),
-                    vm.getPublisher(),
-                    vm.getIsbn()
+                    search.getPrice(),
+                    search.getTitle(),
+                    search.getAuthor(),
+                    search.getPublisher(),
+                    search.getIsbn()
                 });
         }
     }
@@ -321,7 +318,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radioGeneral;
     private javax.swing.JRadioButton radioIsbn;
     private javax.swing.JRadioButton radioPublisher;
-    private javax.swing.JTable tableBooklist;
+    private javax.swing.JTable tableGeneral;
     private javax.swing.JTextField textSearch;
     // End of variables declaration//GEN-END:variables
 

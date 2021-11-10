@@ -2,20 +2,18 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.bean.*;
 import model.dao.*;
-import static model.dao.AuthorDAO.getAuthorId;
 import static view.ViewLivrariaAmazonia.desktopAmazonia;
 
-public class ViewAddBook extends javax.swing.JInternalFrame {
+public class ViewEditBook extends javax.swing.JInternalFrame {
 
-    protected ViewAddBook() {
+    protected ViewEditBook() {
         initComponents();
-        buttonAdd.setEnabled(false);
+        buttonSave.setEnabled(false);
         getComboAuthor();
         getComboPublisher();
     }
@@ -24,9 +22,9 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelAdd = new javax.swing.JLabel();
+        labelEdit = new javax.swing.JLabel();
         panelAdd = new javax.swing.JPanel();
-        buttonAdd = new javax.swing.JButton();
+        buttonSave = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
         labelTitle = new javax.swing.JLabel();
         labelAuthor = new javax.swing.JLabel();
@@ -43,19 +41,18 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         labelSequence = new javax.swing.JLabel();
         textSequence = new javax.swing.JTextField();
 
-        labelAdd.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelAdd.setText("Adicionar livro");
+        labelEdit.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        labelEdit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelEdit.setText("Editar livro");
 
         panelAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        buttonAdd.setText("Adicionar");
-        buttonAdd.setMaximumSize(null);
-        buttonAdd.setMinimumSize(new java.awt.Dimension(134, 22));
-        buttonAdd.setPreferredSize(new java.awt.Dimension(134, 22));
-        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+        buttonSave.setText("Salvar");
+        buttonSave.setMinimumSize(new java.awt.Dimension(134, 22));
+        buttonSave.setPreferredSize(new java.awt.Dimension(134, 22));
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddActionPerformed(evt);
+                buttonSaveActionPerformed(evt);
             }
         });
 
@@ -134,49 +131,46 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         panelAddLayout.setHorizontalGroup(
             panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAddLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAddLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(labelTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAddLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelSequence)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textSequence, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelAddLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelAddLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAddLayout.createSequentialGroup()
+                            .addGroup(panelAddLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
                                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelAddLayout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(labelAuthor))
-                                    .addComponent(labelPublisher))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(labelTitle, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelAuthor, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(labelPublisher))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelAddLayout.createSequentialGroup()
                                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(comboBoxAuthor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(comboBoxPublisher, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(buttonAddAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(buttonAddPublisher)))
-                            .addGroup(panelAddLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(labelIsbn)
-                                    .addComponent(labelPrice))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textIsbn)
-                                    .addComponent(textPrice))))))
+                                    .addComponent(buttonAddPublisher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelAddLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelIsbn)
+                            .addComponent(labelPrice))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textIsbn)
+                            .addComponent(textPrice)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAddLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(labelSequence)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textSequence, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelAddLayout.setVerticalGroup(
@@ -200,7 +194,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
                     .addComponent(labelPublisher)
                     .addComponent(comboBoxPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonAddPublisher))
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textIsbn)
                     .addComponent(labelIsbn))
@@ -208,9 +202,9 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textPrice)
                     .addComponent(labelPrice))
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -222,7 +216,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -230,7 +224,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -261,47 +255,32 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         verifyText();
     }//GEN-LAST:event_textIsbnKeyReleased
 
-    // adiciona um novo livro e autor de livro no banco de dados
-    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        // pegando titulo, isbn, sequencia, preço e id(editora)
-        String title = textTitle.getText();
-        String isbn = textIsbn.getText();
-        Integer seqNo = Integer.parseInt(textSequence.getText());
-        Double price = setToDouble(textPrice.getText());
-        Integer publisherId = PublisherDAO.getPublisherId((String) comboBoxPublisher.getModel().getSelectedItem());
-        
-        // pegando o id do autor, a partir do nome e sobrenome
-        String name = splitAuthor((String) comboBoxAuthor.getModel().getSelectedItem(), 0);
-        String fname = splitAuthor((String) comboBoxAuthor.getModel().getSelectedItem(), 1);
-        Integer authorId = getAuthorId(name, fname);
+    // adiciona um novo livro no banco de dados
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+//        String title = textTitle.getText();
+//        String isbn = textIsbn.getText();
+//        Integer publisherId = PublisherDAO.getPublisherId((String) comboBoxPublisher.getModel().getSelectedItem());
+//        Double price = setToDouble(textPrice.getText());
+//        
+//        Book book = new Book(title, isbn, publisherId, price);
+//        BookDAO.updateBook(book);
+//        
+//        Object[] options = { "Sim", "Não" };
+//        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+//        int option = JOptionPane.showOptionDialog(null, "Autor(a) adicionado.\nGostaria de adicionar mais?", "Adicionar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
+//        
+//        if (option == 1) {
+//            closeWindow();
+//        } else if (option == 0) {
+//            textTitle.setText("");
+//            textIsbn.setText("");
+//            textPrice.setText("");
+//            comboBoxAuthor.setSelectedItem(0);
+//            comboBoxPublisher.setSelectedItem(0);
+//        }
+    }//GEN-LAST:event_buttonSaveActionPerformed
 
-        // adicionando o livro e o autor do livro
-        Book book = new Book(title, isbn, publisherId, price);
-        BookDAO.addBook(book);
-        BookAuthor bookAuthor = new BookAuthor(isbn, authorId, seqNo);
-        BookAuthorDAO.addBookAuthor(bookAuthor);
-        
-        // atualizando a tabela da tela de livros
-        ViewBook.readTableBook();
-        
-        // chamando a janela de opções para saber se o usuário quer adicionar mais livros
-        Object[] options = { "Sim", "Não" };
-        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
-        int option = JOptionPane.showOptionDialog(null, "Livro adicionado.\nGostaria de adicionar mais?", "Adicionar livro", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
-        
-        if (option == 1) {
-            closeWindow();
-        } else if (option == 0) {
-            textTitle.setText("");
-            textIsbn.setText("");
-            textPrice.setText("");
-            textSequence.setText("");
-            comboBoxAuthor.setSelectedItem(0);
-            comboBoxPublisher.setSelectedItem(0);
-        }
-    }//GEN-LAST:event_buttonAddActionPerformed
-
-    // chama a janela interna para adicionar um novo autor
+    // chama a janela de adicionar autor
     private void buttonAddAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddAuthorActionPerformed
         ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
         desktopAmazonia.add(viewAddAuthor);
@@ -309,7 +288,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         viewAddAuthor.setPositionCenter();
     }//GEN-LAST:event_buttonAddAuthorActionPerformed
 
-    // chama a janela interna para adicionar uma nova editora
+    // chama a janela de adicionar editora
     private void buttonAddPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddPublisherActionPerformed
         ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
         desktopAmazonia.add(viewAddPublisher);
@@ -353,12 +332,6 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         return valueDouble;
     }
     
-    // separa a string de nome+sobrenome do autor
-    private String splitAuthor(String toSplit, Integer position) {
-        String [] splitted = toSplit.split(" ");
-        return splitted[position];
-    }
-    
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
         Dimension d = this.getDesktopPane().getSize();
@@ -372,32 +345,33 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         String textT = textTitle.getText();
         String textI = textIsbn.getText();
         String textPr = textPrice.getText();
+        String textS = textSequence.getText();
         
-        if (textT.isBlank() || textI.isBlank() || textPr.isBlank()) {
-            buttonAdd.setEnabled(false);
+        if (textT.isBlank() || textI.isBlank() || textPr.isBlank() || textS.isBlank()) {
+            buttonSave.setEnabled(false);
         } else {
-            buttonAdd.setEnabled(true);
+            buttonSave.setEnabled(true);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAddAuthor;
     private javax.swing.JButton buttonAddPublisher;
     private javax.swing.JButton buttonCancel;
-    private javax.swing.JComboBox<Object> comboBoxAuthor;
-    private javax.swing.JComboBox<Object> comboBoxPublisher;
-    private javax.swing.JLabel labelAdd;
+    private javax.swing.JButton buttonSave;
+    protected javax.swing.JComboBox<Object> comboBoxAuthor;
+    protected javax.swing.JComboBox<Object> comboBoxPublisher;
     private javax.swing.JLabel labelAuthor;
+    private javax.swing.JLabel labelEdit;
     private javax.swing.JLabel labelIsbn;
     private javax.swing.JLabel labelPrice;
     private javax.swing.JLabel labelPublisher;
     private javax.swing.JLabel labelSequence;
     private javax.swing.JLabel labelTitle;
     private javax.swing.JPanel panelAdd;
-    private javax.swing.JTextField textIsbn;
-    private javax.swing.JTextField textPrice;
-    private javax.swing.JTextField textSequence;
-    private javax.swing.JTextField textTitle;
+    protected javax.swing.JTextField textIsbn;
+    protected javax.swing.JTextField textPrice;
+    protected javax.swing.JTextField textSequence;
+    protected javax.swing.JTextField textTitle;
     // End of variables declaration//GEN-END:variables
 }
