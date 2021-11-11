@@ -135,13 +135,11 @@ public class BookDAO {
     // Atualiza um livro
     public static void updateBook(Book book) {
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "UPDATE books SET title = ?, isbn = ?, publisher_id = ?, "
-                    + "price = ?";
+            String query = "UPDATE books SET title = ?, price = ? WHERE isbn = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, book.getTitle());
-            pstm.setString(2, book.getIsbn());
-            pstm.setInt(3, book.getPublisherId());
-            pstm.setDouble(4, book.getPrice());
+            pstm.setDouble(2, book.getPrice());
+            pstm.setString(3, book.getIsbn());
             pstm.executeUpdate();
             con.close();
         } catch(SQLException e) {
