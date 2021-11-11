@@ -40,6 +40,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         labelSequence = new javax.swing.JLabel();
         textSequence = new javax.swing.JTextField();
 
+        setClosable(true);
         setTitle("Adicionar Livro");
 
         panelAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -78,33 +79,35 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         labelIsbn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelIsbn.setText("ISBN:");
 
-        textTitle.setToolTipText("");
+        textTitle.setToolTipText("Digite o título do livro");
         textTitle.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textTitleKeyReleased(evt);
             }
         });
 
-        textPrice.setToolTipText("");
+        textPrice.setToolTipText("Digite o valor do livro. Exemplo: 32,99");
         textPrice.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textPriceKeyReleased(evt);
             }
         });
 
-        textIsbn.setToolTipText("");
+        textIsbn.setToolTipText("Digite o ISBN do livro (ATENÇÃO: para editar posteriormente, deverá excluir o livro)");
         textIsbn.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textIsbnKeyReleased(evt);
             }
         });
 
+        comboBoxAuthor.setToolTipText("Selecione o autor(a)");
         comboBoxAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxAuthorActionPerformed(evt);
             }
         });
 
+        comboBoxPublisher.setToolTipText("Selecione a editora");
         comboBoxPublisher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxPublisherActionPerformed(evt);
@@ -130,7 +133,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         labelSequence.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelSequence.setText("Seq. n°:");
 
-        textSequence.setToolTipText("");
+        textSequence.setToolTipText("Digite a sequência do livro, caso não seja de uma coleção, digite 1");
         textSequence.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textSequenceKeyReleased(evt);
@@ -237,7 +240,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

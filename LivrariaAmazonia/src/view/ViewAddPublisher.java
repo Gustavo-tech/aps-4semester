@@ -28,6 +28,7 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
         textName = new javax.swing.JTextField();
         textURL = new javax.swing.JTextField();
 
+        setClosable(true);
         setTitle("Adicionar Editora");
 
         panelAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -57,14 +58,14 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
         labelURL.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelURL.setText("URL:");
 
-        textName.setToolTipText("");
+        textName.setToolTipText("Digite o nome da editora");
         textName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textNameKeyReleased(evt);
             }
         });
 
-        textURL.setToolTipText("");
+        textURL.setToolTipText("Digite a URL(website) da editora");
         textURL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textURLKeyReleased(evt);
@@ -125,7 +126,7 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

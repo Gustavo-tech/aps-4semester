@@ -30,6 +30,7 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
         labelId = new javax.swing.JLabel();
         textId = new javax.swing.JTextField();
 
+        setClosable(true);
         setTitle("Editar Autor");
         setMinimumSize(new java.awt.Dimension(421, 192));
 
@@ -59,14 +60,14 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
         labelLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelLastName.setText("Sobrenome:");
 
-        textName.setToolTipText("");
+        textName.setToolTipText("Digite o nome do autor");
         textName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textNameKeyReleased(evt);
             }
         });
 
-        textLastName.setToolTipText("");
+        textLastName.setToolTipText("Digite o último nome do autor");
         textLastName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textLastNameKeyReleased(evt);
@@ -76,7 +77,7 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
         labelId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelId.setText("ID:");
 
-        textId.setToolTipText("");
+        textId.setToolTipText("ID do autor (não editável)");
 
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
@@ -138,7 +139,7 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();

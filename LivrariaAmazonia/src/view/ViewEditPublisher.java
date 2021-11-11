@@ -30,6 +30,7 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
         labelId = new javax.swing.JLabel();
         textId = new javax.swing.JTextField();
 
+        setClosable(true);
         setTitle("Editar Editora");
         setMinimumSize(new java.awt.Dimension(421, 192));
 
@@ -59,14 +60,14 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
         labelUrl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelUrl.setText("URL:");
 
-        textName.setToolTipText("");
+        textName.setToolTipText("Digite o nome da editora");
         textName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textNameKeyReleased(evt);
             }
         });
 
-        textUrl.setToolTipText("");
+        textUrl.setToolTipText("Digite a URL (website) da editora");
         textUrl.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textUrlKeyReleased(evt);
@@ -76,7 +77,7 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
         labelId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelId.setText("ID:");
 
-        textId.setToolTipText("");
+        textId.setToolTipText("ID da editora (não editável)");
 
         javax.swing.GroupLayout panelAddLayout = new javax.swing.GroupLayout(panelAdd);
         panelAdd.setLayout(panelAddLayout);
@@ -138,7 +139,7 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();

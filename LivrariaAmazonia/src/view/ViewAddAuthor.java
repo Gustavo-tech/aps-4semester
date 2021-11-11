@@ -28,6 +28,7 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
         textName = new javax.swing.JTextField();
         textLastName = new javax.swing.JTextField();
 
+        setClosable(true);
         setTitle("Adicionar Autor");
         setMinimumSize(new java.awt.Dimension(421, 192));
 
@@ -58,14 +59,14 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
         labelLastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelLastName.setText("Sobrenome:");
 
-        textName.setToolTipText("");
+        textName.setToolTipText("Digite o nome do autor");
         textName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textNameKeyReleased(evt);
             }
         });
 
-        textLastName.setToolTipText("");
+        textLastName.setToolTipText("Digite o último nome do autor");
         textLastName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textLastNameKeyReleased(evt);
@@ -126,7 +127,7 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

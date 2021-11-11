@@ -10,7 +10,9 @@
 06/11 - 5h entendendo e aplicando jtables
 08/11 - 6h criando telas de edição 
 09/11 - 5h finalizando tela de livro
-TOTAL SOLO ATÉ AGORA: 34h
+10/11 - 6h ligando tela de busca geral com banco de dados
+11/11 - 6h corrigindo bugs
+TOTAL SOLO ATÉ AGORA: 46h
 
 
 
