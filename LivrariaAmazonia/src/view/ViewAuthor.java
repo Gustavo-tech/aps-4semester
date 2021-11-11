@@ -19,7 +19,6 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelEdit = new javax.swing.JLabel();
         panelEdit = new javax.swing.JPanel();
         buttonAdd = new javax.swing.JButton();
         buttonFechar = new javax.swing.JButton();
@@ -28,9 +27,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         buttonDelete = new javax.swing.JButton();
         buttonEdit = new javax.swing.JButton();
 
-        labelEdit.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        labelEdit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelEdit.setText("Autores");
+        setTitle("Autores");
 
         panelEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -130,21 +127,15 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(panelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(58, 58, 58))
         );
 
         pack();
@@ -213,7 +204,6 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
     protected static javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonFechar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelEdit;
     private javax.swing.JPanel panelEdit;
     public static javax.swing.JTable tableAuthor;
     // End of variables declaration//GEN-END:variables

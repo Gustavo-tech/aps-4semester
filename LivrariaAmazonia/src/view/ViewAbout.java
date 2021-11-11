@@ -16,6 +16,8 @@ public class ViewAbout extends javax.swing.JInternalFrame {
         labelAbout = new javax.swing.JLabel();
         buttonClose = new javax.swing.JButton();
 
+        setTitle("Sobre");
+
         labelAbout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelAbout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelAbout.setText("Livraria Amazônia:");
@@ -46,7 +48,7 @@ public class ViewAbout extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelAbout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
                 .addComponent(buttonClose)
                 .addContainerGap())
         );

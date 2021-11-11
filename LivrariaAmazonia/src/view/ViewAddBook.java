@@ -22,7 +22,6 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelAdd = new javax.swing.JLabel();
         panelAdd = new javax.swing.JPanel();
         buttonAdd = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
@@ -41,9 +40,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         labelSequence = new javax.swing.JLabel();
         textSequence = new javax.swing.JTextField();
 
-        labelAdd.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelAdd.setText("Adicionar livro");
+        setTitle("Adicionar Livro");
 
         panelAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -232,19 +229,15 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -378,7 +371,6 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonCancel;
     public static javax.swing.JComboBox<Object> comboBoxAuthor;
     public static javax.swing.JComboBox<Object> comboBoxPublisher;
-    private javax.swing.JLabel labelAdd;
     private javax.swing.JLabel labelAuthor;
     private javax.swing.JLabel labelIsbn;
     private javax.swing.JLabel labelPrice;

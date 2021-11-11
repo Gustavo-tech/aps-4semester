@@ -20,7 +20,6 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelAdd = new javax.swing.JLabel();
         panelAdd = new javax.swing.JPanel();
         buttonAdd = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
@@ -29,11 +28,8 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
         textName = new javax.swing.JTextField();
         textLastName = new javax.swing.JTextField();
 
+        setTitle("Adicionar Autor");
         setMinimumSize(new java.awt.Dimension(421, 192));
-
-        labelAdd.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelAdd.setText("Adicionar autor");
 
         panelAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -122,19 +118,15 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-                    .addComponent(panelAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,7 +206,6 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonCancel;
-    private javax.swing.JLabel labelAdd;
     private javax.swing.JLabel labelLastName;
     private javax.swing.JLabel labelName;
     private javax.swing.JPanel panelAdd;

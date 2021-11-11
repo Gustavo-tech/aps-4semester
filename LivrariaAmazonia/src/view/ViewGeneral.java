@@ -34,7 +34,8 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         paneBooklist = new javax.swing.JScrollPane();
         tableGeneral = new javax.swing.JTable();
         textSearch = new javax.swing.JTextField();
-        labelSearch = new javax.swing.JLabel();
+
+        setTitle("Busca Geral");
 
         panelLivraria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -148,29 +149,21 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
 
         panelLivrariaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonClean, buttonClose});
 
-        labelSearch.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        labelSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelSearch.setText("Geral");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelLivraria, javax.swing.GroupLayout.PREFERRED_SIZE, 639, Short.MAX_VALUE)
-                    .addComponent(labelSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelLivraria, javax.swing.GroupLayout.PREFERRED_SIZE, 639, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addComponent(labelSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(panelLivraria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,7 +228,6 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonClose;
     private javax.swing.ButtonGroup buttonGroupType;
     private javax.swing.JButton buttonSearch;
-    private javax.swing.JLabel labelSearch;
     private javax.swing.JScrollPane paneBooklist;
     private javax.swing.JPanel panelLivraria;
     private javax.swing.JRadioButton radioAuthor;
