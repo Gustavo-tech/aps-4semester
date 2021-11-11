@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerView;
 import model.dao.AuthorDAO;
 import model.bean.Author;
 import java.awt.Dimension;
@@ -13,7 +14,6 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
     public ViewEditAuthor() {
         initComponents();
         buttonSave.setEnabled(false);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -152,8 +152,6 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // EVENTS
-    
     // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         closeWindow();
@@ -182,13 +180,11 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
         Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
         JOptionPane.showOptionDialog(null, "Autor(a) atualizado!", "Editar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[0]);
         closeWindow();
-        ViewAuthor.readTableAuthor();
+        ControllerView.readTableAuthor();
         ViewAuthor.buttonEdit.setEnabled(false);
         ViewAuthor.buttonDelete.setEnabled(false);
     }//GEN-LAST:event_buttonSaveActionPerformed
 
-    // NOT EVENTS
-    
     // fecha a janela atual
     private void closeWindow() {
         try {

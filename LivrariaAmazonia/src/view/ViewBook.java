@@ -1,8 +1,8 @@
 package view;
 
+import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import javax.swing.table.DefaultTableModel;
 import model.bean.*;
 import model.dao.*;
 
@@ -12,7 +12,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
         initComponents();
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
-        readTableBook();
+        ControllerView.readTableBook();
     }
 
     @SuppressWarnings("unchecked")
@@ -148,8 +148,6 @@ public class ViewBook extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // EVENTS 
-    
     // quando um item da tabela é selecionado, ativa os botões "buttonEdit" e "buttonDelete"
     private void tableBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBookMouseClicked
         buttonEdit.setEnabled(true);
@@ -158,7 +156,11 @@ public class ViewBook extends javax.swing.JInternalFrame {
     
     // quando é clicado em "Cancelar", fecha a janela interna "Livros"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        closeWindow();
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            System.err.println("Closing Exception");
+        }
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     // quando é clicado em "Adicionar" chama a view "ViewAddBook"
@@ -178,7 +180,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
         bookDAO.deleteBook(book);
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
-        readTableBook();
+        ControllerView.readTableBook();
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     // quando é clicado em "Editar" abre a janela interna de edição já com os dados do livro selecionado
@@ -207,37 +209,10 @@ public class ViewBook extends javax.swing.JInternalFrame {
         ViewEditBook.comboBoxPublisher.setSelectedItem(publisher);
     }//GEN-LAST:event_buttonEditActionPerformed
 
-    // NOT EVENTS
-    
-    // para trazer os dados de livros para a tabela
-    public static void readTableBook() {
-        DefaultTableModel modelo = (DefaultTableModel) tableBook.getModel();
-        modelo.setNumRows(0);
-        BookDAO pdao = new BookDAO();
-        
-        for (Book book: pdao.getBooks()) {
-                modelo.addRow(new Object[] {
-                    book.getPrice(),
-                    book.getTitle(),
-                    book.getPublisherId(),
-                    book.getIsbn()
-                });
-        }
-    }
-    
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
-    }
-    
-    // fecha a janela atual
-    private void closeWindow() {
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            System.err.println("Closing Exception");
-        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -248,6 +223,6 @@ public class ViewBook extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEdit;
     private javax.swing.JPanel panelEdit;
-    protected static javax.swing.JTable tableBook;
+    public static javax.swing.JTable tableBook;
     // End of variables declaration//GEN-END:variables
 }

@@ -126,13 +126,13 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        menuLivraria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-search.png"))); // NOI18N
-        menuLivraria.setText("Buscar");
+        menuLivraria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-open-book.png"))); // NOI18N
+        menuLivraria.setText("Livraria");
         menuLivraria.setFocusable(false);
         menuLivraria.setRequestFocusEnabled(false);
 
         menuLivrariaGeneral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-search.png"))); // NOI18N
-        menuLivrariaGeneral.setText("Geral");
+        menuLivrariaGeneral.setText("Buscar");
         menuLivrariaGeneral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLivrariaGeneralActionPerformed(evt);
@@ -222,27 +222,31 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
         viewAbout.setPositionCenter();
     }//GEN-LAST:event_menuAjudaSobreActionPerformed
     
+    // abre a janela interna "Livros"
     private void menuLivrariaBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLivrariaBookActionPerformed
-        ViewBook viewEditBook = new ViewBook();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditBook);
-        viewEditBook.setVisible(true);
-        viewEditBook.setPositionCenter();
+        ViewBook viewBook = new ViewBook();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewBook);
+        viewBook.setVisible(true);
+        viewBook.setPositionCenter();
     }//GEN-LAST:event_menuLivrariaBookActionPerformed
 
+    // abre a janela interna "Autores" 
     private void menuLivrariaAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLivrariaAuthorActionPerformed
-        ViewAuthor viewEditAuthor = new ViewAuthor();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditAuthor);
-        viewEditAuthor.setVisible(true);
-        viewEditAuthor.setPositionCenter();
+        ViewAuthor viewAuthor = new ViewAuthor();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAuthor);
+        viewAuthor.setVisible(true);
+        viewAuthor.setPositionCenter();
     }//GEN-LAST:event_menuLivrariaAuthorActionPerformed
 
+    // abre a janela interna "Editoras" 
     private void menuLivrariaPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLivrariaPublisherActionPerformed
-        ViewPublisher viewEditPublisher = new ViewPublisher();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditPublisher);
-        viewEditPublisher.setVisible(true);
-        viewEditPublisher.setPositionCenter();
+        ViewPublisher viewPublisher = new ViewPublisher();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewPublisher);
+        viewPublisher.setVisible(true);
+        viewPublisher.setPositionCenter();
     }//GEN-LAST:event_menuLivrariaPublisherActionPerformed
 
+    // abre a janela interna "Buscar" 
     private void menuLivrariaGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLivrariaGeneralActionPerformed
         ViewGeneral viewSearch = new ViewGeneral();
         desktopAmazonia.add(viewSearch);
@@ -250,27 +254,31 @@ public class ViewLivrariaAmazonia extends javax.swing.JFrame {
         viewSearch.setPositionCenter();
     }//GEN-LAST:event_menuLivrariaGeneralActionPerformed
 
+    // abre a janela interna "Livros" pelo botão
     private void buttonBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBooksActionPerformed
-        ViewBook viewEditBook = new ViewBook();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditBook);
-        viewEditBook.setVisible(true);
-        viewEditBook.setPositionCenter();
+        ViewBook viewBook = new ViewBook();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewBook);
+        viewBook.setVisible(true);
+        viewBook.setPositionCenter();
     }//GEN-LAST:event_buttonBooksActionPerformed
 
+    // abre a janela interna "Autores" pelo botão
     private void buttonAuthorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAuthorsActionPerformed
-        ViewAuthor viewEditAuthor = new ViewAuthor();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditAuthor);
-        viewEditAuthor.setVisible(true);
-        viewEditAuthor.setPositionCenter();
+        ViewAuthor viewAuthor = new ViewAuthor();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewAuthor);
+        viewAuthor.setVisible(true);
+        viewAuthor.setPositionCenter();
     }//GEN-LAST:event_buttonAuthorsActionPerformed
 
+    // abre a janela interna "Editoras" pelo botão
     private void buttonPublishersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPublishersActionPerformed
-        ViewPublisher viewEditPublisher = new ViewPublisher();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditPublisher);
-        viewEditPublisher.setVisible(true);
-        viewEditPublisher.setPositionCenter();
+        ViewPublisher viewPublisher = new ViewPublisher();
+        ViewLivrariaAmazonia.desktopAmazonia.add(viewPublisher);
+        viewPublisher.setVisible(true);
+        viewPublisher.setPositionCenter();
     }//GEN-LAST:event_buttonPublishersActionPerformed
 
+    // abre a janela interna "Buscar" pelo botão
     private void buttonGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGeneralActionPerformed
         ViewGeneral viewSearch = new ViewGeneral();
         desktopAmazonia.add(viewSearch);

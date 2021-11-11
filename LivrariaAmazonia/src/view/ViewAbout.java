@@ -54,6 +54,7 @@ public class ViewAbout extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // fecha a janela atual
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         try {
             this.setClosed(true);
@@ -62,6 +63,7 @@ public class ViewAbout extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonCloseActionPerformed
 
+    // coloca a janela atual na posição central do programa
     public void setPositionCenter() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 

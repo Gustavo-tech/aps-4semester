@@ -1,9 +1,8 @@
 package view;
 
+import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import javax.swing.table.DefaultTableModel;
-import model.bean.Author;
 import model.dao.AuthorDAO;
 import view.ViewAddAuthor;
 
@@ -13,7 +12,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         initComponents();
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
-        readTableAuthor();
+        ControllerView.readTableAuthor();
     }
 
     @SuppressWarnings("unchecked")
@@ -151,11 +150,13 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // EVENTS
-    
     // quando é clicado em "Cancelar", fecha a janela interna "Autores"
     private void buttonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFecharActionPerformed
-        closeWindow();
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            System.err.println("Closing Exception");
+        }
     }//GEN-LAST:event_buttonFecharActionPerformed
 
     // quando um item da tabela é selecionado, ativa os botões "buttonEdit" e "buttonDelete"
@@ -178,10 +179,10 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         AuthorDAO.deleteAuthor(id);
         buttonDelete.setEnabled(false);
         buttonEdit.setEnabled(false);
-        readTableAuthor();
+        ControllerView.readTableAuthor();
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    /* quando é clicado em "editar" chama a internalFrame "viewEditAuthor" já com as 
+    /* quando é clicado em "editar" chama a internalFrame "viewAuthor" já com as 
        informações do autor selecionado */
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         ViewEditAuthor viewEditAuthor = new ViewEditAuthor();
@@ -200,36 +201,10 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         viewEditAuthor.textId.setText(id.toString());
     }//GEN-LAST:event_buttonEditActionPerformed
 
-    // NOT EVENTS
-    
-    // para trazer os dados de editora para a tabela
-    protected static void readTableAuthor() {
-        DefaultTableModel modelo = (DefaultTableModel) tableAuthor.getModel();
-        modelo.setNumRows(0);
-        AuthorDAO pdao = new AuthorDAO();
-        
-        for (Author author: pdao.getAuthors()) {
-                modelo.addRow(new Object[] {
-                    author.getId(),
-                    author.getName(),
-                    author.getFName()
-                });
-        }
-    }
-    
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
-    }
-    
-    // fecha a janela atual
-    private void closeWindow() {
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            System.err.println("Closing Exception");
-        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,6 +215,6 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEdit;
     private javax.swing.JPanel panelEdit;
-    protected static javax.swing.JTable tableAuthor;
+    public static javax.swing.JTable tableAuthor;
     // End of variables declaration//GEN-END:variables
 }

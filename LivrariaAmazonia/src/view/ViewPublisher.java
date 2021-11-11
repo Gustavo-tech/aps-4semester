@@ -1,8 +1,8 @@
 package view;
 
+import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import javax.swing.table.DefaultTableModel;
 import model.bean.Publisher;
 import model.dao.PublisherDAO;
 
@@ -12,7 +12,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
         initComponents();
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
-        readTablePublisher();
+        ControllerView.readTablePublisher();
     }
 
     @SuppressWarnings("unchecked")
@@ -156,7 +156,11 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
 
     // quando é clicado em "Cancelar", fecha a janela interna "Editoras"
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
-        closeWindow();
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            System.err.println("Closing Exception");
+        }
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     // quando é clicado em "Adicionar" chama a view "ViewAddPublisher"
@@ -174,12 +178,12 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
 
         publisher.setId((int) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 0));
         publisherDAO.deletePublisher(publisher);
-        readTablePublisher();
+        ControllerView.readTablePublisher();
         buttonDelete.setEnabled(false);
         buttonEdit.setEnabled(false);
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    /* quando é clicado em "editar" chama a internalFrame "viewEditPublisher" já com as 
+    /* quando é clicado em "editar" chama a internalFrame "viewPublisher" já com as 
        informações da editora selecionada */
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         ViewEditPublisher viewEditPublisher = new ViewEditPublisher();
@@ -199,37 +203,10 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
         viewEditPublisher.textId.setText(id.toString());
     }//GEN-LAST:event_buttonEditActionPerformed
 
-    
-    // NOT EVENTS
-    
-    // para trazer os dados de editoras para a tabela
-    protected static void readTablePublisher() {
-        DefaultTableModel modelo = (DefaultTableModel) tablePublisher.getModel();
-        modelo.setNumRows(0);
-        PublisherDAO pdao = new PublisherDAO();
-        
-        for (Publisher publisher: pdao.getPublishers()) {
-                modelo.addRow(new Object[] {
-                    publisher.getId(),
-                    publisher.getName(),
-                    publisher.getUrl()
-                });
-        }
-    }
-    
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
-    }
-
-    // fecha a janela atual
-    private void closeWindow() {
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            System.err.println("Closing Exception");
-        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,6 +217,6 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEdit;
     private javax.swing.JPanel panelEdit;
-    protected static javax.swing.JTable tablePublisher;
+    public static javax.swing.JTable tablePublisher;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerView;
 import model.dao.AuthorDAO;
 import model.bean.Author;
 import java.awt.Dimension;
@@ -139,8 +140,6 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // EVENTS
-    
     // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         closeWindow();
@@ -165,7 +164,7 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
         AuthorDAO.addAuthor(author);
         
         try {
-            ViewAuthor.readTableAuthor();
+            ControllerView.readTableAuthor();
             ViewAuthor.buttonEdit.setEnabled(false);
             ViewAuthor.buttonDelete.setEnabled(false);
             ViewAddBook.comboBoxAuthor.addItem(author.toString());
@@ -183,8 +182,6 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonAddActionPerformed
 
-    // NOT EVENTS
-    
     // fecha a janela atual
     private void closeWindow() {
         try {

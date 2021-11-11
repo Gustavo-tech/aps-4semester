@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerView;
 import model.bean.Publisher;
 import model.dao.PublisherDAO;
 import java.awt.Dimension;
@@ -162,7 +163,7 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
         PublisherDAO.addPublisher(publisher);
         
         try {
-            ViewPublisher.readTablePublisher();
+            ControllerView.readTablePublisher();
             ViewPublisher.buttonDelete.setEnabled(false);
             ViewPublisher.buttonEdit.setEnabled(false);
         } catch (NullPointerException ignored) {}

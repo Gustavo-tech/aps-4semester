@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import javax.swing.Icon;
@@ -13,8 +14,8 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
     protected ViewEditBook() {
         initComponents();
         buttonSave.setEnabled(false);
-        updateComboAuthor();
-        updateComboPublisher();
+        ControllerView.updateEditComboAuthor();
+        ControllerView.updateEditComboPublisher();
     }
 
     @SuppressWarnings("unchecked")
@@ -245,11 +246,13 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // EVENTS
-    
     // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        closeWindow();
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            System.err.println("Closing Exception");
+        }
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     // quando uma tecla é solta no "textTitle", chama o método verifyText() 
@@ -272,7 +275,7 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         String title = textTitle.getText();
         String isbn = textIsbn.getText();
         Integer publisherId = PublisherDAO.getPublisherId((String) comboBoxPublisher.getModel().getSelectedItem());
-        Double price = setToDouble(textPrice.getText());
+        Double price = ControllerView.setToDouble(textPrice.getText());
         
         Book book = new Book(title, isbn, publisherId, price);
         BookDAO.updateBook(book);
@@ -298,58 +301,21 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         viewAddPublisher.setPositionCenter();
     }//GEN-LAST:event_buttonAddPublisherActionPerformed
 
+    // quando uma tecla é solta no "Seq. N", chama o método verifyText()
     private void textSequenceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSequenceKeyReleased
         verifyText();
     }//GEN-LAST:event_textSequenceKeyReleased
 
+    // quando é clicado em "Autor(a)", chama o método verifyText()
     private void comboBoxAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAuthorActionPerformed
         verifyText();
     }//GEN-LAST:event_comboBoxAuthorActionPerformed
 
+    // quando é clicado em "Editora", chama o método verifyText()
     private void comboBoxPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPublisherActionPerformed
         verifyText();
     }//GEN-LAST:event_comboBoxPublisherActionPerformed
 
-    // NOT EVENTS
-    
-    // fecha a janela atual
-    private void closeWindow() {
-        try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            System.err.println("Closing Exception");
-        }
-    }
-    
-    // coloca os autores no "comboBoxAuthor"
-    protected static void updateComboAuthor() {
-        AuthorDAO dao = new AuthorDAO();
-        comboBoxAuthor.removeAllItems();
-        comboBoxAuthor.addItem("Selecione um autor(a)");
-        for (Author author: dao.getAuthors()) {
-            comboBoxAuthor.addItem(author.toString());
-        }
-    }
-    
-    // coloca os autores no "comboBoxPublisher"
-    protected static void updateComboPublisher() {
-        PublisherDAO dao = new PublisherDAO();
-        comboBoxPublisher.removeAllItems();
-        comboBoxPublisher.addItem("Selecione uma editora");
-        for (Publisher publisher: dao.getPublishers()) {
-            comboBoxPublisher.addItem(publisher.toString());
-        }
-    }
-    
-    // tira vírgula do double e ajusta para o bd
-    private Double setToDouble(String value) {
-        value = value.replace(".","");
-        value = value.replace(',', '.');
-        Double valueDouble = Double.parseDouble(value);
-        
-        return valueDouble;
-    }
-    
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
         Dimension d = this.getDesktopPane().getSize();
@@ -379,8 +345,8 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonAddPublisher;
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonSave;
-    protected static javax.swing.JComboBox<Object> comboBoxAuthor;
-    protected static javax.swing.JComboBox<Object> comboBoxPublisher;
+    public static javax.swing.JComboBox<Object> comboBoxAuthor;
+    public static javax.swing.JComboBox<Object> comboBoxPublisher;
     private javax.swing.JLabel labelAuthor;
     private javax.swing.JLabel labelEdit;
     private javax.swing.JLabel labelIsbn;

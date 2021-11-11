@@ -1,20 +1,13 @@
 package view;
 
+import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import model.dao.ViewModelsDAO;
-import model.view.SearchViewModel;
 
 public class ViewGeneral extends javax.swing.JInternalFrame {
 
-    boolean haveText = false;
-    
-    
     protected ViewGeneral() {
         initComponents();
-        
         buttonClean.setEnabled(false);
         buttonSearch.setEnabled(false);
         buttonGroupType.add(radioAuthor);
@@ -183,8 +176,6 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // EVENTS
-    
     /* quando uma tecla é solta dentro do campo de busca
        verifica se existe texto no campo de busca
        caso sim: habilita o botão "Pesquisar"
@@ -213,139 +204,34 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         String search = textSearch.getText();
 
         if (radioTitle.isSelected()) {
-            readTableTitle(search);
+            ControllerView.readTableTitle(search);
         } else if (radioAuthor.isSelected()) {
-            readTableAuthor(search);
+            ControllerView.readTableAuthor(search);
         } else if (radioPublisher.isSelected()) {
-            readTablePublisher(search);
+            ControllerView.readTablePublisher(search);
         } else if (radioIsbn.isSelected()) {
-            readTableIsbn(search);
+            ControllerView.readTableIsbn(search);
         }
         
         buttonClean.setEnabled(true);
     }//GEN-LAST:event_buttonSearchActionPerformed
 
+    // limpa a busca
     private void buttonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanActionPerformed
         buttonClean.setEnabled(false);
         buttonSearch.setEnabled(false);
+        tableGeneral.removeAll();
         textSearch.setText("");
     }//GEN-LAST:event_buttonCleanActionPerformed
 
-    // NOT EVENTS
-    
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
     }
-    
-    // exibe todos os livros cadastrados na tabela
-    public void readTableGeneral() {
-        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
-        modelo.setNumRows(0);
-        ViewModelsDAO vmdao = new ViewModelsDAO();
-        
-        for (SearchViewModel search: vmdao.getSearchViewModels()) {
-                modelo.addRow(new Object[] {
-                    search.getPrice(),
-                    search.getTitle(),
-                    search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
-                });
-        }
-    }
-    
-    // exibe os livros da busca por título na tabela
-    public void readTableTitle(String title) {
-        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
-        modelo.setNumRows(0);
-        ViewModelsDAO vmdao = new ViewModelsDAO();
-        
-        for (SearchViewModel search: vmdao.getSearchByTitle(title)) {
-                modelo.addRow(new Object[] {
-                    search.getPrice(),
-                    search.getTitle(),
-                    search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
-                });
-        }
-        
-        if (modelo.getRowCount() == 0) {
-            JOptionPane.showInternalMessageDialog(null, "Livro não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
-            buttonClean.setEnabled(false);
-        }
-    }
-    
-    // exibe os livros da busca por autor na tabela
-    public void readTableAuthor(String author) {
-        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
-        modelo.setNumRows(0);
-        ViewModelsDAO vmdao = new ViewModelsDAO();
-        
-        for (SearchViewModel search: vmdao.getSearchByAuthor(author)) {
-                modelo.addRow(new Object[] {
-                    search.getPrice(),
-                    search.getTitle(),
-                    search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
-                });
-        }
-        
-        if (modelo.getRowCount() == 0) {
-            JOptionPane.showInternalMessageDialog(null, "Autor(a) não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
-            buttonClean.setEnabled(false);
-        }
-    }
-    
-    // exibe os livros da busca por editora na tabela
-    public void readTablePublisher(String publisher) {
-        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
-        modelo.setNumRows(0);
-        ViewModelsDAO vmdao = new ViewModelsDAO();
-        
-        for (SearchViewModel search: vmdao.getSearchByPublisher(publisher)) {
-                modelo.addRow(new Object[] {
-                    search.getPrice(),
-                    search.getTitle(),
-                    search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
-                });
-        }
-        
-        if (modelo.getRowCount() == 0) {
-            JOptionPane.showInternalMessageDialog(null, "Editora não encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE );
-            buttonClean.setEnabled(false);
-        }
-    }
-    
-    // exibe os livros da busca por isbn na tabela
-    public void readTableIsbn(String isbn) {
-        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
-        modelo.setNumRows(0);
-        ViewModelsDAO vmdao = new ViewModelsDAO();
-        
-        for (SearchViewModel search: vmdao.getSearchByIsbn(isbn)) {
-                modelo.addRow(new Object[] {
-                    search.getPrice(),
-                    search.getTitle(),
-                    search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
-                });
-        }
-        
-        if (modelo.getRowCount() == 0) {
-            JOptionPane.showInternalMessageDialog(null, "ISBN não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
-            buttonClean.setEnabled(false);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonClean;
+    public static javax.swing.JButton buttonClean;
     private javax.swing.JButton buttonClose;
     private javax.swing.ButtonGroup buttonGroupType;
     private javax.swing.JButton buttonSearch;
@@ -356,7 +242,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radioIsbn;
     private javax.swing.JRadioButton radioPublisher;
     private javax.swing.JRadioButton radioTitle;
-    private javax.swing.JTable tableGeneral;
+    public static javax.swing.JTable tableGeneral;
     private javax.swing.JTextField textSearch;
     // End of variables declaration//GEN-END:variables
 
