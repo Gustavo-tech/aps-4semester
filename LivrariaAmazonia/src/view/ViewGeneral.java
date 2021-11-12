@@ -16,6 +16,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         buttonGroupType.add(radioIsbn);
         radioAuthor.setFocusPainted(false);
         radioTitle.doClick();
+        tableGeneral.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     }
 
     @SuppressWarnings("unchecked")
@@ -80,6 +81,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
             }
         });
 
+        tableGeneral.setAutoCreateRowSorter(true);
         tableGeneral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

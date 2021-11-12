@@ -2,7 +2,10 @@ package view;
 
 import controller.ControllerView;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -84,6 +87,9 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textTitleKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textTitleKeyTyped(evt);
+            }
         });
 
         textPrice.setToolTipText("Digite o valor do livro. Exemplo: 32,99");
@@ -91,12 +97,18 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textPriceKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textPriceKeyTyped(evt);
+            }
         });
 
         textIsbn.setToolTipText("Digite o ISBN do livro (ATENÇÃO: para editar posteriormente, deverá excluir o livro)");
         textIsbn.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textIsbnKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textIsbnKeyTyped(evt);
             }
         });
 
@@ -137,6 +149,9 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         textSequence.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textSequenceKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textSequenceKeyTyped(evt);
             }
         });
 
@@ -261,18 +276,17 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         verifyText();
     }//GEN-LAST:event_textPriceKeyReleased
 
-    // quando uma tecla é solta no "textIsbn", chama o método verifyText() 
-    private void textIsbnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textIsbnKeyReleased
-        verifyText();
-    }//GEN-LAST:event_textIsbnKeyReleased
-
     // adiciona um novo livro e autor de livro no banco de dados
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        
         // pegando titulo, isbn, sequencia, preço e id(editora)
         String title = textTitle.getText();
         String isbn = textIsbn.getText();
         Integer seqNo = Integer.parseInt(textSequence.getText());
-        Double price = ControllerView.setToDouble(textPrice.getText());
+        Double price = Double.parseDouble(textPrice.getText());
+        df.format(price);
         Integer publisherId = PublisherDAO.getPublisherId((String) comboBoxPublisher.getModel().getSelectedItem());
         
         // pegando o id do autor, a partir do nome e sobrenome
@@ -322,17 +336,63 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         viewAddPublisher.setPositionCenter();
     }//GEN-LAST:event_buttonAddPublisherActionPerformed
 
+    // quando uma tecla é solta no "Seq. N", chama o método verifyText() 
     private void textSequenceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSequenceKeyReleased
         verifyText();
     }//GEN-LAST:event_textSequenceKeyReleased
 
+    // quando um autor(a) é selecionado, chama o método verifyText() 
     private void comboBoxAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAuthorActionPerformed
         verifyText();
     }//GEN-LAST:event_comboBoxAuthorActionPerformed
 
+    // quando uma editora é selecionado, chama o método verifyText() 
     private void comboBoxPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPublisherActionPerformed
         verifyText();
     }//GEN-LAST:event_comboBoxPublisherActionPerformed
+
+    // limita a quantidade de caracteres em "ISBN" para 13 e proíbe espaço
+    private void textIsbnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textIsbnKeyTyped
+        char c = evt.getKeyChar();
+        if (((textIsbn.getText() + c).length() > 13) || c == KeyEvent.VK_SPACE) {
+            evt.consume();
+        } 
+    }//GEN-LAST:event_textIsbnKeyTyped
+    
+    // quando uma tecla é solta no "ISBN", chama o método verifyText()
+    private void textIsbnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textIsbnKeyReleased
+        verifyText();
+    }//GEN-LAST:event_textIsbnKeyReleased
+    
+    // limita a quantidade de caracteres em "Título" para 60
+    private void textTitleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTitleKeyTyped
+        if ((textTitle.getText() + evt.getKeyChar()).length() > 60) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_textTitleKeyTyped
+
+    // limita a quantidade de caracteres em "Seq No." para 11, proíbe espaço e aceita só números
+    private void textSequenceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSequenceKeyTyped
+        char c = evt.getKeyChar();
+        if (((textSequence.getText() + c).length() > 11) || c == KeyEvent.VK_SPACE || !Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_textSequenceKeyTyped
+
+    // limita a quantidade de caracteres em "Preço" para 11, para 11, proíbe espaço e só aceita números decimais
+    private void textPriceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textPriceKeyTyped
+        char c = evt.getKeyChar();
+        String text = textPrice.getText();
+        if (((text + c).length() > 11) || c == KeyEvent.VK_SPACE || Character.isLetter(c)) {
+            evt.consume();
+        } else {
+            try {
+                Double.parseDouble(text + c);
+            } catch(NumberFormatException e) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_textPriceKeyTyped
 
     // fecha a janela atual
     private void closeWindow() {

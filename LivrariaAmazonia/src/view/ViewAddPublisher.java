@@ -4,6 +4,7 @@ import controller.ControllerView;
 import model.bean.Publisher;
 import model.dao.PublisherDAO;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -26,7 +27,7 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
         labelName = new javax.swing.JLabel();
         labelURL = new javax.swing.JLabel();
         textName = new javax.swing.JTextField();
-        textURL = new javax.swing.JTextField();
+        textUrl = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Adicionar Editora");
@@ -63,12 +64,18 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textNameKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textNameKeyTyped(evt);
+            }
         });
 
-        textURL.setToolTipText("Digite a URL(website) da editora");
-        textURL.addKeyListener(new java.awt.event.KeyAdapter() {
+        textUrl.setToolTipText("Digite a URL(website) da editora");
+        textUrl.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                textURLKeyReleased(evt);
+                textUrlKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textUrlKeyTyped(evt);
             }
         });
 
@@ -91,7 +98,7 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textName)
-                            .addComponent(textURL))))
+                            .addComponent(textUrl))))
                 .addContainerGap())
         );
         panelAddLayout.setVerticalGroup(
@@ -103,7 +110,7 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
                     .addComponent(labelName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textURL)
+                    .addComponent(textUrl)
                     .addComponent(labelURL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(panelAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -132,8 +139,6 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // EVENTS
-    
     // quando é clicado em "Cancelar" , fecha a janela interna "Adicionar livro"
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         closeWindow();
@@ -145,13 +150,14 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_textNameKeyReleased
 
     // quando uma tecla é solta no "textAuthor", chama o método verifyText() 
-    private void textURLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textURLKeyReleased
+    private void textUrlKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textUrlKeyReleased
         verifyText();
-    }//GEN-LAST:event_textURLKeyReleased
+    }//GEN-LAST:event_textUrlKeyReleased
 
+    // quando é clicado, adiciona uma editora no banco de dados
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         String name = textName.getText();
-        String url = textURL.getText();
+        String url = textUrl.getText();
             
         Publisher publisher = new Publisher(name, url);
         PublisherDAO.addPublisher(publisher);
@@ -170,11 +176,24 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
             closeWindow();
         } else if (option == 0) {
             textName.setText("");
-            textURL.setText("");
+            textUrl.setText("");
         }
     }//GEN-LAST:event_buttonAddActionPerformed
 
-    // NOT EVENTS
+    // limita a quantidade de caracteres em "Nome" para 30
+    private void textNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNameKeyTyped
+        if ((textName.getText() + evt.getKeyChar()).length() > 30) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_textNameKeyTyped
+
+    // limita a quantidade de caracteres em "URL" para 80 e proíbe espaço
+    private void textUrlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textUrlKeyTyped
+        char c = evt.getKeyChar();
+        if (((textUrl.getText() + c).length() > 80) || c == KeyEvent.VK_SPACE) {
+            evt.consume();
+        }  
+    }//GEN-LAST:event_textUrlKeyTyped
     
     // fecha a janela atual
     private void closeWindow() {
@@ -196,7 +215,7 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
        caso não: desabilita o botão "Adicionar" */
     private void verifyText() {
         String textN = textName.getText();
-        String textU = textURL.getText();
+        String textU = textUrl.getText();
         
         if (textN.isBlank() || textU.isBlank()) {
             buttonAdd.setEnabled(false);
@@ -212,6 +231,6 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
     private javax.swing.JLabel labelURL;
     private javax.swing.JPanel panelAdd;
     private javax.swing.JTextField textName;
-    private javax.swing.JTextField textURL;
+    private javax.swing.JTextField textUrl;
     // End of variables declaration//GEN-END:variables
 }

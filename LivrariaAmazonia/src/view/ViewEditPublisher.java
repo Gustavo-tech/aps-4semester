@@ -2,6 +2,7 @@ package view;
 
 import controller.ControllerView;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -10,10 +11,10 @@ import model.bean.Publisher;
 import model.dao.PublisherDAO;
 
 public class ViewEditPublisher extends javax.swing.JInternalFrame {
-  
+        
     public ViewEditPublisher() {
         initComponents();
-        buttonSave.setEnabled(false);
+        buttonSave.setEnabled(false); 
     }
 
     @SuppressWarnings("unchecked")
@@ -65,12 +66,19 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textNameKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textNameKeyTyped(evt);
+            }
         });
 
         textUrl.setToolTipText("Digite a URL (website) da editora");
+        textUrl.setName(""); // NOI18N
         textUrl.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textUrlKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textUrlKeyTyped(evt);
             }
         });
 
@@ -177,6 +185,21 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
         ViewPublisher.buttonEdit.setEnabled(false);
         ViewPublisher.buttonDelete.setEnabled(false);
     }//GEN-LAST:event_buttonSaveActionPerformed
+
+    // limita a quantidade de caracteres em "Nome" para 30
+    private void textNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNameKeyTyped
+        if ((textName.getText() + evt.getKeyChar()).length() > 30) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_textNameKeyTyped
+
+    // limita a quantidade de caracteres em "URL" para 80 e proíbe espaço
+    private void textUrlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textUrlKeyTyped
+        char c = evt.getKeyChar();
+        if (((textUrl.getText() + c).length() > 80) || c == KeyEvent.VK_SPACE) {
+            evt.consume();
+        }  
+    }//GEN-LAST:event_textUrlKeyTyped
 
     // fecha a janela atual
     private void closeWindow() {

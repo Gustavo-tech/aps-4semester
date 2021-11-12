@@ -180,15 +180,6 @@ public class ControllerView {
         }
     }
     
-    // tira vírgula do double e ajusta para o bd
-    public static Double setToDouble(String value) {
-        value = value.replace(".","");
-        value = value.replace(',', '.');
-        Double valueDouble = Double.parseDouble(value);
-        
-        return valueDouble;
-    }
-    
     // coloca os autores no "comboBoxAuthor" na tela de adição de livro
     public static void updateAddComboAuthor() {
         AuthorDAO dao = new AuthorDAO();

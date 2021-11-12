@@ -13,6 +13,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
         ControllerView.readTableAuthor();
+        tableAuthor.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     }
 
     @SuppressWarnings("unchecked")

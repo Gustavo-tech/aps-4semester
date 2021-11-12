@@ -13,6 +13,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
         ControllerView.readTableBook();
+        tableBook.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +35,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
 
         panelEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        tableBook.setAutoCreateRowSorter(true);
         tableBook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

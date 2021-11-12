@@ -100,6 +100,7 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tableBook">
               <Properties>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;Pre&#xe7;o&quot;, &quot;T&#xed;tulo&quot;, &quot;Editora&quot;, &quot;ISBN&quot;&#xa;    }&#xa;)&#xa;{&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        return false;&#xa;    }&#xa;}&#xa;" type="code"/>
                 </Property>

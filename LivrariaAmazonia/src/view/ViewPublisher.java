@@ -13,6 +13,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
         ControllerView.readTablePublisher();
+        tablePublisher.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     }
 
     @SuppressWarnings("unchecked")
@@ -196,8 +197,8 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
         String name = ((String) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 1));
         viewEditPublisher.textName.setText(name);
         
-        String lastName = ((String) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 2));
-        viewEditPublisher.textUrl.setText(lastName);
+        String url = ((String) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 2));
+        viewEditPublisher.textUrl.setText(url);
         
         Integer id = ((int) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 0));
         viewEditPublisher.textId.setText(id.toString());

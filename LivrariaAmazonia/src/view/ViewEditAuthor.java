@@ -4,6 +4,7 @@ import controller.ControllerView;
 import model.dao.AuthorDAO;
 import model.bean.Author;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -65,12 +66,18 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textNameKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textNameKeyTyped(evt);
+            }
         });
 
         textLastName.setToolTipText("Digite o último nome do autor");
         textLastName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textLastNameKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textLastNameKeyTyped(evt);
             }
         });
 
@@ -177,6 +184,22 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
         ViewAuthor.buttonEdit.setEnabled(false);
         ViewAuthor.buttonDelete.setEnabled(false);
     }//GEN-LAST:event_buttonSaveActionPerformed
+
+    // limita a quantidade de caracteres em "Nome" para 25 e não permite espaço
+    private void textNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNameKeyTyped
+        char c = evt.getKeyChar();
+        if (((textName.getText() + c).length() > 25) || c == KeyEvent.VK_SPACE) {
+            evt.consume();
+        }  
+    }//GEN-LAST:event_textNameKeyTyped
+
+    // limita a quantidade de caracteres em "Sobrenome" para 25 e não permite espaço
+    private void textLastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textLastNameKeyTyped
+        char c = evt.getKeyChar();
+        if (((textLastName.getText() + c).length() > 25) || c == KeyEvent.VK_SPACE) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_textLastNameKeyTyped
 
     // fecha a janela atual
     private void closeWindow() {
