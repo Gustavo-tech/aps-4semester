@@ -3,17 +3,27 @@ package view;
 import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import model.bean.Publisher;
 import model.dao.PublisherDAO;
 
 public class ViewPublisher extends javax.swing.JInternalFrame {
 
+    static boolean addPublisherIsOpen = false;
+    static boolean editPublisherIsOpen = false;
+    
     protected ViewPublisher() {
         initComponents();
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
         ControllerView.readTablePublisher();
         tablePublisher.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                ViewLivrariaAmazonia.publisherIsOpen = false;
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -29,9 +39,11 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
         buttonClose = new javax.swing.JButton();
 
         setClosable(true);
+        setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Editoras");
+        setPreferredSize(new java.awt.Dimension(456, 400));
 
         panelEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -119,7 +131,7 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
         panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(panelEditLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,17 +171,21 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         try {
             this.setClosed(true);
+            ViewLivrariaAmazonia.publisherIsOpen = false;
         } catch (PropertyVetoException ex) {
             System.err.println("Closing Exception");
         }
     }//GEN-LAST:event_buttonCloseActionPerformed
 
-    // quando é clicado em "Adicionar" chama a view "ViewAddPublisher"
+    // quando é clicado em "Adicionar" chama a view "ViewAddPublisher", limitando para 1 janela dessa aberta
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddPublisher);
-        viewAddPublisher.setVisible(true);
-        viewAddPublisher.setPositionCenter();
+        if (!addPublisherIsOpen) {
+            ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
+            ViewLivrariaAmazonia.desktopAmazonia.add(viewAddPublisher);
+            viewAddPublisher.setVisible(true);
+            viewAddPublisher.setPositionCenter();
+            addPublisherIsOpen = true;
+        } 
     }//GEN-LAST:event_buttonAddActionPerformed
 
     // quando é clicado em "Excluir" exclui a editora do banco de dados e atualiza a tabela
@@ -185,23 +201,25 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     /* quando é clicado em "editar" chama a internalFrame "viewPublisher" já com as 
-       informações da editora selecionada */
+       informações da editora selecionada, limitando para 1 janela dessa aberta */
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        ViewEditPublisher viewEditPublisher = new ViewEditPublisher();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditPublisher);
-        viewEditPublisher.setVisible(true);
-        viewEditPublisher.setPositionCenter();
-        
-        viewEditPublisher.textId.setEnabled(false);
-        
-        String name = ((String) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 1));
-        viewEditPublisher.textName.setText(name);
-        
-        String url = ((String) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 2));
-        viewEditPublisher.textUrl.setText(url);
-        
-        Integer id = ((int) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 0));
-        viewEditPublisher.textId.setText(id.toString());
+        if (!editPublisherIsOpen) {
+            ViewEditPublisher viewEditPublisher = new ViewEditPublisher();
+            ViewLivrariaAmazonia.desktopAmazonia.add(viewEditPublisher);
+            viewEditPublisher.setVisible(true);
+            viewEditPublisher.setPositionCenter();
+            viewEditPublisher.textId.setEnabled(false);
+
+            String name = ((String) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 1));
+            viewEditPublisher.textName.setText(name);
+
+            String url = ((String) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 2));
+            viewEditPublisher.textUrl.setText(url);
+
+            Integer id = ((int) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 0));
+            viewEditPublisher.textId.setText(id.toString());
+            editPublisherIsOpen = true;
+        }
     }//GEN-LAST:event_buttonEditActionPerformed
 
     // define a posição da janela interna no centro do programa

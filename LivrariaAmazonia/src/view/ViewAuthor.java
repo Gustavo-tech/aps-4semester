@@ -3,17 +3,27 @@ package view;
 import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import model.dao.AuthorDAO;
 import view.ViewAddAuthor;
 
 public class ViewAuthor extends javax.swing.JInternalFrame {
 
+    static boolean addAuthorIsOpen = false;
+    static boolean editAuthorIsOpen = false;
+    
     protected ViewAuthor() {
         initComponents();
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
         ControllerView.readTableAuthor();
         tableAuthor.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                ViewLivrariaAmazonia.authorIsOpen = false;
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +39,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         buttonEdit = new javax.swing.JButton();
 
         setClosable(true);
+        setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Autores");
@@ -153,6 +164,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
     private void buttonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFecharActionPerformed
         try {
             this.setClosed(true);
+            ViewLivrariaAmazonia.authorIsOpen = false;
         } catch (PropertyVetoException ex) {
             System.err.println("Closing Exception");
         }
@@ -164,12 +176,15 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         buttonDelete.setEnabled(true);
     }//GEN-LAST:event_tableAuthorMouseClicked
 
-    // quando é clicado em "Adicionar" chama a view "ViewAddAuthor"
+    // quando é clicado em "Adicionar" chama a view "ViewAddAuthor", limitando para 1 janela dessa aberta
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddAuthor);
-        viewAddAuthor.setVisible(true);
-        viewAddAuthor.setPositionCenter();
+        if (!addAuthorIsOpen) {
+            ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
+            ViewLivrariaAmazonia.desktopAmazonia.add(viewAddAuthor);
+            viewAddAuthor.setVisible(true);
+            viewAddAuthor.setPositionCenter();
+            addAuthorIsOpen = true;
+        }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     // quando é clicado em "Excluir" exclui o autor do banco de dados e atualiza a tabela
@@ -182,22 +197,25 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     /* quando é clicado em "editar" chama a internalFrame "viewAuthor" já com as 
-       informações do autor selecionado */
+       informações do autor selecionado, limitando para 1 janela dessa aberta */
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        ViewEditAuthor viewEditAuthor = new ViewEditAuthor();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewEditAuthor);
-        viewEditAuthor.setVisible(true);
-        viewEditAuthor.setPositionCenter();
-        viewEditAuthor.textId.setEnabled(false);
-        
-        String name = ((String) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 1));
-        viewEditAuthor.textName.setText(name);
-        
-        String lastName = ((String) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 2));
-        viewEditAuthor.textLastName.setText(lastName);
-        
-        Integer id = ((int) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 0));
-        viewEditAuthor.textId.setText(id.toString());
+        if (!editAuthorIsOpen) {
+            ViewEditAuthor viewEditAuthor = new ViewEditAuthor();
+            ViewLivrariaAmazonia.desktopAmazonia.add(viewEditAuthor);
+            viewEditAuthor.setVisible(true);
+            viewEditAuthor.setPositionCenter();
+            viewEditAuthor.textId.setEnabled(false);
+
+            String name = ((String) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 1));
+            viewEditAuthor.textName.setText(name);
+
+            String lastName = ((String) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 2));
+            viewEditAuthor.textLastName.setText(lastName);
+
+            Integer id = ((int) tableAuthor.getValueAt(tableAuthor.getSelectedRow(), 0));
+            viewEditAuthor.textId.setText(id.toString());
+            editAuthorIsOpen = true;
+        }
     }//GEN-LAST:event_buttonEditActionPerformed
 
     // define a posição da janela interna no centro do programa

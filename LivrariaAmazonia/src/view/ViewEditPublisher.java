@@ -7,6 +7,8 @@ import java.beans.PropertyVetoException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import model.bean.Publisher;
 import model.dao.PublisherDAO;
 
@@ -14,7 +16,12 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
         
     public ViewEditPublisher() {
         initComponents();
-        buttonSave.setEnabled(false); 
+        buttonSave.setEnabled(false);
+        addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                ViewPublisher.editPublisherIsOpen = false;
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -205,6 +212,7 @@ public class ViewEditPublisher extends javax.swing.JInternalFrame {
     private void closeWindow() {
         try {
             this.setClosed(true);
+            ViewPublisher.editPublisherIsOpen = false;
         } catch (PropertyVetoException ex) {
             System.err.println("Closing Exception");
         }

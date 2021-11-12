@@ -9,12 +9,19 @@ import java.beans.PropertyVetoException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class ViewAddAuthor extends javax.swing.JInternalFrame {
 
     public ViewAddAuthor() {
         initComponents();
         buttonAdd.setEnabled(false);
+        addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                ViewAuthor.addAuthorIsOpen = false;
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -202,6 +209,7 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
     private void closeWindow() {
         try {
             this.setClosed(true);
+            ViewAuthor.addAuthorIsOpen = false;
         } catch (PropertyVetoException ex) {
             System.err.println("Closing Exception");
         }

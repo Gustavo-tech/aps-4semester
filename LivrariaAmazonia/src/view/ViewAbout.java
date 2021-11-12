@@ -2,11 +2,18 @@ package view;
 
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class ViewAbout extends javax.swing.JInternalFrame {
 
     public ViewAbout() {
         initComponents();
+        addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                ViewLivrariaAmazonia.aboutIsOpen = false;
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -17,6 +24,7 @@ public class ViewAbout extends javax.swing.JInternalFrame {
         buttonClose = new javax.swing.JButton();
 
         setClosable(true);
+        setIconifiable(true);
         setTitle("Sobre");
 
         labelAbout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -62,6 +70,7 @@ public class ViewAbout extends javax.swing.JInternalFrame {
         } catch (PropertyVetoException ex) {
             System.err.println("Closing Exception");
         }
+        ViewLivrariaAmazonia.aboutIsOpen = false;
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     // coloca a janela atual na posição central do programa

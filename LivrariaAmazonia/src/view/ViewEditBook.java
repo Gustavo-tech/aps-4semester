@@ -9,6 +9,8 @@ import java.text.DecimalFormat;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import model.bean.*;
 import model.dao.*;
 
@@ -20,6 +22,11 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         textIsbn.setEnabled(false);
         ControllerView.updateEditComboAuthor();
         ControllerView.updateEditComboPublisher();
+        addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                ViewBook.editBookIsOpen = false;
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -254,6 +261,7 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         try {
             this.setClosed(true);
+            ViewBook.editBookIsOpen = false;
         } catch (PropertyVetoException ex) {
             System.err.println("Closing Exception");
         }
@@ -295,20 +303,26 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
-    // chama a janela de adicionar autor
+    // chama a janela de adicionar autor, limitando para 1 janela dessa aberta
     private void buttonAddAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddAuthorActionPerformed
-        ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddAuthor);
-        viewAddAuthor.setVisible(true);
-        viewAddAuthor.setPositionCenter();
+        if (!ViewAuthor.addAuthorIsOpen) {
+            ViewAddAuthor viewAddAuthor = new ViewAddAuthor();
+            ViewLivrariaAmazonia.desktopAmazonia.add(viewAddAuthor);
+            viewAddAuthor.setVisible(true);
+            viewAddAuthor.setPositionCenter();
+            ViewAuthor.addAuthorIsOpen = true;
+        }
     }//GEN-LAST:event_buttonAddAuthorActionPerformed
 
-    // chama a janela de adicionar editora
+    // chama a janela de adicionar editora, limitando para 1 janela dessa aberta
     private void buttonAddPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddPublisherActionPerformed
-        ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddPublisher);
-        viewAddPublisher.setVisible(true);
-        viewAddPublisher.setPositionCenter();
+        if (!ViewPublisher.addPublisherIsOpen) {
+            ViewAddPublisher viewAddPublisher = new  ViewAddPublisher();
+            ViewLivrariaAmazonia.desktopAmazonia.add(viewAddPublisher);
+            viewAddPublisher.setVisible(true);
+            viewAddPublisher.setPositionCenter();
+            ViewPublisher.addPublisherIsOpen = true;
+        }
     }//GEN-LAST:event_buttonAddPublisherActionPerformed
 
     // quando uma tecla é solta no "Seq. N", chama o método verifyText()

@@ -3,17 +3,27 @@ package view;
 import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import model.bean.*;
 import model.dao.*;
 
 public class ViewBook extends javax.swing.JInternalFrame {
 
+    static boolean addBookIsOpen = false;
+    static boolean editBookIsOpen = false;
+    
     protected ViewBook() {
         initComponents();
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
         ControllerView.readTableBook();
         tableBook.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                ViewLivrariaAmazonia.bookIsOpen = false;
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +39,7 @@ public class ViewBook extends javax.swing.JInternalFrame {
         buttonCancel = new javax.swing.JButton();
 
         setClosable(true);
+        setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Livros");
@@ -160,17 +171,21 @@ public class ViewBook extends javax.swing.JInternalFrame {
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         try {
             this.setClosed(true);
+            ViewLivrariaAmazonia.bookIsOpen = false;
         } catch (PropertyVetoException ex) {
             System.err.println("Closing Exception");
         }
     }//GEN-LAST:event_buttonCancelActionPerformed
 
-    // quando é clicado em "Adicionar" chama a view "ViewAddBook"
+    // quando é clicado em "Adicionar" chama a view "ViewAddBook", limitando para 1 janela dessa aberta
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        ViewAddBook viewAddBook = new  ViewAddBook();
-        ViewLivrariaAmazonia.desktopAmazonia.add(viewAddBook);
-        viewAddBook.setVisible(true);
-        viewAddBook.setPositionCenter();
+        if (!addBookIsOpen) {
+            ViewAddBook viewAddBook = new  ViewAddBook();
+            ViewLivrariaAmazonia.desktopAmazonia.add(viewAddBook);
+            viewAddBook.setVisible(true);
+            viewAddBook.setPositionCenter();
+            addBookIsOpen = true;
+        }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     // quando é clicado em "Excluir" exclui o livro do banco de dados e atualiza a tabela
@@ -185,30 +200,33 @@ public class ViewBook extends javax.swing.JInternalFrame {
         ControllerView.readTableBook();
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    // quando é clicado em "Editar" abre a janela interna de edição já com os dados do livro selecionado
+    // quando é clicado em "Editar" abre a janela interna de edição já com os dados do livro selecionado, limitando para 1 janela dessa aberta
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        ViewEditBook ViewEditBook = new ViewEditBook();
-        ViewLivrariaAmazonia.desktopAmazonia.add(ViewEditBook);
-        ViewEditBook.setVisible(true);
-        ViewEditBook.setPositionCenter();
-                
-        Double price = ((double) tableBook.getValueAt(tableBook.getSelectedRow(), 0));
-        ViewEditBook.textPrice.setText(price.toString());
-        
-        String title = ((String) tableBook.getValueAt(tableBook.getSelectedRow(), 1));
-        ViewEditBook.textTitle.setText(title);
-        
-        String isbn = ((String) tableBook.getValueAt(tableBook.getSelectedRow(), 3));
-        ViewEditBook.textIsbn.setText(isbn);
-                  
-        Integer sequence = BookAuthorDAO.getSeq(isbn);
-        ViewEditBook.textSequence.setText(sequence.toString());
-        
-        String author = AuthorDAO.getAuthorName(isbn);
-        ViewEditBook.comboBoxAuthor.setSelectedItem(author);
-        
-        String publisher = PublisherDAO.getPublisherName(((Integer) tableBook.getValueAt(tableBook.getSelectedRow(), 2)));
-        ViewEditBook.comboBoxPublisher.setSelectedItem(publisher);
+        if (!editBookIsOpen) {
+            ViewEditBook ViewEditBook = new ViewEditBook();
+            ViewLivrariaAmazonia.desktopAmazonia.add(ViewEditBook);
+            ViewEditBook.setVisible(true);
+            ViewEditBook.setPositionCenter();
+
+            Double price = ((double) tableBook.getValueAt(tableBook.getSelectedRow(), 0));
+            ViewEditBook.textPrice.setText(price.toString());
+
+            String title = ((String) tableBook.getValueAt(tableBook.getSelectedRow(), 1));
+            ViewEditBook.textTitle.setText(title);
+
+            String isbn = ((String) tableBook.getValueAt(tableBook.getSelectedRow(), 3));
+            ViewEditBook.textIsbn.setText(isbn);
+
+            Integer sequence = BookAuthorDAO.getSeq(isbn);
+            ViewEditBook.textSequence.setText(sequence.toString());
+
+            String author = AuthorDAO.getAuthorName(isbn);
+            ViewEditBook.comboBoxAuthor.setSelectedItem(author);
+
+            String publisher = PublisherDAO.getPublisherName(((Integer) tableBook.getValueAt(tableBook.getSelectedRow(), 2)));
+            ViewEditBook.comboBoxPublisher.setSelectedItem(publisher);
+            editBookIsOpen = true;
+        }
     }//GEN-LAST:event_buttonEditActionPerformed
 
     // define a posição da janela interna no centro do programa

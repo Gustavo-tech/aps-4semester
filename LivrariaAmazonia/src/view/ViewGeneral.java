@@ -3,6 +3,8 @@ package view;
 import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class ViewGeneral extends javax.swing.JInternalFrame {
 
@@ -17,6 +19,11 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         radioAuthor.setFocusPainted(false);
         radioTitle.doClick();
         tableGeneral.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                ViewLivrariaAmazonia.generalIsOpen = false;
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -37,6 +44,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         textSearch = new javax.swing.JTextField();
 
         setClosable(true);
+        setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Busca Geral");
@@ -197,6 +205,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         try {
             this.setClosed(true);
+            ViewLivrariaAmazonia.generalIsOpen = false;
         } catch (PropertyVetoException ex) {
             System.err.println("Closing Exception");
         }
