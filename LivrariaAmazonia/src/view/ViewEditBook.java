@@ -92,7 +92,7 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
             }
         });
 
-        textPrice.setToolTipText("Digite o valor do livro. Exemplo: 32,99");
+        textPrice.setToolTipText("Digite o valor do livro. Exemplo: 32.99");
         textPrice.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textPriceKeyReleased(evt);
@@ -284,7 +284,15 @@ public class ViewEditBook extends javax.swing.JInternalFrame {
         
         Object[] options = { "Ok" };
         Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
-        JOptionPane.showOptionDialog(null, "Livro atualizado!", "Editar livro", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[0]);
+        int option = JOptionPane.showOptionDialog(null, "Livro atualizado!", "Editar livro", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[0]);
+        
+        if (option == -1) {
+            try {
+                this.setClosed(true);
+            } catch (PropertyVetoException ex) {
+                System.err.println("Closing Exception");
+            }
+        }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     // chama a janela de adicionar autor

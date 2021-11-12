@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 
 public class PublisherDAO {
 

@@ -172,7 +172,7 @@ public class ViewAddPublisher extends javax.swing.JInternalFrame {
         Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
         int option = JOptionPane.showOptionDialog(null, "Editora adicionada.\nGostaria de adicionar mais?", "Adicionar editora", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
         
-        if (option == 1) {
+        if (option == 1 || option == -1) {
             closeWindow();
         } else if (option == 0) {
             textName.setText("");

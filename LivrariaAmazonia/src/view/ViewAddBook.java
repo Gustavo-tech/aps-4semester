@@ -92,7 +92,7 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             }
         });
 
-        textPrice.setToolTipText("Digite o valor do livro. Exemplo: 32,99");
+        textPrice.setToolTipText("Digite o valor do livro. Exemplo: 32.99");
         textPrice.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textPriceKeyReleased(evt);
@@ -307,8 +307,8 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         Object[] options = { "Sim", "Não" };
         Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
         int option = JOptionPane.showOptionDialog(null, "Livro adicionado.\nGostaria de adicionar mais?", "Adicionar livro", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
-        
-        if (option == 1) {
+
+        if (option == 1 || option == -1) {
             closeWindow();
         } else if (option == 0) {
             textTitle.setText("");
