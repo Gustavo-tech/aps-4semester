@@ -84,7 +84,7 @@ public class AuthorDAO {
     // Obtem o id do autor de acordo com o nome e sobrenome
     public static Integer getAuthorId(String name, String fname) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "SELECT author_id FROM authors WHERE name= ? AND fname= ?";
+            String query = "SELECT author_id FROM authors WHERE name = ? AND fname = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, name);
             pstm.setString(2, fname);

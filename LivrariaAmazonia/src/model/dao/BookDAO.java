@@ -77,7 +77,7 @@ public class BookDAO {
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1, p.getId());
             
-            ResultSet rs = pstm.executeQuery(query);
+            ResultSet rs = pstm.executeQuery();
             while(rs.next()) {
                 String title = rs.getString("title");
                 String isbn = rs.getString("isbn");
