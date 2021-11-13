@@ -120,6 +120,11 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         });
 
         comboBoxAuthor.setToolTipText("Selecione o autor(a)");
+        comboBoxAuthor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                comboBoxAuthorFocusGained(evt);
+            }
+        });
         comboBoxAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxAuthorActionPerformed(evt);
@@ -127,6 +132,11 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
         });
 
         comboBoxPublisher.setToolTipText("Selecione a editora");
+        comboBoxPublisher.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                comboBoxPublisherFocusGained(evt);
+            }
+        });
         comboBoxPublisher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxPublisherActionPerformed(evt);
@@ -406,6 +416,14 @@ public class ViewAddBook extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_textPriceKeyTyped
+
+    private void comboBoxPublisherFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboBoxPublisherFocusGained
+        ControllerView.updateAddComboPublisher();
+    }//GEN-LAST:event_comboBoxPublisherFocusGained
+
+    private void comboBoxAuthorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboBoxAuthorFocusGained
+        ControllerView.updateAddComboAuthor();
+    }//GEN-LAST:event_comboBoxAuthorFocusGained
 
     // fecha a janela atual
     private void closeWindow() {
