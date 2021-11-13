@@ -10,5 +10,7 @@
 07/11/2021 - Reunião para discutirmos o design das telas [3 horas]
 08/11/2021 - Deletando dependencias das entidades [5 horas]
 09/11/2021 - Adicionando comentário aos métodos [5 horas]
+10/11/2021 - Alterando queries no sistema [5 horas]
+11/11/2021 - Criando queries para views [5 horas]
 
-Total: 50 horas
+Total: 60 horas
