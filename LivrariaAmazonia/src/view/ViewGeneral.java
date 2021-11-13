@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.table.DefaultTableModel;
 
 public class ViewGeneral extends javax.swing.JInternalFrame {
 
@@ -42,6 +43,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         paneBooklist = new javax.swing.JScrollPane();
         tableGeneral = new javax.swing.JTable();
         textSearch = new javax.swing.JTextField();
+        buttonShowAll = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -60,7 +62,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         radioIsbn.setText("ISBN");
 
         buttonSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-search.png"))); // NOI18N
-        buttonSearch.setText("Pesquisar");
+        buttonSearch.setText("Buscar");
         buttonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSearchActionPerformed(evt);
@@ -115,6 +117,14 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         }
     });
 
+    buttonShowAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-show.png"))); // NOI18N
+    buttonShowAll.setText("Mostrar tudo");
+    buttonShowAll.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            buttonShowAllActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout panelLivrariaLayout = new javax.swing.GroupLayout(panelLivraria);
     panelLivraria.setLayout(panelLivrariaLayout);
     panelLivrariaLayout.setHorizontalGroup(
@@ -138,11 +148,16 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
                     .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLivrariaLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(buttonShowAll)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(buttonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addContainerGap())
     );
+
+    panelLivrariaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {buttonClean, buttonClose, buttonShowAll});
+
     panelLivrariaLayout.setVerticalGroup(
         panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(panelLivrariaLayout.createSequentialGroup()
@@ -161,11 +176,12 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(panelLivrariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(buttonClean, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonShowAll))
             .addContainerGap())
     );
 
-    panelLivrariaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonClean, buttonClose});
+    panelLivrariaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonClean, buttonClose, buttonSearch, buttonShowAll, textSearch});
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -226,15 +242,24 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
         }
         
         buttonClean.setEnabled(true);
+        buttonShowAll.setEnabled(true);
     }//GEN-LAST:event_buttonSearchActionPerformed
 
     // limpa a busca
     private void buttonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanActionPerformed
         buttonClean.setEnabled(false);
         buttonSearch.setEnabled(false);
-        tableGeneral.removeAll();
+        buttonShowAll.setEnabled(true);
+        DefaultTableModel modelo = (DefaultTableModel) tableGeneral.getModel();
+        modelo.setNumRows(0);
         textSearch.setText("");
     }//GEN-LAST:event_buttonCleanActionPerformed
+
+    private void buttonShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowAllActionPerformed
+        ControllerView.readTableGeneral();
+        buttonClean.setEnabled(true);
+        buttonShowAll.setEnabled(false);
+    }//GEN-LAST:event_buttonShowAllActionPerformed
 
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
@@ -247,6 +272,7 @@ public class ViewGeneral extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonClose;
     private javax.swing.ButtonGroup buttonGroupType;
     private javax.swing.JButton buttonSearch;
+    private javax.swing.JButton buttonShowAll;
     private javax.swing.JScrollPane paneBooklist;
     private javax.swing.JPanel panelLivraria;
     private javax.swing.JRadioButton radioAuthor;

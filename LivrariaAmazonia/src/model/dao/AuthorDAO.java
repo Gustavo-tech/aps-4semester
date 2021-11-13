@@ -62,6 +62,30 @@ public class AuthorDAO {
         return authors;
     }
     
+    // Obtem todos os autores do banco com o nome/id/sobrenome especificado
+    public static List<Author> getAuthorsGeneral(String data) {
+        List<Author> authors = new ArrayList<Author>();
+        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM authors WHERE author_id = '" + data + "' "
+                    + "OR name = '" + data + "' "
+                    + "OR fname = '" + data + "';";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next()) {
+                Integer id = rs.getInt("author_id");
+                String name = rs.getString("name");
+                String fname = rs.getString("fname");
+                Author author = new Author(id, name, fname);
+                authors.add(author);
+            }
+            con.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return authors;
+    }
+    
     // Obtem um autor do banco com determinado id
     public static Author getAuthor(Integer id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {

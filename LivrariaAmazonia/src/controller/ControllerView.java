@@ -58,8 +58,11 @@ public class ControllerView {
         }
         
         if (modelo.getRowCount() == 0) {
-            JOptionPane.showInternalMessageDialog(null, "Livro não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
-            ViewGeneral.buttonClean.setEnabled(false);
+            try {
+                JOptionPane.showInternalMessageDialog(null, "Livro não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+                ViewGeneral.buttonClean.setEnabled(false);
+            } catch (Exception ignored) {}
+            
         }
     }
     
@@ -80,8 +83,10 @@ public class ControllerView {
         }
         
         if (modelo.getRowCount() == 0) {
-            JOptionPane.showInternalMessageDialog(null, "Autor(a) não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
-            ViewGeneral.buttonClean.setEnabled(false);
+            try {
+                JOptionPane.showInternalMessageDialog(null, "Autor(a) não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+                ViewGeneral.buttonClean.setEnabled(false);
+            } catch (Exception ignored) {}
         }
     }
     
@@ -102,8 +107,10 @@ public class ControllerView {
         }
         
         if (modelo.getRowCount() == 0) {
-            JOptionPane.showInternalMessageDialog(null, "Editora não encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE );
-            ViewGeneral.buttonClean.setEnabled(false);
+            try {
+                JOptionPane.showInternalMessageDialog(null, "Editora não encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE );
+                ViewGeneral.buttonClean.setEnabled(false);
+            } catch (Exception ignored) {}
         }
     }
     
@@ -124,8 +131,10 @@ public class ControllerView {
         }
         
         if (modelo.getRowCount() == 0) {
-            JOptionPane.showInternalMessageDialog(null, "ISBN não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
-            ViewGeneral.buttonClean.setEnabled(false);
+            try {
+                JOptionPane.showInternalMessageDialog(null, "ISBN não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+                ViewGeneral.buttonClean.setEnabled(false);
+            } catch (Exception ignored) {}
         }
     }
     
@@ -206,4 +215,70 @@ public class ControllerView {
         return splitted[position];
     }
     
+    // para trazer os dados de editora para a tabela
+    public static void readTableAuthorGeneral(String data) {
+        DefaultTableModel modelo = (DefaultTableModel) ViewAuthor.tableAuthor.getModel();
+        modelo.setNumRows(0);
+        AuthorDAO pdao = new AuthorDAO();
+        
+        for (Author author: pdao.getAuthorsGeneral(data)) {
+                modelo.addRow(new Object[] {
+                    author.getId(),
+                    author.getName(),
+                    author.getFName()
+                });
+        }
+        
+        if (modelo.getRowCount() == 0) {
+            try {
+                JOptionPane.showInternalMessageDialog(null, "Autor não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+                ViewGeneral.buttonClean.setEnabled(false);
+            } catch (Exception ignored) {}
+        }
+    }
+    
+    // para trazer os dados de editora para a tabela
+    public static void readTablePublisherGeneral(String data) {
+        DefaultTableModel modelo = (DefaultTableModel) ViewPublisher.tablePublisher.getModel();
+        modelo.setNumRows(0);
+        PublisherDAO pdao = new PublisherDAO();
+        
+        for (Publisher publisher: pdao.getPublishersGeneral(data)) {
+                modelo.addRow(new Object[] {
+                    publisher.getId(),
+                    publisher.getName(),
+                    publisher.getUrl()
+                });
+        }
+        
+        if (modelo.getRowCount() == 0) {
+            try {
+                JOptionPane.showInternalMessageDialog(null, "Editora não encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE );
+                ViewGeneral.buttonClean.setEnabled(false);
+            } catch (Exception ignored) {}
+        }
+    }
+    
+    // para trazer os dados de editora para a tabela
+    public static void readTableBookGeneral(String data) {
+        DefaultTableModel modelo = (DefaultTableModel) ViewBook.tableBook.getModel();
+        modelo.setNumRows(0);
+        BookDAO pdao = new BookDAO();
+        
+        for (Book book: pdao.getBooksGeneral(data)) {
+                modelo.addRow(new Object[] {
+                    book.getPrice(),
+                    book.getTitle(),
+                    book.getPublisherId(),
+                    book.getIsbn()
+                });
+        }
+        
+        if (modelo.getRowCount() == 0) {
+            try {
+                JOptionPane.showInternalMessageDialog(null, "Livro não encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE );
+                ViewGeneral.buttonClean.setEnabled(false);
+            } catch (Exception ignored) {}
+        }
+    }
 }

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.table.DefaultTableModel;
 import model.dao.AuthorDAO;
 import view.ViewAddAuthor;
 
@@ -17,6 +18,8 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         initComponents();
         buttonEdit.setEnabled(false);
         buttonDelete.setEnabled(false);
+        buttonSearch.setEnabled(false);
+        buttonShowAll.setEnabled(false);
         ControllerView.readTableAuthor();
         tableAuthor.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         addInternalFrameListener(new InternalFrameAdapter(){
@@ -37,6 +40,10 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         tableAuthor = new javax.swing.JTable();
         buttonDelete = new javax.swing.JButton();
         buttonEdit = new javax.swing.JButton();
+        textSearch = new javax.swing.JTextField();
+        buttonSearch = new javax.swing.JButton();
+        buttonClear = new javax.swing.JButton();
+        buttonShowAll = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -108,6 +115,38 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         }
     });
 
+    textSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            textSearchKeyReleased(evt);
+        }
+    });
+
+    buttonSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-search.png"))); // NOI18N
+    buttonSearch.setText("Buscar");
+    buttonSearch.setPreferredSize(new java.awt.Dimension(119, 22));
+    buttonSearch.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            buttonSearchActionPerformed(evt);
+        }
+    });
+
+    buttonClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-clear.png"))); // NOI18N
+    buttonClear.setText("Limpar");
+    buttonClear.setPreferredSize(new java.awt.Dimension(119, 22));
+    buttonClear.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            buttonClearActionPerformed(evt);
+        }
+    });
+
+    buttonShowAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-show.png"))); // NOI18N
+    buttonShowAll.setText("Mostrar tudo");
+    buttonShowAll.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            buttonShowAllActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout panelEditLayout = new javax.swing.GroupLayout(panelEdit);
     panelEdit.setLayout(panelEditLayout);
     panelEditLayout.setHorizontalGroup(
@@ -115,7 +154,7 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         .addGroup(panelEditLayout.createSequentialGroup()
             .addContainerGap()
             .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
                 .addGroup(panelEditLayout.createSequentialGroup()
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -123,14 +162,28 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                    .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                .addGroup(panelEditLayout.createSequentialGroup()
+                    .addComponent(textSearch)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(buttonClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(buttonShowAll)))
             .addContainerGap())
     );
     panelEditLayout.setVerticalGroup(
         panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(panelEditLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+            .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(buttonClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonShowAll)
+                .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,6 +192,8 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
                 .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap())
     );
+
+    panelEditLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonAdd, buttonClear, buttonDelete, buttonEdit, buttonFechar, buttonSearch, buttonShowAll, textSearch});
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -218,6 +273,45 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonEditActionPerformed
 
+    // realiza a pesquisa de autor
+    private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
+        String search = textSearch.getText();
+        ControllerView.readTableAuthorGeneral(search);
+        buttonClear.setEnabled(true);
+        buttonShowAll.setEnabled(true);
+    }//GEN-LAST:event_buttonSearchActionPerformed
+
+    // limpa a busca
+    private void buttonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClearActionPerformed
+        buttonClear.setEnabled(false);
+        buttonSearch.setEnabled(false);
+        buttonShowAll.setEnabled(true);
+        DefaultTableModel modelo = (DefaultTableModel) tableAuthor.getModel();
+        modelo.setNumRows(0);
+        textSearch.setText("");
+    }//GEN-LAST:event_buttonClearActionPerformed
+
+    /* quando uma tecla é solta dentro do campo de busca
+       verifica se existe texto no campo de busca
+       caso sim: habilita o botão "Pesquisar"
+       caso não: desabilita o botão "Pesquisar" */
+    private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
+        String text = textSearch.getText();
+
+        if (text.isBlank()) {
+            buttonSearch.setEnabled(false);
+        } else {
+            buttonSearch.setEnabled(true);
+        }
+    }//GEN-LAST:event_textSearchKeyReleased
+
+    // mostra todos os autores para o usuário
+    private void buttonShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowAllActionPerformed
+        ControllerView.readTableAuthor();
+        buttonClear.setEnabled(true);
+        buttonShowAll.setEnabled(false);
+    }//GEN-LAST:event_buttonShowAllActionPerformed
+
     // define a posição da janela interna no centro do programa
     protected void setPositionCenter() {
         Dimension d = this.getDesktopPane().getSize();
@@ -226,11 +320,15 @@ public class ViewAuthor extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonClear;
     protected static javax.swing.JButton buttonDelete;
     protected static javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonFechar;
+    private javax.swing.JButton buttonSearch;
+    private javax.swing.JButton buttonShowAll;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelEdit;
     public static javax.swing.JTable tableAuthor;
+    private javax.swing.JTextField textSearch;
     // End of variables declaration//GEN-END:variables
 }

@@ -96,6 +96,33 @@ public class BookDAO {
         return books;
     }
     
+    // Obtem todos os livros do banco com o título/isbn/editora/preço especificado
+    public static List<Book> getBooksGeneral(String data) {
+        List<Book> books = new ArrayList<Book>();
+        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM books WHERE title = '" + data + "' "
+                    + "OR isbn = '"+ data + "' "
+                    + "OR publisher_id = '" + data + "' "
+                    + "OR price = '" + data + "';";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next()) {
+                String title = rs.getString("title");
+                String isbn = rs.getString("isbn");
+                Integer publisherId = rs.getInt("publisher_id");
+                Double price = rs.getDouble("price");
+                
+                Book book = new Book(title, isbn, publisherId, price);
+                books.add(book);
+            }
+            con.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
+    
     // Obtem determinado livro de acordo com a ISBN
     public static Book getBook(String isbn) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {

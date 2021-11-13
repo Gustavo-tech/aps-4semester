@@ -86,6 +86,32 @@ public class PublisherDAO {
         return publishers;
     }
     
+    // Obtem todos as editoras do banco com o id/nome/url especificado
+    public static List<Publisher> getPublishersGeneral(String data) {
+        List<Publisher> publishers = new ArrayList<Publisher>();
+        try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
+            String query = "SELECT * FROM publishers WHERE publisher_id = '" + data + "' "
+                    + "OR name = '" + data + "' "
+                    + "OR url = '" + data + "';";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next()) {
+                Integer id = rs.getInt("publisher_id");
+                String name = rs.getString("name");
+                String url = rs.getString("url");
+                
+                Publisher publisher = new Publisher(id, name, url);
+                publishers.add(publisher);
+            }
+            con.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return publishers;
+    }
+    
+    
     public static Integer getPublisherId(String name) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
             String query = "SELECT publisher_id FROM publishers WHERE name= ?";
