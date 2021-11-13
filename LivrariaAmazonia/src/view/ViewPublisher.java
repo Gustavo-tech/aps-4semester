@@ -3,6 +3,9 @@ package view;
 import controller.ControllerView;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import model.bean.Publisher;
@@ -190,14 +193,20 @@ public class ViewPublisher extends javax.swing.JInternalFrame {
 
     // quando é clicado em "Excluir" exclui a editora do banco de dados e atualiza a tabela
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        Publisher publisher = new Publisher();
-        PublisherDAO publisherDAO = new PublisherDAO();
+        Object[] options = { "Sim", "Não" };
+        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-warning.png"))); 
+        int option = JOptionPane.showOptionDialog(null, "Caso exclua essa editora, todos os livros vinculados a ela também serão excluídos.\nGostaria de continuar mesmo assim?", "Excluir editora", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, figura, options, options[1]);
 
-        publisher.setId((int) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 0));
-        publisherDAO.deletePublisher(publisher);
-        ControllerView.readTablePublisher();
-        buttonDelete.setEnabled(false);
-        buttonEdit.setEnabled(false);
+        if (option == 0) {
+            Publisher publisher = new Publisher();
+            PublisherDAO publisherDAO = new PublisherDAO();
+
+            publisher.setId((int) tablePublisher.getValueAt(tablePublisher.getSelectedRow(), 0));
+            publisherDAO.deletePublisher(publisher);
+            ControllerView.readTablePublisher();
+            buttonDelete.setEnabled(false);
+            buttonEdit.setEnabled(false);
+        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     /* quando é clicado em "editar" chama a internalFrame "viewPublisher" já com as 
