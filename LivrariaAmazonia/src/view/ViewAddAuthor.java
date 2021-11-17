@@ -166,27 +166,32 @@ public class ViewAddAuthor extends javax.swing.JInternalFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         String name = textName.getText();
         String lastName = textLastName.getText();
-        
-        Author author = new Author(name, lastName);
-        AuthorDAO.addAuthor(author);
-        
-        try {
-            ControllerView.readTableAuthor();
-            ViewAuthor.buttonEdit.setEnabled(false);
-            ViewAuthor.buttonDelete.setEnabled(false);
-            ViewAddBook.comboBoxAuthor.addItem(author.toString());
-        } catch (NullPointerException ignored) {}
-        
-        Object[] options = { "Sim", "Não" };
-        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
-        int option = JOptionPane.showOptionDialog(null, "Autor(a) adicionado.\nGostaria de adicionar mais?", "Adicionar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
-        
-        if (option == 1 || option == -1) {
-            closeWindow();
-        } else if (option == 0) {
-            textName.setText("");
-            textLastName.setText("");
+        if(!ControllerView.checkForSpaces(name, lastName)){
+            Author author = new Author(name, lastName);
+            AuthorDAO.addAuthor(author);
+
+            try {
+                ControllerView.readTableAuthor();
+                ViewAuthor.buttonEdit.setEnabled(false);
+                ViewAuthor.buttonDelete.setEnabled(false);
+                ViewAddBook.comboBoxAuthor.addItem(author.toString());
+            } catch (NullPointerException ignored) {}
+
+            Object[] options = { "Sim", "Não" };
+            Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+            int option = JOptionPane.showOptionDialog(null, "Autor(a) adicionado.\nGostaria de adicionar mais?", "Adicionar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[1]);
+
+            if (option == 1 || option == -1) {
+                closeWindow();
+            } else if (option == 0) {
+                textName.setText("");
+                textLastName.setText("");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Nomes e sobrenomes não podem conter espaços.");
         }
+        
+        
     }//GEN-LAST:event_buttonAddActionPerformed
     
     // limita a quantidade de caracteres em "Nome" para 25 e não permite espaço

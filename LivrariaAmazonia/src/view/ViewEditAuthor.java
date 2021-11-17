@@ -178,18 +178,22 @@ public class ViewEditAuthor extends javax.swing.JInternalFrame {
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         String name = textName.getText();
         String lastName = textLastName.getText();
-        Integer id = ((int) ViewAuthor.tableAuthor.getValueAt(ViewAuthor.tableAuthor.getSelectedRow(), 0));
+        if(!ControllerView.checkForSpaces(name, lastName)){
+            Integer id = ((int) ViewAuthor.tableAuthor.getValueAt(ViewAuthor.tableAuthor.getSelectedRow(), 0));
         
-        Author author = new Author(id, name, lastName);
-        AuthorDAO.updateAuthor(author);
-        
-        Object[] options = { "Ok" };
-        Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
-        JOptionPane.showOptionDialog(null, "Autor(a) atualizado!", "Editar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[0]);
-        closeWindow();
-        ControllerView.readTableAuthor();
-        ViewAuthor.buttonEdit.setEnabled(false);
-        ViewAuthor.buttonDelete.setEnabled(false);
+            Author author = new Author(id, name, lastName);
+            AuthorDAO.updateAuthor(author);
+
+            Object[] options = { "Ok" };
+            Icon figura = new ImageIcon (getToolkit().createImage(getClass().getResource("../images/icon-done.png"))); 
+            JOptionPane.showOptionDialog(null, "Autor(a) atualizado!", "Editar autor(a)", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, figura, options, options[0]);
+            closeWindow();
+            ControllerView.readTableAuthor();
+            ViewAuthor.buttonEdit.setEnabled(false);
+            ViewAuthor.buttonDelete.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nomes e sobrenomes não podem conter espaços.");
+        }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     // limita a quantidade de caracteres em "Nome" para 25 e não permite espaço

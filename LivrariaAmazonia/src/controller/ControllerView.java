@@ -281,4 +281,8 @@ public class ControllerView {
             } catch (Exception ignored) {}
         }
     }
+    
+    public static Boolean checkForSpaces(String nome, String snome){
+        return (nome.indexOf(" ") != -1 || snome.indexOf(" ") != -1);
+    }
 }
