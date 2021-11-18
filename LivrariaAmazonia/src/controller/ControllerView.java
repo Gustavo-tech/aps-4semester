@@ -32,11 +32,11 @@ public class ControllerView {
         
         for (SearchViewModel search: vmdao.getSearchViewModels()) {
                 modelo.addRow(new Object[] {
-                    search.getPrice(),
                     search.getTitle(),
+                    search.getIsbn(),
                     search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
+                    "R$"+ String.format("%.2f", search.getPrice()),
+                    search.getPublisher()
                 });
         }
     }
@@ -49,11 +49,11 @@ public class ControllerView {
         
         for (SearchViewModel search: vmdao.getSearchByTitle(title)) {
                 modelo.addRow(new Object[] {
-                    search.getPrice(),
                     search.getTitle(),
+                    search.getIsbn(),
                     search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
+                    "R$"+ String.format("%.2f", search.getPrice()),
+                    search.getPublisher()
                 });
         }
         
@@ -74,11 +74,11 @@ public class ControllerView {
         
         for (SearchViewModel search: vmdao.getSearchByAuthor(author)) {
                 modelo.addRow(new Object[] {
-                    search.getPrice(),
                     search.getTitle(),
+                    search.getIsbn(),
                     search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
+                    "R$"+ String.format("%.2f", search.getPrice()),
+                    search.getPublisher()
                 });
         }
         
@@ -98,11 +98,11 @@ public class ControllerView {
         
         for (SearchViewModel search: vmdao.getSearchByPublisher(publisher)) {
                 modelo.addRow(new Object[] {
-                    search.getPrice(),
                     search.getTitle(),
+                    search.getIsbn(),
                     search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
+                    "R$"+ String.format("%.2f", search.getPrice()),
+                    search.getPublisher()
                 });
         }
         
@@ -122,11 +122,11 @@ public class ControllerView {
         
         for (SearchViewModel search: vmdao.getSearchByIsbn(isbn)) {
                 modelo.addRow(new Object[] {
-                    search.getPrice(),
                     search.getTitle(),
+                    search.getIsbn(),
                     search.getAuthor(),
-                    search.getPublisher(),
-                    search.getIsbn()
+                    "R$"+ String.format("%.2f", search.getPrice()),
+                    search.getPublisher()
                 });
         }
         
@@ -161,10 +161,10 @@ public class ControllerView {
         
         for (Book book: pdao.getBooks()) {
                 modelo.addRow(new Object[] {
-                    book.getPrice(),
                     book.getTitle(),
-                    book.getPublisherId(),
-                    book.getIsbn()
+                    book.getIsbn(),
+                    "R$"+ String.format("%.2f", book.getPrice()),
+                    book.getPublisherId()
                 });
         }
     }
