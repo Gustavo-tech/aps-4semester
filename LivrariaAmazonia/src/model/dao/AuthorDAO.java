@@ -66,11 +66,18 @@ public class AuthorDAO {
     public static List<Author> getAuthorsGeneral(String data) {
         List<Author> authors = new ArrayList<Author>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "SELECT * FROM authors WHERE author_id = '" + data + "' "
-                    + "OR name = '" + data + "' "
-                    + "OR fname = '" + data + "';";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            String query = "SELECT * FROM authors WHERE author_id = ? "
+                    + "OR name = ? "
+                    + "OR fname = ?;";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(2, "%"+data+"%");
+            pstm.setString(3, "%"+data+"%");
+            try {
+                pstm.setInt(1, Integer.parseInt(data));
+            } catch (NumberFormatException e) {
+                pstm.setInt(1, -1);
+            }
+            ResultSet rs = pstm.executeQuery();
             
             while(rs.next()) {
                 Integer id = rs.getInt("author_id");

@@ -90,11 +90,18 @@ public class PublisherDAO {
     public static List<Publisher> getPublishersGeneral(String data) {
         List<Publisher> publishers = new ArrayList<Publisher>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "SELECT * FROM publishers WHERE publisher_id = '" + data + "' "
-                    + "OR name = '" + data + "' "
-                    + "OR url = '" + data + "';";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            String query = "SELECT * FROM publishers WHERE publisher_id = ? "
+                    + "OR name LIKE ? "
+                    + "OR url LIKE ?;";
+            PreparedStatement pstm = con.prepareStatement(query);
+            try {
+                pstm.setInt(1, Integer.parseInt(data));
+            } catch (NumberFormatException e) {
+                pstm.setInt(1, -1);
+            }
+            pstm.setString(2, "%"+data+"%");
+            pstm.setString(3, "%"+data+"%");
+            ResultSet rs = pstm.executeQuery();
             
             while(rs.next()) {
                 Integer id = rs.getInt("publisher_id");

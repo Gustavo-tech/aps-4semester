@@ -100,12 +100,22 @@ public class BookDAO {
     public static List<Book> getBooksGeneral(String data) {
         List<Book> books = new ArrayList<Book>();
         try(Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            String query = "SELECT * FROM books WHERE title = '" + data + "' "
-                    + "OR isbn = '"+ data + "' "
-                    + "OR publisher_id = '" + data + "' "
-                    + "OR price = '" + data + "';";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            String query = "SELECT * FROM books WHERE title LIKE ? "
+                    + "OR isbn = ? "
+                    + "OR publisher_id = ? "
+                    + "OR price = ?;";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setString(1, "%"+data+"%");
+            try {
+                pstm.setInt(2, Integer.parseInt(data));
+                pstm.setInt(3, Integer.parseInt(data));
+                pstm.setInt(4, Integer.parseInt(data));
+            } catch (NumberFormatException e) {
+                pstm.setInt(2, -1);
+                pstm.setInt(3, -1);
+                pstm.setInt(4, -1);
+            }
+            ResultSet rs = pstm.executeQuery();
             
             while(rs.next()) {
                 String title = rs.getString("title");
